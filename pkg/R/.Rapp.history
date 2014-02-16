@@ -1,0 +1,66 @@
+?warning
+source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
+source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
+source('~/DropBox/HWxtest/pkg/R/acount.R', chdir = TRUE)
+xcount(c(100,200,300))
+xcount(c(100,200,300,100,100,100))
+xcount(c(100,200,300,10,10,10,10,10,10,10,10))
+source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
+xcount(c(100,200,300,10,10,10,10,10,10,10,10))
+source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
+rtables <- #
+function(n, len,top) {#
+	n <- as.integer(runif(n * len, 1,top));#
+	matrix(n, nrow)#
+}
+a <- rtables(200,5,30)
+rtables <- #
+function(n, len,top) {#
+	n <- as.integer(runif(n * len, 1,top));#
+	matrix(n, len)#
+}
+a <- rtables(200,5,30)
+xc <- apply(a,2,xcount)
+xc
+min(xc)
+which(xc,min(xc))
+which(xc,xc==min(xc))
+which(xc==min(xc))
+a[,191]
+a[,190]
+a[,191]=NULL
+a[1,191]
+a[1:5,191]=NULL
+str(a)
+a[[191]]
+a[,191]
+ac <- apply(a,2,acount)
+plot(log(xc), log(ac))
+a[1:5,191]
+a[1:5,191] <- NULL
+a[1:5,191] <- NA
+a[,191]
+?plot
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)")
+log(c(5,6,7,-2,9))
+plot(xc, yc, xlab="log(Exact count)", ylab="log(Normal approximation)")
+plot(xc, ac, xlab="log(Exact count)", ylab="log(Normal approximation)")
+plot(xc, ac, xlab="log(Exact count)", ylab="log(Normal approximation)", xlog=T, ylog=T)
+plot(xc, ac, xlab="log(Exact count)", ylab="log(Normal approximation)", xlog=T, ylog=T)
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)")
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,4))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,5))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,5), yaxp=c(5,20,5))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,6), yaxp=c(5,20,5))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,7), yaxp=c(5,20,5))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,5), yaxp=c(5,20,5))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,5), yaxp=c(5,25,5))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xlim=c(4,20))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xlim=c(4,20), ylim=c(4,20))
+line(c(4,20), c(4,20))
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xlim=c(4,20), ylim=c(4,20),)
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xlim=c(4,20), ylim=c(4,20),main="5 alleles, up to 30 each")
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xlim=c(4,20), ylim=c(4,20),main="5 alleles", sub="up to 30 per allele")
+plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xlim=c(4,20), ylim=c(4,20),main="5 alleles\nup to 30 per allele")
+save(ac, xc, a, file = "~/DropBox/HWxtest/test counter/5 alleles up to 30.RData")
