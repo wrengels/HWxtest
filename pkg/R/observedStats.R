@@ -28,9 +28,9 @@ function(c){
 	m <- alleleCounts(c);
 	d <- sum(diag(c));
 	n <- sum(m)/2;
-	k <- (n-d)* log(2) + lgamma(n+1)- lgamma(2 * n + 1) + sum(lgamma(m+1));
+	k <- n * log(2) + lgamma(n+1)- lgamma(2 * n + 1) + sum(lgamma(m+1));
 	a <- matrix.to.vec(c);
-	p <- exp(k - sum(lgamma(a+1)));
+	p <- exp(k - sum(lgamma(a+1)) - d*log(2));
 }
 #' @rdname observedStatistics
 #' @export
@@ -71,4 +71,17 @@ function(c){
 	for(i in 1:k)ae[i,i] <- ae[i,i]/2;
 	ve <- matrix.to.vec(ae);
 	sum((a-ve)^2/ve)
+}
+
+# Find the probability of a perfectly-fitting set of genotype counts for the given allele counts.
+perfectProb <- 
+function(c){
+	m <- alleleCounts(c);
+	k <- dim(c)[1];
+	n <- sum(m)/2;
+	ae <- matrix(0,k,k);
+	for(i in 1:k) for(j in 1:k) ae[i,j] <- m[i]*m[j]/(2*n);
+	for(i in 1:k)ae[i,i] <- ae[i,i]/2;
+	ae <- round(ae);
+	observedProb(ae)
 }

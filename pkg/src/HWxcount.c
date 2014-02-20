@@ -204,7 +204,6 @@ void xcount (int * m, int * k, double * count, int * safeSecs) {
 //    *****************      This is the call to do all the work!
     homozygote(nAlleles, Rarray);
 //
-    
     *count = tableCount;
     Free(hashCoefs);
     Free(Rarray);
