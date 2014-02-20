@@ -82,6 +82,7 @@ function(c){
 	ae <- matrix(0,k,k);
 	for(i in 1:k) for(j in 1:k) ae[i,j] <- m[i]*m[j]/(2*n);
 	for(i in 1:k)ae[i,i] <- ae[i,i]/2;
-	ae <- round(ae);
-	observedProb(ae)
+	#ae <- round(ae);
+	observedProb(ae);
+	ae
 }

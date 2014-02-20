@@ -137,7 +137,7 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
                        probl + lnFact[ar2] + lnFact[ar1],
                        statl + xlnx[ar2] + xlnx[ar1],
                        u,
-                        x2 + R_pow_di(arc - exa[exindex], 2)/exa[exindex] ,
+                        x2 + R_pow_di(ar2 - exa[exindex], 2)/exa[exindex] ,
                        Rnew);
         } // if r > 3
 		if(r==3) // and c = 2, then we can handle a series of two-allele cases with no deeper recursion
@@ -152,12 +152,13 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
 				// get residual allele counts for two-allele case
 				res1 = res[1] - a31;
 				res2 = res[2] - a32;
+                // make pointers to lookups in case they need to be swapped
 				uT1 = uTerm1;
 				uT2 = uTerm2;
                 x11 = x211;
                 x22 = x222;
                 
-				if(res1 > res2) {            // make sure res1 <= res2
+				if(res1 > res2) {            // make sure res1 <= res2. If they need swapping, then swap lookups too
 					resTemp = res2;
 					res2 = res1;
 					res1 = resTemp;
@@ -168,8 +169,7 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
 				}
 				
 				// Now process two-allele case with allele counts res1 and res2
-                
-				for(a11 = 0; a11 <= res1/2; a11++) {
+                    for(a11 = 0; a11 <= res1/2; a11++) {
 					a21 = res1-a11*2; // integer arithmetic rounds down
 					a22 = (res2-a21)/2;
 					problT = probl3 + lnFact[a11] + lnFact[a21] + lnFact[a22];
@@ -182,8 +182,8 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
 					statlT = constLLRterm - statlT - dT * M_LN2;
 					uT = 2 * ntotal * (u + uT1[a11] + uT2[a22]) - ntotal;
                     x2T = x23 + x221[a21] + x11[a11] + x22[a22];
-					
-					//Now process the new values of prob and stat
+                    
+                    //Now process the new values of prob and stat
                     probSum += prob;
                     if(statlT <= maxLLR) pLLR += prob;
                     if(problT <= maxlPr) pPr += prob;
