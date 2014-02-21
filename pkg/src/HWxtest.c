@@ -47,15 +47,13 @@ int histobins, HN;
 int statID;
 int * mi;
 double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup tables
-double tableCount, ln2;
+double tableCount;
 double pLLR, pU, pPr, pX2;  // P values
 double maxLLR, maxlPr, minmaxU, minX2; // cutoff values
 double statSpan, constProbTerm, constLLRterm, probSum, leftStat;
 double * hProb;
 
 static void heterozygote (unsigned r, unsigned c, double probl, double statl, double u, double x2, COUNTTYPE * R);
-
-//void homozygote (unsigned r, double probl, double statl, double u, double x2, COUNTTYPE * R);
 
 static void homozygote (unsigned r, double probl, double statl, double u, double x2, COUNTTYPE * R)
 {
@@ -80,7 +78,7 @@ static void homozygote (unsigned r, double probl, double statl, double u, double
     //For each possible value of arr, examine the heterozygote at r, r-1
     for(arr = lower; arr <= upper; arr++) {
         resn[r] = res[r] - 2*arr;
-        arrln2 = arr * ln2;
+        arrln2 = arr * M_LN2;
         exindix = (r-1)*nAlleles + r - 1;  // index of homozygote
         heterozygote(r,
                      r-1,
@@ -94,6 +92,7 @@ static void homozygote (unsigned r, double probl, double statl, double u, double
 
 static void heterozygote (unsigned r, unsigned c, double probl, double statl, double u, double x2, COUNTTYPE * R)
 {
+    if(tableCount < 0) return;
     COUNTTYPE *res, *resn;
 	int lower, upper, exindex;
 	unsigned i, arc, ar1, ar2, a32, a31, a11, a21, a22;
@@ -169,6 +168,7 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
 				}
 				
 				// Now process two-allele case with allele counts res1 and res2
+                tableCount += res1/2 + 1;
                     for(a11 = 0; a11 <= res1/2; a11++) {
 					a21 = res1-a11*2; // integer arithmetic rounds down
 					a22 = (res2-a21)/2;
@@ -290,7 +290,8 @@ void xtest (int * rm,
             int * rhistobins, // number of bins for histogram. (no histogram if 0)
             double * rhistobounds, // Two values indicating the range for histogram
             double * rhistoData, // histogram data. length = histobounds.
-            int * rsafeSecs // abort calculation after this many seconds
+            int * rsafeSecs, // abort calculation after this many seconds
+            double * tables // the number of tables examined
             )
 {
     // Set up global variables used during recursion
@@ -299,13 +300,13 @@ void xtest (int * rm,
     hProb = rhistoData;
     Rbytes = *rk * sizeof(COUNTTYPE);
     statID = *rstatID;
-    timeLimit = rsafeSecs;
+    timeLimit = *rsafeSecs;
     HN = *rhistobins;
     start = time(NULL);
     Rarray = Calloc(*rk * *rk * (*rk-1)/2, COUNTTYPE);
     for (int i = 0; i < nAlleles; i++) Rarray[i] = rm[i];
     mi = rm-1; // 1-based list of allele counts
-    ln2 = log(2.0);
+    tableCount = 0;
     
     // Make lookup tables
     xlnx = Calloc(rm[0] + 1, double);
@@ -385,26 +386,19 @@ void xtest (int * rm,
         hProb = rhistoData;
         for(int i = 0; i < HN; i++) hProb[i] = 0;
     }
-   
+    start = time(NULL);
     if (nAlleles == 2) {
         twoAlleleSpecialCase();
     } else {
         homozygote(nAlleles, 0, 0, 0, 0, Rarray);
     }
     
-//    double psum = 0;
-//    if (HN) {
-//        for (int i = 0; i < HN; i++) {
-//            printf("\n%5d   %12.7f", i, hProb[i]);
-//            psum += hProb[i];
-//        }
-//        printf("\nTotal in histogram: %10.5f\n", psum);
-//    }
-    
+    *tables = tableCount;
     rPvals[0] = pLLR;
     rPvals[1] = pPr;
     rPvals[2] = pU;
     rPvals[3] = pX2;
+    if (tableCount < 0) for(int i = 0; i < 4; i++) rPvals[i] = -1; // Process timed out and p values are meaningless
     
     Free(xlnx);Free(lnFact);Free(Rarray);
     Free(exa); Free(uTerm1); Free(uTerm2);
