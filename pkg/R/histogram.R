@@ -1,5 +1,20 @@
-# plot(seq(0, 16.3, length.out = 500),c$histoData, type = "h", xlab="The Test Statistic", col=c(rep("gray20", 200), rep("lightcoral", 400)))
 
+#' Functions to plot a histogram of test statistic
+#' 
+#' Running  \code{xtest()} or \code{mtest()} can create data for a frequency distribution plot of one of the four test statistics. Then these functions can be used to make the plot. The user will not normally call these functions. Instead, they will be called by \code{xtest} or \code{mtest} provided \code{histobins} is positive.
+#' 
+#' @param obstats Observed statistics for the 4 test measures, \code{LLR}, \code{Prob}, \code{U} and \code{Chisq}.
+#' @param statID Value 1-4 indicating which statistic to use for the plot.
+#' @m A vector of the allele counts
+
+#' 
+#' @return \code{defaultHistobounds} returns a vector containing the left and right boundaries for the x axis.
+#' 
+#' @return \code{plotHistogram} does not return a value, but plots the histogram.
+
+
+#' @rdname histogramFunctions
+#' @export
 defaultHistobounds <- 
 function(ostats, statID, m) {
 	k <- length(m);
@@ -21,3 +36,7 @@ function(ostats, statID, m) {
 	}
 	return(b);	
 }
+
+
+
+# plot(seq(0, 16.3, length.out = 500),c$histoData, type = "h", xlab="The Test Statistic", col=c(rep("gray20", 200), rep("lightcoral", 400)))
