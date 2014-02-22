@@ -76,6 +76,7 @@ double pLLR, pU, pPr, pX2;  // P values
 double maxLLR, maxlPr, minmaxU, minX2; // cutoff values
 double statSpan, constProbTerm, constLLRterm, probSum, leftStat;
 double * hProb;
+double umean, uvariance;
 
 static void heterozygote (unsigned r, unsigned c, double probl, double statl, double u, double x2, COUNTTYPE * R);
 
@@ -206,6 +207,9 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
 					statlT = constLLRterm - statlT - dT * M_LN2;
 					uT = 2 * ntotal * (u + uT1[a11] + uT2[a22]) - ntotal;
                     x2T = x23 + x221[a21] + x11[a11] + x22[a22];
+                        
+//                    umean += prob * uT;
+//                    uvariance += prob * uT * uT;
                     
                     //Now process the new values of prob and stat
                     probSum += prob;
@@ -331,6 +335,7 @@ void xtest (int * rm,
     for (int i = 0; i < nAlleles; i++) Rarray[i] = rm[i];
     mi = rm-1; // 1-based list of allele counts
     tableCount = 0;
+    umean = 0; uvariance = 0;
     
     // Make lookup tables
     xlnx = Calloc(rm[0] + 1, double);
@@ -423,6 +428,9 @@ void xtest (int * rm,
     rPvals[2] = pU;
     rPvals[3] = pX2;
     if (tableCount < 0) for(int i = 0; i < 4; i++) rPvals[i] = -1; // Process timed out and p values are meaningless
+    
+//    printf("\nU mean = %.8f", umean);
+//    printf("\nU variance = %.8f\n", uvariance - umean * umean);
     
     Free(xlnx);Free(lnFact);Free(Rarray);
     Free(exa); Free(uTerm1); Free(uTerm2);

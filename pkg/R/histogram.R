@@ -5,7 +5,14 @@
 #' 
 #' @param obstats Observed statistics for the 4 test measures, \code{LLR}, \code{Prob}, \code{U} and \code{Chisq}.
 #' @param statID Value 1-4 indicating which statistic to use for the plot.
-#' @m A vector of the allele counts
+#' @param m A vector of the allele counts
+#' @param histobins the number of bins for the histogram
+#' @param histobounds The left and right boundary of the histogram x-axis
+#' @param histoData A vector of probabilities (or counts) returned from the \code{xtest} or \code{mtest} function
+#' @param showCurve Whether to draw a blue curve indicating the asymptotic distribution (if known)
+#' @param color1 The color for outcomes fitting the null distribution better than the observed
+#' @param color2 The color for outcomes deviating from the null at leasst as much as observed. Area of \code{color2} is the P value.
+#' @param ntrials If greater than 0, this is the number of trials used in a Monte Carlo test.
 
 #' 
 #' @return \code{defaultHistobounds} returns a vector containing the left and right boundaries for the x axis.
@@ -19,11 +26,11 @@ defaultHistobounds <-
 function(ostats, statID, m) {
 	k <- length(m);
 	b <- double(2);
+	n <- sum(m)/2;
 	df <- k *(k+1)/2 - k - 1;
 	if(statID==1 || statID==4) b[2] <- qchisq(.999, df);
 	if(statID==2) {
 		# find maximum probability
-		n <- sum(m)/2;
 		ae <- matrix(0,k,k);
 		for(i in 1:k) for(j in 1:k) ae[i,j] <- m[i]*m[j]/(2*n);
 		for(i in 1:k)ae[i,i] <- ae[i,i]/2;
@@ -31,8 +38,9 @@ function(ostats, statID, m) {
 		b[2] <- b[[1]] + qchisq(.999, df);
 	}
 	if(statID==3) {
-		b[[1]] <- -abs(ostats[3]) -5;
-		b[[2]] <- abs(ostats[3]) + 5;
+		seu <- sqrt(n * (k-1));
+		b[[1]] <- -4 * seu;
+		b[[2]] <- 4 * seu;
 	}
 	return(b);	
 }
@@ -41,9 +49,33 @@ function(ostats, statID, m) {
 #' @rdname histogramFunctions
 #' @export
 plotHistogram <- 
-function(ostats, statID, m, histobins, histobounds, histoData, showCurve=TRUE) {
-	labels <- c("-2 ln(LR)", "-2 ln(Probability)", "U Score (positive implies homozygote excess)", "Pearson's Chi Squared")
-	plot(seq(histobounds[1], histobounds[2], length.out=histobins+1), histoData, type="h", xlab=labels[statID]);
+function(ostats, statID, m, histobins, histobounds, histoData, showCurve=TRUE, color1="gray40", color2="lightcoral", ntrials=0) {
+	k <- length(m);
+	labels <- c("-2 ln(LR)", "-2 ln(Probability)", "U Score (test for homozygote excess)", "Pearson's Chi Squared");
+	os <- ostats[statID];
+	if(statID==1) os <- -2*os;
+	if(statID==2) os <- -2*log(os);
+	nleft <- as.integer(histobins*(os-histobounds[1])/(histobounds[2]-histobounds[1]));
+	if(nleft < 0) nleft <- 0;
+	nright <- histobins - nleft + 5;
+	if(nright < 0) nright <- 0;
+	if(statID==3 && os < 0) {  #swap colors
+		temp <- color1;
+		color1 <- color2;
+		color2 <- temp;
+		labels[3] <- "U Score (test for heterozygote excess)"
+	}
+	colrs <- c(rep(color1, nleft), rep(color2, nright));
+	plot(seq(histobounds[1], histobounds[2], length.out=histobins+1), 
+		histoData, 
+		type="h",
+		xlab=labels[statID],
+		ylab="Frequency",
+		col=colrs);
+	if(showCurve && (statID==1 || statID==4)){
+		if(ntrials==0) ntrials <- 1;
+		dx <- seq(from=histobounds[[1]], to=histobounds[[2]], length.out=histobins);
+		dy <- dchisq(dx,k *(k+1)/2 - k - 1 );
+		lines(dx,dy * (ntrials) * (histobounds[[2]] - histobounds[[1]])/histobins, col="blue", lwd=2)
+	}
 }
-
-# plot(seq(0, 16.3, length.out = 500),c$histoData, type = "h", xlab="The Test Statistic", col=c(rep("gray20", 200), rep("lightcoral", 400)))
