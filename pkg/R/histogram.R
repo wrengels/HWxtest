@@ -38,5 +38,12 @@ function(ostats, statID, m) {
 }
 
 
+#' @rdname histogramFunctions
+#' @export
+plotHistogram <- 
+function(ostats, statID, m, histobins, histobounds, histoData, showCurve=TRUE) {
+	labels <- c("-2 ln(LR)", "-2 ln(Probability)", "U Score (positive implies homozygote excess)", "Pearson's Chi Squared")
+	plot(seq(histobounds[1], histobounds[2], length.out=histobins+1), histoData, type="h", xlab=labels[statID]);
+}
 
 # plot(seq(0, 16.3, length.out = 500),c$histoData, type = "h", xlab="The Test Statistic", col=c(rep("gray20", 200), rep("lightcoral", 400)))

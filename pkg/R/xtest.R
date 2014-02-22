@@ -14,7 +14,7 @@
 
 #' @export
 xtest <- 
-function(c, statName="LLR", histobins=0, histobounds=c(0,0), safeSecs=100, detail=2) {
+function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	statNames <- c("LLR", "Prob", "U", "Chisq");
 	statID <- which(statNames==statName);
 	m <- alleleCounts(c);
@@ -38,5 +38,6 @@ function(c, statName="LLR", histobins=0, histobounds=c(0,0), safeSecs=100, detai
 	if(detail>=3) cat("\n\nExamined", x$tableCount, "tables\n");
 	if(detail>=4) {cat("\nObserved Test Statistics:\n");
 		for(i in 1:4){cat("\n",strtrim("     ", 6-nchar(statNames[i])), statNames[i],"  :  ", formatC(ostats[i]))}}
+	if(histobins) plotHistogram(ostats, statID, m, histobins, histobounds, x$histoData, showCurve);
 	x
 }
