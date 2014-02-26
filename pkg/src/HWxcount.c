@@ -5,7 +5,7 @@
 //  Created by Bill Engels February 2014.
 //
 /*
- Routines dealing with correlation structures.
+ Calculate the number of genotype tables for a given set of allele counts
  
  Copyright 2009-2014  William R. Engels
  

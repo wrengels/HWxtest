@@ -1,10 +1,10 @@
 
 #' Performs an exact test with full enumeration for Hardy-Weinberg proportions
 #' 
-#' Given a set of genotype counts, \code{xtest} examines all possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. These four test statistics and other information is in the vignette.
+#' Given a set of genotype counts, \code{xtest} examines all possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette.
 #' 
 #' @param c A matrix containing the genotype counts. It should be a square matrix, but only the lower-left half is used.
-#' @param statname can be \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq} depending on which one is to be ploted. Note that P values for all four are computed regardless of which one is specified with this parameter.
+#' @param statName can be \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq} depending on which one is to be ploted. Note that P values for all four are computed regardless of which one is specified with this parameter.
 #' @param histobins If 0 no histogram is plotted. If 1 or \code{TRUE} a histogram with 500 bins is plotted. If set to a number greater than 1, a histogram with \code{histobins} is plotted.
 #' @param histobounds A vector containing the left and right boundaries for the histogram's x axis. If you leave this as the default, \code{c(0,0)}, then \code{xtest} will compute reasonable bounds to include most of the distribution.
 #' @param showCurve whether to show a blue curve indicating the asymptotic (chi squared) distribution. This only works for \code{LLR} and \code{Chisq}
@@ -29,6 +29,7 @@
 #' xtest(c, statName="U", histobins=TRUE, detail=4)
 #' 
 
+#' @useDynLib HWxtest
 #' @export
 xtest <- 
 function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
@@ -48,7 +49,9 @@ function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSe
 			histobounds=as.double(histobounds),
 			histoData=as.double(double(histobins + 1)),
 			safeSecs=as.integer(safeSecs),
-			tableCount=as.double(0));
+			tableCount=as.double(0)
+			,PACKAGE="HWxtest"
+			);
 	comments = character(4);
 	if(ostats[3]>=0) {comments[[3]] <- " (test for homozygote excess)"}
 	if(ostats[3]<0) {comments[[3]] <- " (test for heterozygote excess)"};

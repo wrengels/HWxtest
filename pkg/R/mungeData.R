@@ -105,33 +105,33 @@ function(t){
 }
 
 
-#' Convert a list of genotypes into a genotype count matrix
-#' 
-#' Genotype lists as are used by packages `genetics` and `adegenet` are converted to an array of genotype counts.
-#' This function requires package `genetics`
-#' 
-#' @param g List of text objects indicating genotypes. Alleles are separated by \dQuote{/}
-#' 
-#' @return matrix of \eqn{k x k} genotype counts
-#' 
-#' @examples
-#' g <- c(rep("a/b",3),
-#'		"b/b",
-#'		rep("a/c", 5),
-#'		rep("b/c", 18),
-#'		"c/c",
-#'		rep("a/d",3),
-#'		rep("b/d", 7),
-#'		rep("c/d", 5),
-#'		rep("d/d", 2))
-#' genotypeList.to.matrix(g)
+# #' Convert a list of genotypes into a genotype count matrix
+# #' 
+# #' Genotype lists as are used by packages `genetics` and `adegenet` are converted to an array of genotype counts.
+# #' This function requires package `genetics`
+# #' 
+# #' @param g List of text objects indicating genotypes. Alleles are separated by \dQuote{/}
+# #' 
+# #' @return matrix of \eqn{k x k} genotype counts
+# #' 
+# #' @examples
+# #' g <- c(rep("a/b",3),
+# #'		"b/b",
+# #'		rep("a/c", 5),
+# #'		rep("b/c", 18),
+# #'		"c/c",
+# #'		rep("a/d",3),
+# #'		rep("b/d", 7),
+# #'		rep("c/d", 5),
+# #'		rep("d/d", 2))
+# #' genotypeList.to.matrix(g)
 
-#' @export
-genotypeList.to.matrix <- 
-function(g){
-	if(!require(genetics)) stop("\ngenetics package is required")
-	x <- genotype(g);
-	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
-	t(tab)
-}
+# #' @export
+# genotypeList.to.matrix <- 
+# function(g){
+	# if(!require(genetics)) stop("\ngenetics package is required")
+	# x <- genotype(g);
+	# tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
+	# t(tab)
+# }
 

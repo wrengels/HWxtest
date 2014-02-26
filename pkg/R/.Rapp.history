@@ -124,16 +124,11 @@ dyn.load("~/DropBox/HWxtest/pkg/src/HWxcount.so")#
 src <- list.files('~/DropBox/HWxtest/pkg/R', full.names=T)#
 for(i in 1:length(src)){source(src[i])}#
 load("~/DropBox/HWxtest/data/hwexamples")
-dyn.load("~/DropBox/HWxtest/pkg/src/HWxcount.so")#
-src <- list.files('~/DropBox/HWxtest/pkg/R', full.names=T)#
-for(i in 1:length(src)){source(src[i])}#
-load("~/DropBox/HWxtest/data/hwexamples")
 observedLLR(s8)
 observedProb(s8)
 observedProb(s4)
 observedLLR(s4)
 source("/Users/WRE/DropBox/HWxtest/pkg/R/observedStats.R")
-observedLLR(s4)
 observedLLR(s4)
 s8
 observedProb(s8)

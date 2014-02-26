@@ -24,7 +24,7 @@
 # dyn.load("~/DropBox/HWxtest/pkg/src/HWxcount.so")
 
 
-
+#' @useDynLib HWxtest
 #' @export
 xcount <- 
 function(m, safety = 1e10, safeSecs = 10) {
@@ -37,7 +37,9 @@ function(m, safety = 1e10, safeSecs = 10) {
 		counts=as.integer(sort(m, decreasing=T)),
 		nAlleles = as.integer(length(m)),
 		tableCount=as.double(xc),
-		safeSecs=as.integer(safeSecs));
+		safeSecs=as.integer(safeSecs)
+		,PACKAGE="HWxtest"
+		);
 	n <- value$tableCount;
 	if(n < 0) {
 		warning("\nOperation timed out after ", -n, 

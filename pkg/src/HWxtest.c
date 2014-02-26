@@ -5,8 +5,8 @@
 //  Created by Bill Engels on 2/11/14.
 //
  /*
- Routines dealing with correlation structures.
- 
+   Full Enumeration Test for Hardy-Weinberg Proportions
+  
  Copyright 2009-2014  William R. Engels
  
  This file used in computing an exact test for Hardy-Weinberg
@@ -156,12 +156,12 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
 			ar1 = fmin(resn[r], resn[1]);
 			resn[1] -= ar1;
 			resn[r] -= ar1;
-            exindex = (r-1)*nAlleles + c - 1;
+            exindex = (r-1)*nAlleles;
             homozygote(r-1,
                        probl + lnFact[ar2] + lnFact[ar1],
                        statl + xlnx[ar2] + xlnx[ar1],
                        u,
-                        x2 + R_pow_di(ar2 - exa[exindex], 2)/exa[exindex] ,
+                        x2 + R_pow_di(ar1 - exa[exindex], 2)/exa[exindex]+ R_pow_di(ar2 - exa[exindex+1], 2)/exa[exindex+1] ,
                        Rnew);
         } // if r > 3
 		if(r==3) // and c = 2, then we can handle a series of two-allele cases with no deeper recursion

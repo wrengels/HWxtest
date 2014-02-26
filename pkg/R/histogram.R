@@ -3,7 +3,7 @@
 #' 
 #' Running  \code{xtest()} or \code{mtest()} can create data for a frequency distribution plot of one of the four test statistics. Then these functions can be used to make the plot. The user will not normally call these functions. Instead, they will be called by \code{xtest} or \code{mtest} provided \code{histobins} is positive.
 #' 
-#' @param obstats Observed statistics for the 4 test measures, \code{LLR}, \code{Prob}, \code{U} and \code{Chisq}.
+#' @param ostats Observed statistics for the 4 test measures, \code{LLR}, \code{Prob}, \code{U} and \code{Chisq}.
 #' @param statID Value 1-4 indicating which statistic to use for the plot.
 #' @param m A vector of the allele counts
 #' @param histobins the number of bins for the histogram
