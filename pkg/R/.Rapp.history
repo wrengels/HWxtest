@@ -1,51 +1,3 @@
-?warning
-source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
-source('~/DropBox/HWxtest/pkg/R/acount.R', chdir = TRUE)
-xcount(c(100,200,300))
-xcount(c(100,200,300,100,100,100))
-xcount(c(100,200,300,10,10,10,10,10,10,10,10))
-source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
-xcount(c(100,200,300,10,10,10,10,10,10,10,10))
-source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
-rtables <- #
-function(n, len,top) {#
-	n <- as.integer(runif(n * len, 1,top));#
-	matrix(n, nrow)#
-}
-a <- rtables(200,5,30)
-rtables <- #
-function(n, len,top) {#
-	n <- as.integer(runif(n * len, 1,top));#
-	matrix(n, len)#
-}
-a <- rtables(200,5,30)
-xc <- apply(a,2,xcount)
-xc
-min(xc)
-which(xc,min(xc))
-which(xc,xc==min(xc))
-which(xc==min(xc))
-a[,191]
-a[,190]
-a[,191]=NULL
-a[1,191]
-a[1:5,191]=NULL
-str(a)
-a[[191]]
-a[,191]
-ac <- apply(a,2,acount)
-plot(log(xc), log(ac))
-a[1:5,191]
-a[1:5,191] <- NULL
-a[1:5,191] <- NA
-a[,191]
-?plot
-plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)")
-log(c(5,6,7,-2,9))
-plot(xc, yc, xlab="log(Exact count)", ylab="log(Normal approximation)")
-plot(xc, ac, xlab="log(Exact count)", ylab="log(Normal approximation)")
-plot(xc, ac, xlab="log(Exact count)", ylab="log(Normal approximation)", xlog=T, ylog=T)
-plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)")
 plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20))
 plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,4))
 plot(log(xc), log(ac), xlab="log(Exact count)", ylab="log(Normal approximation)", xaxp=c(5,20,5))
@@ -173,3 +125,129 @@ x2  <- vec.to.matrix(c(100,150,50))
 x2
 observedLLR(x2)
 v <- observedLLR(x2);v
+source('~/DropBox/HWxtest/loader.R', chdir = TRUE)
+a <- mtest(s4)
+a
+mtest(s9, safeSecs=3)
+mtest(s9, safeSecs=3, detail=4)
+mtest(s9, safeSecs=3, detail=4, ntrials=1e8)
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+hw.test(s4)
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h <- hw.test(s4)
+h
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h <- hw.test(s4)
+h
+h <- hw.test(s4)
+str(h)
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h <- hw.test(s4)
+h
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h <- hw.test(s4)
+h
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h
+h <- hw.test(s4)
+h
+h$detail
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h
+h$detail==1
+h$detail==2
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h
+h$detail <- 1
+h
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h
+h$statName <- "U"
+h
+h$detail <- 4
+h
+class(1:8)
+class(s4)
+class(alleleCounts(s4))
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+h
+h9 <- hw.test(s9)
+h9
+hw.test(s4)
+source('~/DropBox/HWxtest/pkg/R/mtest.R', chdir = TRUE)
+h9 <- hw.test(s9)
+h9
+hw.test(s9)
+hw.test(s9, detail=3)
+hw.test(s9, detail=1)
+hw.test(s9, detail=1)$p.value
+hw.test(s9, detail=1, statName="Prob")$p.value
+source('~/DropBox/HWxtest/pkg/R/xtest.R', chdir = TRUE)
+hw.test(s4)
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+hw.test(s4)
+h
+print(h)
+print(h, detail=1)
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+print(h, detail=1)
+?print
+print(h, quote=T)
+h$detail <- 3;h
+h$detail <- 2;h
+h$detail <- 1;h
+h$detail <- -1;h
+?HWE.test
+hw.test(c(1,2,3))
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+hw.test(c(1,2,3))
+hw.test(c(1,2,3,4))
+hw.test(c(1,2,3,4,5,6))
+summary(h)
+signature(h)
+data(GuoThompson8)#
+plot(GuoThompson8)#
+hwe.bf(GuoThompson8)
+GuoThompson8
+GuoThompson8$data.mat
+data.mat(GuoThompson8)
+GuoThompson8@data.mat
+gt <- GuoThompson8@data.mat
+class(gt)
+hw.test(gt)
+hw.test(gt, method="exact")
+source('~/DropBox/HWxtest/loader.R', chdir = TRUE)
+hw.test(s4)
+m <- alleleCount(s4)
+m <- alleleCounts(s4)
+m
+class(m)
+source('~/DropBox/HWxtest/pkg/R/xcount.R', chdir = TRUE)
+y <- 1:6
+class(y)
+z <- c(1,2,3,4,5,6)
+class(z)
+z <- c(1,2,3,4,5,6.4)
+class(z)
+as.integer(z)
+z
+zi <- as.integer(z)
+class(zi)
+roxygenize("~/DropBox/HWxtest/pkg")
+Data from Louis and Dempster 1987 Table 2 and Guo and Thompson 1992 Figure 2:#
+c <- c(0,3,1,5,18,1,3,7,5,2)#
+hw.test(c)#
+# To see a histogram of the LLR statistic:#
+hw.test(c, histobins=TRUE)#
+# For a histogram of the U statistic and other details of the result:#
+hw.test(c, statName="U", histobins=TRUE, detail=3)
+roxygenize("~/DropBox/HWxtest/pkg")
+roxygenize("~/DropBox/HWxtest/pkg")
+roxygenize("~/DropBox/HWxtest/pkg")
+roxygenize("~/DropBox/HWxtest/pkg")
+roxygenize("~/DropBox/HWxtest/pkg")
+roxygenize("~/DropBox/HWxtest/pkg")
+roxygenize("~/DropBox/HWxtest/pkg")
+roxygenize("~/DropBox/HWxtest/pkg")

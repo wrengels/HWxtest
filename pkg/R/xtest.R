@@ -1,5 +1,5 @@
 
-#' Performs an exact test with full enumeration for Hardy-Weinberg proportions
+#' Performs an exact test with full enumeration for Hardy-Weinberg proportions.
 #' 
 #' Given a set of genotype counts, \code{xtest} examines all possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette.
 #' 
@@ -30,6 +30,7 @@
 #' 
 
 #' @useDynLib HWxtest
+
 #' @export
 xtest <- 
 function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
@@ -52,15 +53,6 @@ function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSe
 			tableCount=as.double(0)
 			,PACKAGE="HWxtest"
 			);
-	comments = character(4);
-	if(ostats[3]>=0) {comments[[3]] <- " (test for homozygote excess)"}
-	if(ostats[3]<0) {comments[[3]] <- " (test for heterozygote excess)"};
-	if(x$tableCount < 0) stop("Calculation timed out. You can change the time limit by setting parameter 'safeSecs'");
-	if(detail==1) cat("\nP value (", statName,") = ", formatC(x$Pvalues[statID]), comments[statID], sep="");
-	if(detail>=2) for(i in 1:4){cat("\nP value (",statNames[i],")",strtrim("     ", 6-nchar(statNames[i])),"= ", formatC(x$Pvalues[i]), comments[i], sep="")};
-	if(detail>=3) cat("\n\nExamined", x$tableCount, "tables\n");
-	if(detail>=4) {cat("\nObserved Test Statistics:\n");
-		for(i in 1:4){cat("\n",strtrim("     ", 6-nchar(statNames[i])), statNames[i],"  :  ", formatC(ostats[i]))}}
 	if(histobins) plotHistogram(ostats, statID, m, histobins, histobounds, x$histoData, showCurve);
 	return = list(Pvalues=x$Pvalues, observed=ostats, tableCount= x$tableCount, genotypes=c, alleles=m)
 

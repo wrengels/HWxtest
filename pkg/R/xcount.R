@@ -28,6 +28,8 @@
 #' @export
 xcount <- 
 function(m, safety = 1e10, safeSecs = 10) {
+	if(class(m)=="table") m <- unclass(m);
+	if(class(m)=="matrix") m <- alleleCounts(m);
 	if(length(m) < 2) stop("\nThere must be at least two alleles\n");
 	if(any(m < 1)) stop("\nThere must be at least one copy of each allele\n");
 	ac <- acount(m);
@@ -38,7 +40,7 @@ function(m, safety = 1e10, safeSecs = 10) {
 		nAlleles = as.integer(length(m)),
 		tableCount=as.double(xc),
 		safeSecs=as.integer(safeSecs)
-		,PACKAGE="HWxtest"
+#		,PACKAGE="HWxtest"
 		);
 	n <- value$tableCount;
 	if(n < 0) {

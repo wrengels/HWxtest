@@ -77,7 +77,7 @@
 // Globals
 COUNTTYPE * Rarray;
 unsigned nAlleles, Rbytes;
-double tableCount;
+double tableCount, countLimit;
 struct node {
     double count;
     unsigned long long hash;
@@ -105,7 +105,7 @@ void homozygote (unsigned r, COUNTTYPE * R)
     // `tableCount` negative to signify that the job is aborted
     if(tableCount < 0) return;
     if(time(NULL) - start >= timeLimit) tableCount = -tableCount;
-    
+    if (tableCount > countLimit) tableCount = -tableCount;
 	COUNTTYPE * res, *resn;
 	int lower, upper;
 	unsigned i, arr;
@@ -199,6 +199,8 @@ double twoAlleleSpecialCase(int * m)  {
 
 
 void xcount (int * m, int * k, double * count, int * safeSecs) {
+    countLimit = *count;
+    if (*count < 1) countLimit = 1e100; // Set limit to a huge number unless user asked for a limit
     tableCount = 0;
     // If there are only 2 alleles, that's a special case.
     if (*k==2) {
