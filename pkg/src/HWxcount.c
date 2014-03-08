@@ -2,7 +2,7 @@
 //  HWxcount.c
 //  ExactoHW
 //
-//  Created by Bill Engels February 2014.
+//  Created by William R. Engels 2014.
 //
 /*
  Calculate the number of genotype tables for a given set of allele counts

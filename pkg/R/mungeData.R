@@ -1,3 +1,6 @@
+# Functions for arranging data used in HW test
+# (c) William R. Engels, 2014
+
 
 #' Make a matrix symmetrical, using only the lower-left half
 #' 
@@ -72,7 +75,7 @@ function(cv){
 	nGenotypes <- length(cv)
 	nAlleles <- as.integer((sqrt(8*nGenotypes + 1) - 1)/2)
 	if(nGenotypes != nAlleles*(nAlleles + 1)/2) stop("\nWrong number of genotype counts")
-	t <- matrix(0, nAlleles, nAlleles)
+	t <- matrix(NA, nAlleles, nAlleles)
 	for(i in 1:nAlleles){t[i, 1:i] <- cv[(i*(i-1)/2 + 1):(i*(i+1)/2)]}
 	t	
 }

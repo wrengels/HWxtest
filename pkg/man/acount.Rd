@@ -2,7 +2,7 @@
 \alias{acount}
 \title{Find Approximate Number of Genotype Tables}
 \usage{
-acount(m)
+acount(m, ...)
 }
 \arguments{
   \item{m}{vector containing the numbers of alleles of each

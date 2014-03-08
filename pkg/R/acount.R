@@ -1,5 +1,5 @@
 # acount
-# Bill Engels
+# (c) William R. Engels, 2014
 # 'Exact Tests For Hardy-Weinberg Proportions', 2009, Genetics, 183, pp1431-1441
 
 
@@ -26,9 +26,16 @@
 
 
 
-#' @export
+#' @export acount
 acount <- 
-function(m) {
+function(m, ...){
+	UseMethod("acount")
+}
+
+#' @method acount integer
+#' @S3method acount integer
+acount.integer <- 
+function(m, ...) {
 	if(length(m) < 2) stop("\nThere must be at least two alleles\n");
 	if(any(m < 1)) stop("\nThere must be at least one copy of each allele\n");
 	n <- sum(m)/2;
@@ -41,4 +48,29 @@ function(m) {
 	lnPm <- log(sqrt(k))  +  ((k-1)/2) * log((k-1)/(2*pi*k*vm)) - q/2;
 	lns <- lchoose(n + b, b);
 	exp(lns + lnPm)
+}
+
+#' @method acount matrix
+#' @S3method acount matrix
+acount.matrix <- 
+function(c, ...) {
+	m <- alleleCounts(c);
+	acount.integer(m,...)
+}
+
+#' @method acount numeric
+#' @S3method acount numeric
+acount.numeric <- 
+function(c, ...) {
+	m <- as.integer(c);
+	acount.integer(m,...)
+}
+
+#' @method acount genotype
+#' @S3method acount genotype
+acount.genotype <- 
+function(x, ...) {
+	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
+	m <- alleleCounts(unclass(t(tab)));
+	acount.integer(m,...)
 }

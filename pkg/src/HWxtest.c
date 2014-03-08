@@ -2,7 +2,7 @@
 //  HWxtest.c
 //  ExactoHW
 //
-//  Created by Bill Engels on 2/11/14.
+//  Created by William R. Engels.
 //
  /*
    Full Enumeration Test for Hardy-Weinberg Proportions

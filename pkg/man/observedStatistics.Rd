@@ -11,7 +11,7 @@ observedLLR(c)
 
 observedU(c)
 
-observedX2(c)
+observedX2(c, returnExpected = F)
 }
 \arguments{
   \item{c}{Matrix of observed genotype counts. Each number

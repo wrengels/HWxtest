@@ -1,3 +1,6 @@
+# Compute statistics for observed table in HW test
+# (c) William R. Engels, 2014
+
 
 #' Compute observed statistics for a genotype count matrix
 #' 
@@ -59,7 +62,7 @@ function(c){
 #' @rdname observedStatistics
 #' @export
 observedX2 <- 
-function(c){
+function(c, returnExpected=F){
 	c <- fillUpper(c);
 	k <- dim(c)[1];
 	m <- alleleCounts(c);
@@ -70,6 +73,7 @@ function(c){
 	for(i in 1:k) for(j in 1:k) ae[i,j] <- m[i]*m[j]/(2*n);
 	for(i in 1:k)ae[i,i] <- ae[i,i]/2;
 	ve <- matrix.to.vec(ae);
+	if(returnExpected) return(vec.to.matrix(ve));
 	sum((a-ve)^2/ve)
 }
 

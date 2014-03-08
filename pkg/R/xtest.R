@@ -1,3 +1,6 @@
+# Full enumeration test for HW
+# (c) William R. Engels, 2014
+
 
 #' Performs an exact test with full enumeration for Hardy-Weinberg proportions.
 #' 
@@ -18,20 +21,9 @@
 #' \item{$ genotypes}{The input matrix of genotype counts}
 #' \item{$ alleles}{The allele counts \eqn{m} corresponding to the input genotype counts}
 
-#' 
-#' @examples
-#' # Data from Louis and Dempster 1987 Table 2 and Guo and Thompson 1992 Figure 2:
-#' c <- vec.to.matrix(c(0,3,1,5,18,1,3,7,5,2))
-#' xtest(c)
-#' # To see a histogram of the LLR statistic:
-#' xtest(c, histobins=TRUE)
-#' # For a histogram of the U statistic and other details of the result:
-#' xtest(c, statName="U", histobins=TRUE, detail=4)
-#' 
 
 #' @useDynLib HWxtest
 
-#' @export
 xtest <- 
 function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	statNames <- c("LLR", "Prob", "U", "Chisq");

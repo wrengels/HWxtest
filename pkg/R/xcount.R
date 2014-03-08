@@ -1,11 +1,11 @@
 # xcount
-# Bill Engels
+# (c) William R. Engels, 2014
 # 'Exact Tests For Hardy-Weinberg Proportions', 2009, Genetics, 183, pp1431-1441
 
 
 #' Find Exact Number of Genotype Tables
 #' 
-#' Use \code{xcount} to determine the exact number of tables (i.e., genotype numbers) for a given set of allele counts. This method enumerates all tables, and is best when the total number is less than 10^10 or so.
+#' Use \code{xcount} to determine the exact number of tables (i.e., genotype numbers) for a given set of allele counts. This method enumerates all tables, and is best when the total number is less than 10^10 or so. This function is mostly called by \code{hw.test} rather than directly by the user.
 #' 
 #' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be positive integers.
 #' @param safety Stop execution if the approximate table number obtained from \code{acount()} is more than this cutoff.
@@ -25,8 +25,16 @@
 
 
 #' @useDynLib HWxtest
-#' @export
+#' @export xcount
 xcount <- 
+function(x, ...) {
+	UseMethod("xcount")
+}
+
+
+#' @method xcount integer
+#' @S3method xcount integer
+xcount.integer <- 
 function(m, safety = 1e10, safeSecs = 10) {
 	if(class(m)=="table") m <- unclass(m);
 	if(class(m)=="matrix") m <- alleleCounts(m);
@@ -40,7 +48,7 @@ function(m, safety = 1e10, safeSecs = 10) {
 		nAlleles = as.integer(length(m)),
 		tableCount=as.double(xc),
 		safeSecs=as.integer(safeSecs)
-#		,PACKAGE="HWxtest"
+		,PACKAGE="HWxtest"
 		);
 	n <- value$tableCount;
 	if(n < 0) {
@@ -49,3 +57,30 @@ function(m, safety = 1e10, safeSecs = 10) {
 	}
 	value$tableCount;
 }
+
+#' @method xcount matrix
+#' @S3method xcount matrix
+xcount.matrix <- 
+function(c, ...) {
+	m <- alleleCounts(c);
+	xcount.integer(m,...)
+}
+
+#' @method xcount numeric
+#' @S3method xcount numeric
+xcount.numeric <- 
+function(c, ...) {
+	m <- as.integer(c);
+	xcount.integer(m,...)
+}
+
+#' @method xcount genotype
+#' @S3method xcount genotype
+xcount.genotype <- 
+function(x, ...) {
+	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
+	m <- alleleCounts(unclass(t(tab)));
+	xcount.integer(m,...)
+}
+
+

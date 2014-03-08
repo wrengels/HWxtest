@@ -2,7 +2,7 @@
 \alias{xcount}
 \title{Find Exact Number of Genotype Tables}
 \usage{
-xcount(m, safety = 1e+10, safeSecs = 10)
+xcount(x, ...)
 }
 \arguments{
   \item{m}{vector containing the numbers of alleles of each

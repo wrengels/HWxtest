@@ -1,7 +1,10 @@
+# Plot histogram of HW test statistics
+# (c) William R. Engels, 2014
+
 
 #' Functions to plot a histogram of test statistic
 #' 
-#' Running  \code{xtest()} or \code{mtest()} can create data for a frequency distribution plot of one of the four test statistics. Then these functions can be used to make the plot. The user will not normally call these functions. Instead, they will be called by \code{xtest} or \code{mtest} provided \code{histobins} is positive.
+#' Running  \code{xtest()} or \code{mtest()} can create data for a frequency distribution plot of one of the four test statistics. Then these functions can be used to make the plot. The user will not normally call these functions. Instead, they will be called by \code{hw.test} provided \code{histobins} is positive.
 #' 
 #' @param ostats Observed statistics for the 4 test measures, \code{LLR}, \code{Prob}, \code{U} and \code{Chisq}.
 #' @param statID Value 1-4 indicating which statistic to use for the plot.
