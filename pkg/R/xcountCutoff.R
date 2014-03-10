@@ -5,10 +5,11 @@
 
 #' Determine immediately whether number of tables is over a limit
 #' 
-#' Calling \code{scountCutoff} gives you a quick answer to whether the number of tables is over a given cutoff. It is useful in deciding whether to analyze a data set with \code{xtest} or \code{mtest}. This function is used by \code{hw.test} and not normally called directly by the user.
+#' Calling \code{scountCutoff} gives you a quick answer to whether the number of tables is over a given cutoff. It is useful in deciding whether to analyze a data set with \code{\link{xtest}} or \code{\link{mtest}}. This function is used by \code{\link{hw.test}} and not normally called directly by the user.
 #' 
 #' 
-#' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be positive integers.
+#' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be positive integers. It can also be a matrix of genotype counts, but not a vector of genotype counts.
+#' @param ... parameters passed to \code{xcountCutoff}
 #' @param cutoff Is the number of tables above or below this value?
 #' 
 #' @method generic xcountCutoff
@@ -29,8 +30,8 @@ function(x, ...){
 	UseMethod("xcountCutoff")
 }
 
-#' @method xcountCutoff integer
-#' @S3method xcountCutoff integer
+
+#' @export
 xcountCutoff.integer <- 
 function(m, cutoff=1e7) {
 	if(length(m) < 2) stop("\nThere must be at least two alleles\n");
@@ -48,16 +49,17 @@ function(m, cutoff=1e7) {
 		return(FALSE)
 }
 
-#' @method xcountCutoff matrix
-#' @S3method xcountCutoff matrix
+
+#' @export
 xcountCutoff.matrix <- 
 function(c, ...) {
 	m <- alleleCounts(c);
 	xcountCutoff.integer(m,...)
 }
 
-#' @method xcountCutoff numeric
-#' @S3method xcountCutoff numeric
+
+
+#' @export
 xcountCutoff.numeric <-
 function(c, ...) {
 	m <- as.integer(c);

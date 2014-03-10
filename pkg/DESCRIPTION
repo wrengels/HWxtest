@@ -8,8 +8,9 @@ Maintainer: Bill Engels <wrengels@wisc.edu>
 Description: Tests whether a set of genotype counts fits the HW expectations.
     Exact tests performed by an efficient algorithm. Included test statistics
     are likelihood ratio, probability, U-score and Pearsons X2.
-VignetteBuilder: knitr
+VignetteBuilder: knitr, knitcitations
 Suggests:
-    knitr
+    knitr,
+    knitcitations
 NeedsCompilation: yes
 License: GPL

@@ -4,15 +4,16 @@
 
 #' Performs an \dQuote{exact} test using Monte Carlo trials for Hardy-Weinberg proportions
 #' 
-#' Given a set of genotype counts, \code{mtest} examines a large number of possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette.
+#' Given a set of genotype counts, \code{mtest} examines a large number of possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette. This function will not usually be called directly by the user. Instead, call \code{\link{hw.test}} with \code{method} set to either \dQuote{auto} or \dQuote{monte}.
 #' 
 #' @param c A matrix containing the genotype counts. It should be a square matrix, but only the lower-left half is used.
+#' @param ntrials the number of random trials to perform
 #' @param statName can be \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq} depending on which one is to be ploted. Note that P values for all four are computed regardless of which one is specified with this parameter.
 #' @param histobins If 0 no histogram is plotted. If 1 or \code{TRUE} a histogram with 500 bins is plotted. If set to a number greater than 1, a histogram with \code{histobins} is plotted.
-#' @param histobounds A vector containing the left and right boundaries for the histogram's x axis. If you leave this as the default, \code{c(0,0)}, then \code{xtest} will compute reasonable bounds to include most of the distribution.
+#' @param histobounds A vector containing the left and right boundaries for the histogram's x axis. If you leave this as the default, \code{c(0,0)}, then \code{mtest} will compute reasonable bounds to include most of the distribution.
 #' @param showCurve whether to show a blue curve indicating the asymptotic (chi squared) distribution. This only works for \code{LLR} and \code{Chisq}
 #' @param safeSecs After this many seconds the calculation will be aborted. This is a safety valve to prevent attempts to compute impossibly large sets of tables.
-#' @param detail Determines how much detail is printed. If it is set to 0, nothing is printed (useful if you use \code{xtest} programmatically.).
+#' @param detail Determines how much detail is printed. If it is set to 0, nothing is printed (useful if you use \code{mtest} programmatically.).
 #' 
 #' @return \code{mtest} returns a list components
 #' \item{$ Pvalues}{The four computed P values corresponding to the test statistics: \code{LLR}, \code{Prob}, \code{U} and \code{Chisq} in that order.}

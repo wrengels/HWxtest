@@ -4,7 +4,7 @@
 
 #' Performs an exact test with full enumeration for Hardy-Weinberg proportions.
 #' 
-#' Given a set of genotype counts, \code{xtest} examines all possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette.
+#' Given a set of genotype counts, \code{xtest} examines all possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette. This function will not normally be called directly. Instead, \code{\link{hw.test}} calls either \code{xtest} or \code{\link{mtest}} depending on which method is to be used.
 #' 
 #' @param c A matrix containing the genotype counts. It should be a square matrix, but only the lower-left half is used.
 #' @param statName can be \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq} depending on which one is to be ploted. Note that P values for all four are computed regardless of which one is specified with this parameter.

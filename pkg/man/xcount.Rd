@@ -10,8 +10,8 @@ xcount(x, ...)
   integers.}
 
   \item{safety}{Stop execution if the approximate table
-  number obtained from \code{acount()} is more than this
-  cutoff.}
+  number obtained from \code{\link{acount}} is more than
+  this cutoff.}
 
   \item{safeSecs}{Time limit in seconds. Another safety
   feature to prevent getting stuck in a too-long
@@ -24,7 +24,9 @@ The exact number of tables
 Use \code{xcount} to determine the exact number of tables
 (i.e., genotype numbers) for a given set of allele counts.
 This method enumerates all tables, and is best when the
-total number is less than 10^10 or so.
+total number is less than 10^10 or so. This function is
+mostly called by \code{\link{hw.test}} rather than directly
+by the user.
 }
 \examples{
 # Allele counts from human Rh locus. Guo and Thompson, 1992, Figure 1

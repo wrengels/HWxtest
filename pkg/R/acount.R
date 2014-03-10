@@ -7,7 +7,7 @@
 #' 
 #' Use \code{acount} to obtain the approximate number of genotype tables for a given set of allele counts. This method uses a normal approximation and is much faster than enumerating the tables.
 #' 
-#' @param m vector containing the numbers of alleles of each type. Length must be at least 2. All items are positive integers.
+#' @param m vector containing the numbers of alleles of each type. Length must be at least 2. All items are positive integers. It can also be a matrix of genotype counts, an object of type \code{genotype}, but not a vector of genotype counts.
 #' 
 #' @return The approximate number of tables.
 #' 
@@ -28,14 +28,14 @@
 
 #' @export acount
 acount <- 
-function(m, ...){
+function(m){
 	UseMethod("acount")
 }
 
 #' @method acount integer
 #' @S3method acount integer
 acount.integer <- 
-function(m, ...) {
+function(m) {
 	if(length(m) < 2) stop("\nThere must be at least two alleles\n");
 	if(any(m < 1)) stop("\nThere must be at least one copy of each allele\n");
 	n <- sum(m)/2;
@@ -53,24 +53,24 @@ function(m, ...) {
 #' @method acount matrix
 #' @S3method acount matrix
 acount.matrix <- 
-function(c, ...) {
+function(c) {
 	m <- alleleCounts(c);
-	acount.integer(m,...)
+	acount.integer(m)
 }
 
 #' @method acount numeric
 #' @S3method acount numeric
 acount.numeric <- 
-function(c, ...) {
+function(c) {
 	m <- as.integer(c);
-	acount.integer(m,...)
+	acount.integer(m)
 }
 
 #' @method acount genotype
 #' @S3method acount genotype
 acount.genotype <- 
-function(x, ...) {
+function(x) {
 	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
 	m <- alleleCounts(unclass(t(tab)));
-	acount.integer(m,...)
+	acount.integer(m)
 }

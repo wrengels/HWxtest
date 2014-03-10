@@ -106,6 +106,7 @@ function(t){
 	names(v) <- NULL;
 	v	
 }
+NULL
 
 
 # #' Convert a list of genotypes into a genotype count matrix

@@ -1,0 +1,59 @@
+\name{defaultHistobounds}
+\alias{defaultHistobounds}
+\alias{plotHistogram}
+\title{Functions to plot a histogram of test statistic}
+\usage{
+defaultHistobounds(ostats, statID, m)
+
+plotHistogram(ostats, statID, m, histobins, histobounds, histoData,
+  showCurve = TRUE, color1 = "gray40", color2 = "lightcoral",
+  ntrials = 0)
+}
+\arguments{
+  \item{ostats}{Observed statistics for the 4 test
+  measures, \code{LLR}, \code{Prob}, \code{U} and
+  \code{Chisq}.}
+
+  \item{statID}{Value 1-4 indicating which statistic to use
+  for the plot.}
+
+  \item{m}{A vector of the allele counts}
+
+  \item{histobins}{the number of bins for the histogram}
+
+  \item{histobounds}{The left and right boundary of the
+  histogram x-axis}
+
+  \item{histoData}{A vector of probabilities (or counts)
+  returned from the \code{xtest} or \code{mtest} function}
+
+  \item{showCurve}{Whether to draw a blue curve indicating
+  the asymptotic distribution (if known)}
+
+  \item{color1}{The color for outcomes fitting the null
+  distribution better than the observed}
+
+  \item{color2}{The color for outcomes deviating from the
+  null at leasst as much as observed. Area of \code{color2}
+  is the P value.}
+
+  \item{ntrials}{If greater than 0, this is the number of
+  trials used in a Monte Carlo test.}
+}
+\value{
+\code{defaultHistobounds} returns a vector containing the
+left and right boundaries for the x axis.
+
+\code{plotHistogram} does not return a value, but plots the
+histogram.
+}
+\description{
+Running the function \code{\link{hw.test}},
+\code{\link{xtest}} or \code{\link{mtest}} can create data
+for a frequency distribution plot of one of the four test
+statistics. Then these functions can be used to make the
+plot. The user will not normally call these functions.
+Instead, they will be called by \code{hw.test} provided
+\code{histobins} is positive.
+}
+

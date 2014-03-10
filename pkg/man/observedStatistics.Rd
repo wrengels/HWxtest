@@ -17,6 +17,10 @@ observedX2(c, returnExpected = F)
   \item{c}{Matrix of observed genotype counts. Each number
   should be a non-negative integer, and matrix is \eqn{k x
   k}.}
+
+  \item{returnExpected}{Used in \code{observedX2} to
+  indicate whether a matrix of expected numbers should be
+  returned instead.}
 }
 \value{
 the observed statistic

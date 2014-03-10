@@ -2,12 +2,14 @@
 \alias{acount}
 \title{Find Approximate Number of Genotype Tables}
 \usage{
-acount(m, ...)
+acount(m)
 }
 \arguments{
   \item{m}{vector containing the numbers of alleles of each
   type. Length must be at least 2. All items are positive
-  integers.}
+  integers. It can also be a matrix of genotype counts, an
+  object of type \code{genotype}, but not a vector of
+  genotype counts.}
 }
 \value{
 The approximate number of tables.

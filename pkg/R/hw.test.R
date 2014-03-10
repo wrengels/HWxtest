@@ -5,12 +5,13 @@
 
 #' Test for HW by either full enumeration or Monte Carlo.
 #' 
-#' The \code{hw.test()} function is the main function of the \code{HWxtest} package. This function produces a valid test for Hardy-Weinberg frequencies for virtually any set of genotype counts. It will use either a full-enumeration method in which all possible tables with the same allele numbers are examined, or a Monte Carlo test where a large number of random tables is examined. To decide which to use, it calls \code{xcountCutoff} to determine whether the number of tables to examine is greater than \code{cutoff}. If it is, then \code{mtest} is used. Otherwise \code{xtest} is used. The result is a robust test which will always provide a meaningful and accurate P value. Each table examined is compared with the observed counts according to each of four measures of fit:  \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq} corresponding to the log-likelihood ratio, the null-hypothesis probability, the U-score or the Pearson X^2 value. It can also plot a histogram showing the distribution of any of these statistics.
+#' The \code{hw.test()} function is the main function of the \code{HWxtest} package. This function produces a valid test for Hardy-Weinberg frequencies for virtually any set of genotype counts. It will use either a full-enumeration method in which all possible tables with the same allele numbers are examined, or a Monte Carlo test where a large number of random tables is examined. To decide which to use, it calls \code{\link{xcountCutoff}} to determine whether the number of tables to examine is greater than \code{cutoff}. If it is, then \code{mtest} is used. Otherwise \code{xtest} is used. The result is a robust test which will always provide a meaningful and accurate P value. Each table examined is compared with the observed counts according to each of four measures of fit:  \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq} corresponding to the log-likelihood ratio, the null-hypothesis probability, the U-score or the Pearson X^2 value. It can also plot a histogram showing the distribution of any of these statistics.
 #' 
 #' 
 #' @aliases hw.test.matrix hw.test.integer
 #' 
 #' @param x The genotype counts. You must provide the number of each genotype. So if there are \eqn{k} alleles, you need to include the number of each of the \eqn{k(k+1)/2} genotypes. The format of \code{x} is somewhat flexible: It can be a square matrix, but only the lower-left half is used. It can be a vector of the observations in the order \eqn{a_11, a_21, a_22, a_31, ..., a_kk}. For compatability with the packages \code{genetics} and \code{adegenet}, it can also be an object of class \code{genotype}.
+#' @param ... parameters passed to test functions, including the following:
 #' @param method Can be \dQuote{auto}, \dQuote{exact} or \dQuote{monte} to indicate the method to use. If \dQuote{auto}, the \code{hw.test} will first check to see whether the total number of tables exceeds a cutoff specified by the parameter \code{cutoff}.
 #' @param cutoff If \code{method} is set to \dQuote{auto}, then \code{cutoff} is used to decide whether to perform the test via the full enumeration or Monte Carlo method. If the number of tables is less than \code{cutoff}, then a full enumeration is performed. Otherwise the method will be Monte Carlo with \code{B} random trials.
 #' @param B The number of trials to perform if Monte Carlow method is used
@@ -47,13 +48,15 @@
 #' 
 
 #' @export hw.test
+#' @aliases hw.test.matrix
 
 hw.test <- 
 function(x, ...) {
 	UseMethod("hw.test")
 }
 
-#' @method hw.test matrix
+
+
 #' @S3method hw.test matrix
 hw.test.matrix <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2, ...) {
@@ -72,14 +75,12 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 	return(value)
 }
 
-#' @method hw.test integer
 #' @S3method hw.test integer
 hw.test.integer <- 
 function(c, ...) {
 	c <- vec.to.matrix(c);
 	hw.test(c, ...)
 }
-#' @method hw.test numeric
 #' @S3method hw.test numeric
 hw.test.numeric <- 
 function(c, ...) {
@@ -87,28 +88,24 @@ function(c, ...) {
 	hw.test(c, ...)
 }
 
-#' @method hw.test table
 #' @S3method hw.test table
 hw.test.table <- 
 function(c, ...) {
 	hw.test(unclass(c), ...)
 }
 
-#' @method hw.test genotype
 #' @S3method hw.test genotype
 hw.test.genotype <- 
 function(x, ...) {
 	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
 	hw.test(unclass(t(tab)), ...)
 }
-#' @method hw.test list
 #' @S3method hw.test list
 hw.test.list <- 
 function(s, ...){
 	lapply(s, hw.test, ...)
 }
 
-#' @method hw.test logical
 #' @S3method hw.test logical
 hw.test.logical <- 
 function(s, ...) {

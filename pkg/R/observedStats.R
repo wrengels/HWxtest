@@ -15,6 +15,7 @@
 #' * \code{observedX2} The classical \dQuote{chi-squared} statistic
 #' 
 #' @param c Matrix of observed genotype counts. Each number should be a non-negative integer, and matrix is \eqn{k x k}.
+#' @param returnExpected Used in \code{observedX2} to indicate whether a matrix of expected numbers should be returned instead.
 #' 
 #' @return the observed statistic
 #' 

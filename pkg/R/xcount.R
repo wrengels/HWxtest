@@ -5,10 +5,10 @@
 
 #' Find Exact Number of Genotype Tables
 #' 
-#' Use \code{xcount} to determine the exact number of tables (i.e., genotype numbers) for a given set of allele counts. This method enumerates all tables, and is best when the total number is less than 10^10 or so. This function is mostly called by \code{hw.test} rather than directly by the user.
+#' Use \code{xcount} to determine the exact number of tables (i.e., genotype numbers) for a given set of allele counts. This method enumerates all tables, and is best when the total number is less than 10^10 or so. This function is mostly called by \code{\link{hw.test}} rather than directly by the user.
 #' 
 #' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be positive integers.
-#' @param safety Stop execution if the approximate table number obtained from \code{acount()} is more than this cutoff.
+#' @param safety Stop execution if the approximate table number obtained from \code{\link{acount}} is more than this cutoff.
 #' @param safeSecs Time limit in seconds. Another safety feature to prevent getting stuck in a too-long computation
 #' 
 #' @return The exact number of tables

@@ -5,10 +5,11 @@
 #' S3 Method for printing \code{hwtest} objects
 
 #' 
-#' Prints test results (\code{hwtest}) objects depending on how much detail is provided.
+#' Prints test results (\code{\link{hwtest}}) objects depending on how much detail is provided.
 #' 
-#' @param h the results from a call to \code{hw.test}
+#' @param h the results from a call to \code{\link{hw.test}}
 #' @param detail If unspecified, the level of detail used in the \code{hw.test} call will be applied.
+#' @param ... other parameters passed to \code{print}
 
 
 #' @method print hwtest
