@@ -4,7 +4,9 @@
 \alias{hw.test.matrix}
 \title{Test for HW by either full enumeration or Monte Carlo.}
 \usage{
-hw.test(x, ...)
+hw.test(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR",
+  histobins = 0, histobounds = c(0, 0), showCurve = T, safeSecs = 100,
+  detail = 2)
 }
 \arguments{
   \item{x}{The genotype counts. You must provide the number

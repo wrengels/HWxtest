@@ -21,6 +21,7 @@
 #' @param showCurve whether to show a blue curve indicating the asymptotic (chi squared) distribution. This only works for \code{LLR} and \code{Chisq}
 #' @param safeSecs After this many seconds the calculation will be aborted. This is a safety valve to prevent attempts to compute impossibly large sets of tables.
 #' @param detail Determines how much detail is printed. If it is set to 0, nothing is printed (useful if you use \code{hw.test} programmatically.)
+#' @param \dots any other parameters
 #' 
 
 #' 
@@ -51,15 +52,15 @@
 #' @aliases hw.test.matrix
 
 hw.test <- 
-function(x, ...) {
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	UseMethod("hw.test")
 }
 
 
 
-#' @S3method hw.test matrix
+#' @export
 hw.test.matrix <- 
-function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2, ...) {
+function(c,  method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	statNames <- c("LLR", "Prob", "U", "Chisq");
 	statID <- which(statNames==statName);
 	if(method=="auto") method <- if(xcountCutoff(c, cutoff))method <- "monte" else method <- "exact"
@@ -75,40 +76,40 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 	return(value)
 }
 
-#' @S3method hw.test integer
+#' @export
 hw.test.integer <- 
-function(c, ...) {
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	c <- vec.to.matrix(c);
-	hw.test(c, ...)
+	hw.test.matrix(c,  method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
-#' @S3method hw.test numeric
+#' @export
 hw.test.numeric <- 
-function(c, ...) {
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	c <- vec.to.matrix(c);
-	hw.test(c, ...)
+	hw.test(c,  method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
-#' @S3method hw.test table
+#' @export
 hw.test.table <- 
-function(c, ...) {
-	hw.test(unclass(c), ...)
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
+	hw.test(unclass(c),method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
-#' @S3method hw.test genotype
+#' @export
 hw.test.genotype <- 
-function(x, ...) {
-	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
-	hw.test(unclass(t(tab)), ...)
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
+	tab <- table(factor(allele(c, 1), levels = allele.names(c)), factor(allele(c, 2), levels = allele.names(c)));
+	hw.test(unclass(t(tab)), method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
-#' @S3method hw.test list
+#' @export
 hw.test.list <- 
-function(s, ...){
-	lapply(s, hw.test, ...)
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2){
+	lapply(c, hw.test, method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
-#' @S3method hw.test logical
+#' @export
 hw.test.logical <- 
-function(s, ...) {
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	a <- list(p.value=NA);
 	class(a) <- "hwtest"
 	return(a)
