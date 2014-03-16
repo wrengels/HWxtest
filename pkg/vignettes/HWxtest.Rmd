@@ -1,0 +1,84 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{HWxtest}
+-->
+```{r setup, include=FALSE}
+library(knitr)
+library(knitcitations)
+opts_chunk$set(fig.width=8, fig.height=5)
+set.seed(60823316) 
+```
+```{r refs, include=FALSE}
+bib <- read.bibtex('~/DropBox/HWxtest/bibHW.txt')
+me2009 <- ref("10.1534/genetics.109.108977")
+levene1949 <- ref("10.1214/aoms/1177730093")
+haldane1954 <- ref("10.1007/BF02985085")
+louis1987 <- ref("10.2307/2531534")
+guo1992 <- ref("10.2307/2532296")
+ward2014 <- ref("10.1093/biostatistics/kxt028")
+rousset1995 <- bib[["R1995"]]
+robertson1984 <- bib[["robertson1984"]]
+```
+
+
+<STYLE type="text/css">
+  h1,h2,h3,h4,h5 { 
+    font-family: palatino, georgia, serif;
+    color: Maroon;
+  }
+    h1, h6{
+    text-align: center;
+  }
+  h1{line-height: 50px}
+  body{
+    font-size: 0.9em;
+    line-height: 23px;
+  }
+  h3{
+  font-weight: normal;
+  }
+  h6{
+        font-size: 0.9em;
+        font-weight: normal;
+        line-height: 5px;      
+   }
+   hr{
+     border-top-style: solid;
+     border-top-width: medium;
+   }
+  code {
+    font-size: 80%;
+    line-height: 140%;
+    border: 1px solid #ccc;
+  }
+   @media print{
+  hr { 
+      visibility: inherit;
+      page-break-before: auto;
+    }
+   }
+ </STYLE>
+
+
+* * *
+HWxtest -- Exact Tests for Hardy-Weinberg Proportions With Multiple Alleles
+========================================================
+
+###### William R. Engels  <wrengels@wisc.edu>  
+###### University of Wisconsin, Madison -- Genetics Department
+* * *
+### Contents
+* Introduction -- [1](#intro)
+* Bibliography -- [2](#bib)
+
+### <a name="intro">Introduction</a>
+This packages uses algorithms from `r citep(me2009)` for everything.See also `r citep(list(levene1949, haldane1954, guo1992, louis1987, ward2014, rousset1995))` for good stuff `r citet(c(rousset1995, robertson1984))`.
+
+### More stuff
+
+### More yet
+
+### <a name="bib">Bibliography</a>
+```{r results="asis", echo=FALSE}
+bibliography("html")
+````
