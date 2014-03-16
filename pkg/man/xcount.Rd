@@ -26,12 +26,22 @@ Use \code{xcount} to determine the exact number of tables
 This method enumerates all tables, and is best when the
 total number is less than 10^10 or so. This function is
 mostly called by \code{\link{hw.test}} rather than directly
-by the user.
+by the user. If the number of tables is too large to
+enumerate with this method, use \code{\link{acount}} for an
+approximation.
 }
 \examples{
 # Allele counts from human Rh locus. Guo and Thompson, 1992, Figure 1
 #
 alleles <- c(15, 14, 11, 12, 2, 2, 1, 3)
 xcount(alleles)
+}
+\references{
+The methods are described by
+\href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels,
+2009. \bold{Genetics} 183:1431}.
+}
+\seealso{
+\code{\link{hw.test}}, \code{\link{acount}}
 }
 

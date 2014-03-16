@@ -20,6 +20,10 @@
 #' \item{$ tableCount}{The number of tables examined during the calculation}
 #' \item{$ genotypes}{The input matrix of genotype counts}
 #' \item{$ alleles}{The allele counts \eqn{m} corresponding to the input genotype counts}
+#' 
+#' @references The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
+#' 
+#' @seealso \code{\link{hw.test}}
 
 
 #' @useDynLib HWxtest

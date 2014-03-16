@@ -53,7 +53,10 @@ Running the function \code{\link{hw.test}},
 for a frequency distribution plot of one of the four test
 statistics. Then these functions can be used to make the
 plot. The user will not normally call these functions.
-Instead, they will be called by \code{hw.test} provided
-\code{histobins} is positive.
+Instead, they will be called by \code{\link{hw.test}}
+provided \code{histobins} is positive.
+}
+\seealso{
+\code{\link{hw.test}}
 }
 

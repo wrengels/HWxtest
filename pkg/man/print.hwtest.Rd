@@ -14,7 +14,7 @@
   \item{...}{other parameters passed to \code{print}}
 }
 \description{
-Prints test results (\code{\link{hwtest}}) objects
-depending on how much detail is provided.
+Prints test results (\code{hwtest}) objects depending on
+how much detail is provided.
 }
 

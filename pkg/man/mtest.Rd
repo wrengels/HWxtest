@@ -68,4 +68,12 @@ called directly by the user. Instead, call
 \code{\link{hw.test}} with \code{method} set to either
 \dQuote{auto} or \dQuote{monte}.
 }
+\references{
+The methods are described by
+\href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels,
+2009. \bold{Genetics} 183:1431}.
+}
+\seealso{
+\code{\link{hw.test}}
+}
 

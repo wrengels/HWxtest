@@ -18,7 +18,8 @@ The approximate number of tables.
 Use \code{acount} to obtain the approximate number of
 genotype tables for a given set of allele counts. This
 method uses a normal approximation and is much faster than
-enumerating the tables.
+enumerating the tables with \code{\link{xcount}} but not as
+accurate.
 }
 \examples{
 # Allele counts from human Rh locus. Guo and Thompson, 1992, Figure 1
@@ -31,5 +32,13 @@ ld <- c(6329, 319, 47, 2773, 75, 6702, 14, 2, 333)
 acount(ld)
 #
 # This is an example where the number of tables is too large for a full enumeration.
+}
+\references{
+The methods are described by
+\href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels,
+2009. \bold{Genetics} 183:1431}.
+}
+\seealso{
+\code{\link{hw.test}}, \code{\link{xcount}}
 }
 

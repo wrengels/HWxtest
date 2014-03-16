@@ -67,6 +67,8 @@ hw.test(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR",
   \item{detail}{Determines how much detail is printed. If
   it is set to 0, nothing is printed (useful if you use
   \code{hw.test} programmatically.)}
+
+  \item{\dots}{any other parameters}
 }
 \value{
 Returns a list of class \code{hwtest} which includes the
@@ -97,11 +99,11 @@ numbers are examined, or a Monte Carlo test where a large
 number of random tables is examined. To decide which to
 use, it calls \code{\link{xcountCutoff}} to determine
 whether the number of tables to examine is greater than
-\code{cutoff}. If it is, then \code{mtest} is used.
-Otherwise \code{xtest} is used. The result is a robust test
-which will always provide a meaningful and accurate P
-value. Each table examined is compared with the observed
-counts according to each of four measures of fit:
+\code{cutoff}. If it is, then \code{\link{mtest}} is used.
+Otherwise \code{\link{xtest}} is used. The result is a
+robust test which will always provide a meaningful and
+accurate P value. Each table examined is compared with the
+observed counts according to each of four measures of fit:
 \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq}
 corresponding to the log-likelihood ratio, the
 null-hypothesis probability, the U-score or the Pearson X^2
@@ -116,5 +118,10 @@ hw.test(c)
 hw.test(c, histobins=TRUE)
 # For a histogram of the U statistic and other details of the result:
 hw.test(c, statName="U", histobins=TRUE, detail=3)
+}
+\references{
+The methods are described by
+\href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels,
+2009. \bold{Genetics} 183:1431}.
 }
 

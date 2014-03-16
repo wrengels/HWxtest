@@ -5,7 +5,7 @@
 
 #' Find Exact Number of Genotype Tables
 #' 
-#' Use \code{xcount} to determine the exact number of tables (i.e., genotype numbers) for a given set of allele counts. This method enumerates all tables, and is best when the total number is less than 10^10 or so. This function is mostly called by \code{\link{hw.test}} rather than directly by the user.
+#' Use \code{xcount} to determine the exact number of tables (i.e., genotype numbers) for a given set of allele counts. This method enumerates all tables, and is best when the total number is less than 10^10 or so. This function is mostly called by \code{\link{hw.test}} rather than directly by the user. If the number of tables is too large to enumerate with this method, use \code{\link{acount}} for an approximation.
 #' 
 #' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be positive integers.
 #' @param safety Stop execution if the approximate table number obtained from \code{\link{acount}} is more than this cutoff.
@@ -18,7 +18,10 @@
 #' #
 #' alleles <- c(15, 14, 11, 12, 2, 2, 1, 3)
 #' xcount(alleles)
-
+#' 
+#' @references The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
+#' 
+#' @seealso \code{\link{hw.test}}, \code{\link{acount}}
 
 
 # dyn.load("~/DropBox/HWxtest/pkg/src/HWxcount.so")
@@ -84,3 +87,6 @@ function(x, ...) {
 }
 
 
+#' export
+xcount.logical <- 
+function(x,...) {return(NA)}
