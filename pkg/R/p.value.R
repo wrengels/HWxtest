@@ -1,0 +1,51 @@
+# p.value   Generic function to return just the P value from a Hardy-Weinberg test
+# (c) William R. Engels, 2014
+# Accepts hwtest, list, matrix, vector, table, genotype, etc. 
+
+
+#' Extract just the P value from a Hardy-Weinberg test.
+#' 
+#' Use the \code{p.value} function to return just the P value from the results of a call to \code{\link{hw.test}}. If applied to a list of results, it will return a vector or matrix of P values. You can specify the \code{statName} as \dQuote{LLR}, \dQuote{Prob}, \dQuote{U} or \dQuote{Chisq}. You can also apply \code{p.value} to a matrix or vector and it will attempt to use \code{\link{hw.test}} to return a P value. However, it's usually preferable to use \code{\link{hw.test}} directly.
+#' 
+#' @aliases p.value.hwtest p.value.list, p.value.matrix, p.value.integer, p.value.table, p.value.numeric, p.value.genotype, p.value.logical
+#' 
+#' 
+#' @references The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
+#' 
+#' @param x The result of a call to \code{\link{hw.test}} or a list of such results. It can also be the genotype counts in any of the same formats as accepted by \code{\link{hw.test}}
+#' @param statName can be \dQuote{LLR}, \dQuote{Prob}, \dQuote{U}, or \dQuote{Chisq}
+#' 
+#' @return The P value
+#' 
+#' @examples
+#' data(HWcases)
+#' testResults <- hw.test(HWcases)
+#' p.value(testResults)
+#' p.value(testResults, statName="U")
+
+#' 
+#' @export
+p.value <- function(x, statName="auto") UseMethod("p.value")
+
+#' @export
+p.value.hwtest <- function(x, statName="auto"){
+	if(statName=="auto") statName <- x$statName;
+	statNames <- c("LLR", "Prob", "U", "Chisq");
+	statID <- which(statNames==statName);
+	x[["Pvalues"]][statID]}
+	
+	
+#' @export
+p.value.list <- function(x,statName="auto") sapply(x, p.value,statName=statName)
+#' @export
+p.value.matrix <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value 
+#' @export
+p.value.integer <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+#' @export
+p.value.table <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+#' @export
+p.value.numeric <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+#' @export
+p.value.genotype <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+#' @export
+p.value.logical <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
