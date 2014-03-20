@@ -11,6 +11,7 @@ Description: Tests whether a set of genotype counts fits the HW expectations.
 VignetteBuilder: knitr, knitcitations
 Suggests:
     knitr,
-    knitcitations
+    knitcitations,
+    adegenet
 NeedsCompilation: yes
 License: GPL

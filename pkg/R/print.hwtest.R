@@ -32,6 +32,7 @@ function(h, detail=h$detail, ...) {
 		cat(comments[statID],"\n");
 	}
 	if(detail >= 2) {
+		cat("\n*****    Sample of ", sum(h$alleles)/2," diploids with ", length(h$alleles), " alleles", sep="")
 		if(h$method=="monte") cat("\nMonte Carlo test for HW with ", h$ntrials," trials.\n", sep="");
 		if(h$method=="exact") cat("\nFull enumeration of ",h$tableCount, " tables to test for HW\n", sep="");
 		for(i in 1:4){
@@ -47,11 +48,14 @@ function(h, detail=h$detail, ...) {
 	if(detail>=4){
 		cat("\n\nObserved Allele Counts: ", h$alleles);
 		cat("\n\nObserved Genotype Counts\n");
-		print(h$genotypes, na.print="");
+		print(clearUpper(h$genotypes), na.print="");
 	}
 	if(detail>=5){
 		cat("\n\nExpected Genotype Counts\n");
-		print(observedX2(h$genotypes, returnExpected=T), digits=3, na.print="");
+		ecounts <- observedX2(h$genotypes, returnExpected=T);
+		rownames(ecounts) <- rownames(h$genotypes);
+		colnames(ecounts) <- rownames(h$genotypes);
+		print(clearUpper(ecounts), digits=3, na.print="");
 	}
 	cat("\n", sep="");
 }

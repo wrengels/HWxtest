@@ -63,6 +63,8 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 #' @export
 hw.test.matrix <- 
 function(c,  method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
+	nAlleles <- length(alleleCounts(c));
+	if(nAlleles < 2) return(hw.test.logical(FALSE))
 	statNames <- c("LLR", "Prob", "U", "Chisq");
 	statID <- which(statNames==statName);
 	if(method=="auto") method <- if(xcountCutoff(c, cutoff))method <- "monte" else method <- "exact"
@@ -82,13 +84,13 @@ function(c,  method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, h
 hw.test.integer <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	c <- vec.to.matrix(c);
-	hw.test.matrix(c,  method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+	hw.test.matrix(c,  method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 #' @export
 hw.test.numeric <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	c <- vec.to.matrix(c);
-	hw.test(c,  method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+	hw.test(c,  method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
 #' @export
@@ -101,12 +103,28 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 hw.test.genotype <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	tab <- table(factor(allele(c, 1), levels = allele.names(c)), factor(allele(c, 2), levels = allele.names(c)));
-	hw.test(unclass(t(tab)), method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+	hw.test(unclass(t(tab)), method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
+
+
+#' @export
+hw.test.genind <- 
+function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2){
+	if (!require(adegenet)) stop("package adegenet is not installed.")
+	if (!is.genind(c)) 
+        stop("function requires a genind object")
+    if (c@ploidy != as.integer(2)) 
+        stop("function requires diploid data")
+	cg <- genind2genotype(c, pop=c@pop, res.type="list")
+	hw.test(cg, method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+        	
+}
+
+
 #' @export
 hw.test.list <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2){
-	lapply(c, hw.test, method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+	lapply(c, hw.test, method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
 #' @export

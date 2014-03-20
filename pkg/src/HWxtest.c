@@ -257,6 +257,7 @@ static void twoAlleleSpecialCase() {
 	int hdex;
 	res1 = mi[2]; // because they come ordered largest to smallest
 	res2 = mi[1];
+    tableCount = res1/2 + 1;
 	for(a11 = 0; a11 <= res1/2; a11++) {
 		a21 = res1-a11*2; // integer arithmetic rounds down
 		a22 = (res2-a21)/2;

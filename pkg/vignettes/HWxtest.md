@@ -58,15 +58,6 @@ HWxtest -- Exact Tests for Hardy-Weinberg Proportions With Multiple Alleles
 * Introduction -- [1](#intro)
 * Bibliography -- [2](#bib)
 
-```r
-getwd()
-```
-
-```
-## [1] "/Users/WRE/DropBox/HWxtest/pkg/vignettes"
-```
-
-
 ### <a name="intro">Introduction</a>
 This packages uses algorithms from (<a href="http://dx.doi.org/10.1534/genetics.109.108977">Engels, 2009</a>) for everything.See also (<a href="http://dx.doi.org/10.1214/aoms/1177730093">Levene, 1949</a>; <a href="http://dx.doi.org/10.1007/BF02985085">Haldane, 1954</a>; <a href="http://dx.doi.org/10.2307/2532296">Guo & Thompson, 1992</a>; <a href="http://dx.doi.org/10.2307/2531534">Louis & Dempster, 1987</a>; <a href="http://dx.doi.org/10.1093/biostatistics/kxt028">Ward & Carroll, 2013</a>; <a href="http://www.genetics.org/cgi/content/abstract/140/4/1413">Rousset & Raymond, 1995</a>; <a href="http://dx.doi.org/10.1111/j.1471-8286.2007.01931.x">Rousset, 2008</a>) for good stuff <a href="http://www.genetics.org/cgi/content/abstract/140/4/1413">Rousset & Raymond (1995)</a>; <a href="http://www.genetics.org/cgi/content/abstract/107/4/703">Robertson & Hill (1984)</a>.
 

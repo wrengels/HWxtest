@@ -32,7 +32,7 @@ function(ostats, statID, m) {
 	k <- length(m);
 	b <- double(2);
 	n <- sum(m)/2;
-	df <- k *(k+1)/2 - k - 1;
+	df <- k *(k-1)/2;
 	if(statID==1 || statID==4) b[2] <- qchisq(.999, df);
 	if(statID==2) {
 		# find maximum probability
@@ -80,7 +80,7 @@ function(ostats, statID, m, histobins, histobounds, histoData, showCurve=TRUE, c
 	if(showCurve && (statID==1 || statID==4)){
 		if(ntrials==0) ntrials <- 1;
 		dx <- seq(from=histobounds[[1]], to=histobounds[[2]], length.out=histobins);
-		dy <- dchisq(dx,k *(k+1)/2 - k - 1 );
+		dy <- dchisq(dx,k *(k-1)/2);
 		lines(dx,dy * (ntrials) * (histobounds[[2]] - histobounds[[1]])/histobins, col="blue", lwd=2)
 	}
 }

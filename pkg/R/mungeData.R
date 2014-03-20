@@ -2,109 +2,98 @@
 # (c) William R. Engels, 2014
 
 
-#' Make a matrix symmetrical, using only the lower-left half
+#' Utility functions for handling genotype counts
 #' 
-#' In a matrix of genotype counts, \code{a[i,j]} and \code{a[j,i]} both represent the same
-#' heterozygote if \code{i!=j}. So only half the matrix need be used. If \code{i==j} then
-#' it is a homozygote.
+#' Interconvert between different formats for genotype counts. 
 #' 
-#' @param t a matrix of non-negative integers representing genotype counts. At least 2x2
+#' Let \code{k} be the number of alleles:
 #' 
-#' @return a matrix of the same dimensions as \code{t} but symmetrical. Upper-right is replaced.
+#' * \code{clearUpper} fills the upper-right half of the \eqn{k x k} matrix with \code{NA}
+#' 
+#' * \code{fillUpper} makes the \eqn{k x k} matrix symmetrical by filling the upper-right half with numbers from the lower half.
+#' 
+#' * \code{vec.to.matrix} converts genotype counts in vector form and returns a matrix. The vector must have \eqn{k(k+1)/2} non-negative integers.
+#' 
+#' * \code{matrix.to.vec} converts a \eqn{k x k} matrix of genotype counts to a vector of length \eqn{k(k+1)/2}
+#' 
+#' * \code{alleleCounts} returns a vector of length \eqn{k} containing the numbers of each allele. The sum of this vector will be twice the number of diploids in the sample.
+#' 
+#' @param gmat a matrix of non-negative integers representing genotype counts. In a matrix of genotype counts, \code{a[i,j]} and \code{a[j,i]} both represent the same heterozygote. Only the lower-left half of \code{gmat} is used. Numbers along the diagonal represent counts of the homozygotes.
+#' 
+#' @param gvec vector containing \code{k(k+1)/2} genotype counts. All non-negative integers.  Genotype counts should be in the order: \code{a11, a21, a22, a31, a32, ..., akk}
+#' 
+#' @param alleleNames an optional list of names for the alleles. The length should be \eqn{k}
 #' 
 #' 
 #' @examples
-#' d <- matrix(1:25,5,5)
-#' fillUpper(d)
+#' gvec <- c(0,3,1,5,18,1,3,7,5,2)
+#' gmat <- vec.to.matrix(gvec, alleleNames=letters[1:4])
+#' alleleCounts(gmat)
 #' 
+#' 
+#' @rdname mungeData
 #' @export
 fillUpper <- 
-function(t){
-	if(!(is.matrix(t) && (dim(t)[1]==dim(t)[2]) && dim(t)[1] > 1)) stop("Must be square matrix at least 2x2")
-	k <- dim(t)[1];
-	for(j in 2:k) {t[1:(j-1), j] <- t[j,1:(j-1)]};
-	t
+function(gmat){
+	if(!(is.matrix(gmat) && (nrow(gmat)==ncol(gmat)))) stop("Must be square matrix at least 2x2")
+	k <- nrow(gmat);
+	if(k<2) return(gmat)
+	for(j in 2:k) {gmat[1:(j-1), j] <- gmat[j,1:(j-1)]};
+	gmat
 }
 
 
-
-#' Extract allele counts from matrix of genotypes
-#' 
-#' Create a vector of the number of each allele. The sum will be double that of genotpes.
-#' 
-#' @param g a matrix of non-negative integers representing genotype counts
-#' 
-#' @return a vector of allele counts
-#' 
-#' @examples
-#' d <- matrix(1:25,5,5)
-#' alleleCounts(d)
-#' 
-#' 
+#' @rdname mungeData 
 #' @export
 alleleCounts <- 
-function(g) {
-	t <- fillUpper(g);
+function(gmat) {
+	t <- fillUpper(gmat);
 	k <- dim(t)[1];
 	m <- integer(k);
 	for(i in 1:k) {m[i] <- sum(t[i,]) + t[i,i]};
+	if(!is.null(rownames(gmat))) names(m) <- rownames(gmat)
 	m
 }
 
 
-
-#' Convert a by-rows vector to a genotype matrix
 #' 
-#' If there are \code{k} alleles, there are \code{k(k+1)/2} possible genotypes. Convert a row-
-#' wise vector of genotype counts into a \code{k x k} symmetrical matrix of genotype counts.
-#' Genotype counts should be in the order: \code{a11, a21, a22, a31, a32, ..., a}
-#' 
-#' @param cv vector containing \code{k(k+1)/2} genotype counts. All non-negative integers.
-#' 
-#' @return a \code{k x k} symmetrical matrix of genotype counts.
-#' 
-#' 
-#' @examples
-#' vec.to.matrix(c(0,3,1,5,18,1,3,7,5,2))
-#' 
-
-
+#' @rdname mungeData
 #' @export
 vec.to.matrix <- 
-function(cv){
-	nGenotypes <- length(cv)
+function(gvec, alleleNames=""){
+	nGenotypes <- length(gvec)
 	nAlleles <- as.integer((sqrt(8*nGenotypes + 1) - 1)/2)
 	if(nGenotypes != nAlleles*(nAlleles + 1)/2) stop("\nWrong number of genotype counts")
 	t <- matrix(NA, nAlleles, nAlleles)
-	for(i in 1:nAlleles){t[i, 1:i] <- cv[(i*(i-1)/2 + 1):(i*(i+1)/2)]}
+	for(i in 1:nAlleles){t[i, 1:i] <- gvec[(i*(i-1)/2 + 1):(i*(i+1)/2)]}
+	if(length(alleleNames)>=nAlleles) {
+		rownames(t) <- alleleNames;
+		colnames(t) <- alleleNames;
+	}
 	t	
 }
 
-
-#' Extract a by-rows vector from a genotype matrix
 #' 
-#' Given a square matrix of size \eqn{k x k}, generate a vector of genotype counts of
-#' size \eqn{k(k-1)/2}
-#' 
-#' @param t square matrix of genotype counts. Only the lower-left half is used.
-#' 
-#' @return a vector of length \eqn{k(k-1)/2} containing the genotype counts
-#' 
-#' @examples
-#' t <- vec.to.matrix(c(0,3,1,5,18,1,3,7,5,2))
-#' v <- matrix.to.vec(t)
-#' 
-
-
+#' @rdname mungeData
 #' @export
 matrix.to.vec <- 
-function(t){
-	if(!(is.matrix(t) && (dim(t)[1]==dim(t)[2]) && dim(t)[1] > 1)) stop("Must be square matrix at least 2x2")
+function(gmat){
+	if(!(is.matrix(gmat) && (nrow(gmat)==ncol(gmat)))) stop("Must be square matrix")
 	v <- c();
-	k <- dim(t)[1]
-	for(i in 1:k){v <- append(v,t[i,1:i])}
+	k <- nrow(gmat)
+	for(i in 1:k){v <- append(v,gmat[i,1:i])}
 	names(v) <- NULL;
 	v	
+}
+
+#' @rdname mungeData
+#' @export
+clearUpper <- 
+function(gmat){
+	if(!(is.matrix(gmat) && (nrow(gmat)==ncol(gmat)))) stop("Must be square matrix")
+	k <- nrow(gmat);
+	for(j in 2:k) {gmat[1:(j-1), j] <- NA};
+	gmat
 }
 NULL
 
