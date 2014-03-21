@@ -18,7 +18,7 @@ hw.test(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR",
   order \eqn{a_11, a_21, a_22, a_31, ..., a_kk}. For
   compatability with the packages \code{genetics} and
   \code{adegenet}, it can also be an object of class
-  \code{genotype}.}
+  \code{genind}, \code{genotype}, or a \code{data.frame}.}
 
   \item{...}{parameters passed to test functions, including
   the following:}

@@ -23,6 +23,8 @@
 #' @param gvec vector containing \code{k(k+1)/2} genotype counts. All non-negative integers.  Genotype counts should be in the order: \code{a11, a21, a22, a31, a32, ..., akk}
 #' 
 #' @param alleleNames an optional list of names for the alleles. The length should be \eqn{k}
+#' @param df a dataframe containing individual genotypes. Each row represents an individual. The first column, named \dQuote{pop} names the population. Each other column is named for a particular locus. The genotypes are as \dQuote{123/124}
+#' @param sep For a dataframe, this is the separator character. typically \dQuote{/}
 #' 
 #' 
 #' @examples
@@ -94,6 +96,40 @@ function(gmat){
 	k <- nrow(gmat);
 	for(j in 2:k) {gmat[1:(j-1), j] <- NA};
 	gmat
+}
+
+
+#' @rdname mungeData
+#' @export
+df.to.matrices <- function(df, sep="/"){
+	if(!is.data.frame(df)) stop("Must be a data frame")
+	pnames <- levels(factor(df$pop)) # population names
+	gnames <- colnames(df)[-1] #locus names (with "pop" removed)
+	res <- list()
+	for(pn in pnames){
+		popn <- list()
+		popsel <- df$pop==pn
+		for(gn in gnames){
+			anames <- levels(factor(unlist(strsplit(df[[gn]][popsel], sep))))
+			k <- length(anames)
+			ta <- table(factor(df[[gn]][popsel]))
+			gtypes <- names(ta)
+			t <- matrix(0, k,k)
+			rownames(t) <- anames
+			colnames(t) <- anames
+			if(k > 1) {
+			for(g in gtypes) {
+				diploid <- unlist(strsplit(g,sep))
+				t[diploid[[1]], diploid[[2]]] <- ta[[g]]
+			}}
+			t <- t + t(t)
+			diag(t)  <- diag(t)/2
+			popn[[gn]] <- NA
+			if(k > 1) popn[[gn]] <- clearUpper(t)
+		} # for gn
+		res[[pn]] <- popn
+	} #for pn
+	res
 }
 NULL
 
