@@ -32,9 +32,10 @@ xtest <-
 function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	statNames <- c("LLR", "Prob", "U", "Chisq");
 	statID <- which(statNames==statName);
-	m <- alleleCounts(c);
+	m <- alleleCounts(c); names(m) <- rownames(c);
 	if(histobins == 1){ histobins  <- 500};   #The default is 500 bins
 	ostats <- c(observedLLR(c), observedProb(c), observedU(c), observedX2(c));
+	names(ostats) <- statNames;
 	if(histobounds[1]==histobounds[2] && histobins) histobounds <- defaultHistobounds(ostats, statID, m);
 	x <- .C("xtest",
 			m=as.integer(sort(m, decreasing=T)),
@@ -49,7 +50,9 @@ function(c, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSe
 			tableCount=as.double(0)
 			,PACKAGE="HWxtest"
 			);
+	names(x$Pvalues) <- statNames;
+	se <- rep(NA, 4); names(se) <- statNames;
 	if(histobins) plotHistogram(ostats, statID, m, histobins, histobounds, x$histoData, showCurve);
-	return = list(Pvalues=x$Pvalues, observed=ostats, tableCount= x$tableCount, genotypes=c, alleles=m)
+	return = list(Pvalues=x$Pvalues, observed=ostats, tableCount= x$tableCount, ntrials=NA, genotypes=c, alleles=m, SE=se)
 
 }

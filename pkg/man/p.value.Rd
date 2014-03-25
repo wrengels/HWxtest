@@ -10,7 +10,7 @@
 \alias{p.value.table,}
 \title{Extract just the P value from a Hardy-Weinberg test.}
 \usage{
-p.value(x, statName = "auto")
+p.value(x, statName = NA)
 }
 \arguments{
   \item{x}{The result of a call to \code{\link{hw.test}} or

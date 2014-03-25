@@ -37,23 +37,22 @@ function(h, detail=NA, statName=NA) {
 #' @export
 show.hwtest.hwtest <- 
 function(h, detail=NA, statName=NA) {
-	if(is.na(h$p.value)) return()
+	if(is.na(h$method)) return()
 	if(!is.na(detail)) h$detail=detail
 	if(!is.na(statName))h$statName=statName
 	if(h$method=="exact" && h$tableCount < 0) stop("Calculation timed out. You can change the time limit by setting parameter 'safeSecs'");
-	statNames <- c("LLR", "Prob", "U", "Chisq");
-	statID <- which(statNames==h$statName);
 	p <- h$Pvalues;
 	ob <- h$observed;
-	if(h$method=="monte") se <- sqrt(p * (1-p)/h$ntrials);
+	statNames <- names(h$SE)
 	comments <- character(4);
 	if(ob[3]>=0) {comments[[3]] <- " (test for homozygote excess)"}
 	if(ob[3]<0) {comments[[3]] <- " (test for heterozygote excess)"};
+	names(comments) <- statNames;
 	detail <- h$detail
 	if(detail==1) {
-		cat("P value (", h$statName,") = ", formatC(p[statID]), sep="");
-		if(h$method=="monte") cat( " \u00b1 ",formatC(se[statID], digits=5), sep="");
-		cat(comments[statID],"\n");
+		cat("P value (", h$statName,") = ", formatC(p[h$statName]), sep="");
+		if(h$method=="monte") cat( " \u00b1 ",formatC(h$SE[h$statName], digits=5), sep="");
+		cat(comments[h$statName],"\n");
 	}
 	if(detail >= 2) {
 		cat("\n*****    Sample of ", sum(h$alleles)/2," diploids with ", length(h$alleles), " alleles", sep="")
@@ -61,7 +60,7 @@ function(h, detail=NA, statName=NA) {
 		if(h$method=="exact") cat("\nFull enumeration of ",h$tableCount, " tables to test for HW\n", sep="");
 		for(i in 1:4){
 			cat("\nP value (",statNames[i],")",strtrim("     ", 6-nchar(statNames[i])),"= ", formatC(p[i], digits=6, format="f"), sep="");
-			if(h$method=="monte") cat( " \u00b1 ",formatC(se[i], digits=5), sep="");
+			if(h$method=="monte") cat( " \u00b1 ",formatC(h$SE[i], digits=5), sep="");
 			cat(comments[i]);
 		}
 	}

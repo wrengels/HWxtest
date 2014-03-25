@@ -72,9 +72,8 @@ Returns a list of class \code{hwtest} which includes the
 following items: \item{$ Pvalues}{The four computed P
 values corresponding to the test statistics: \code{LLR},
 \code{Prob}, \code{U} and \code{Chisq} in that order.}
-\item{$ p.value}{The P value corresponding to the specified
-test} \item{$ observed}{The four observed statistics in the
-same order as above} \item{$ ntrials}{The number of tables
+\item{$ observed}{The four observed statistics in the same
+order as above} \item{$ ntrials}{The number of tables
 examined during the calculation if done by Monte Carlo}
 \item{$ tableCount}{The total number of tables if done by
 full enumeration} \item{$ genotypes}{The input matrix of
@@ -84,7 +83,8 @@ statName}{Which statistic to use for the histogram and in
 the \code{p.value} item} \item{$ method}{Which method was
 used, \dQuote{exact} or \dQuote{monte}} \item{$ detail}{An
 integer indicating how much detail to print. Use 0 for no
-printing}
+printing} \item{$ SE}{vector with the standard error for
+each stat. Only applicable with Monte Carlo tests}
 }
 \description{
 The \code{hw.test()} function is the main function of the

@@ -28,24 +28,24 @@
 p.value <- function(x, statName=NA) UseMethod("p.value")
 
 #' @export
-p.value.hwtest <- function(x, statName="auto"){
+p.value.hwtest <- function(x, statName=NA){
+	if(is.na(x$method))return(NA)
 	if(is.na(statName)) statName <- x$statName;
-	statNames <- c("LLR", "Prob", "U", "Chisq");
-	statID <- which(statNames==statName);
-	x[["Pvalues"]][statID]}
+	x$Pvalues[statName]
+}
 	
 	
 #' @export
-p.value.list <- function(x,statName="auto") sapply(x, p.value,statName=statName)
+p.value.list <- function(x,statName= NA) sapply(x, p.value, statName=statName)
 #' @export
-p.value.matrix <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value 
+p.value.matrix <- function(x, statName="LLR") hw.test(x, statName=statName)$Pvalues[statName] 
 #' @export
-p.value.integer <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+p.value.integer <- function(x, statName="LLR") hw.test(x, statName=statName)$Pvalues[statName]
 #' @export
-p.value.table <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+p.value.table <- function(x, statName="LLR") hw.test(x, statName=statName)$Pvalues[statName]
 #' @export
-p.value.numeric <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+p.value.numeric <- function(x, statName="LLR") hw.test(x, statName=statName)$Pvalues[statName]
 #' @export
-p.value.genotype <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+p.value.genotype <- function(x, statName="LLR") hw.test(x, statName=statName)$Pvalues[statName]
 #' @export
-p.value.logical <- function(x, statName="LLR") hw.test(x, statName=statName)$p.value
+p.value.logical <- function(x, statName="LLR") hw.test(x, statName=statName)$Pvalues[statName]

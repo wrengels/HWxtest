@@ -43,7 +43,7 @@ listify <- function(hwlist, detail = NA, statName = NA) {
 			z
 		})
 	}
-	isnum <- sapply(hwlist, function(x) is.numeric(x$p.value))
+	isnum <- sapply(hwlist, function(x) is.character(x$method))
 	hwlist <- hwlist[isnum]
 	hwlist
 }
@@ -66,7 +66,7 @@ listify <- function(hwlist, detail = NA, statName = NA) {
 
 #' @export
 hwdf <- 
-function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TRUE, showTables=TRUE, showTrials=TRUE, showStat=TRUE) {
+function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TRUE, showTables=TRUE, showTrials=TRUE, showStat=TRUE, showAsymptoticX2=FALSE, showAsymptoticG2=FALSE) {
 	hwlist <- listify(hwlist, statName=statName)
 	statNames <- c("LLR", "Prob", "U", "Chisq")
 	statID <- which(statNames==hwlist[[1]]$statName)
@@ -115,6 +115,20 @@ function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TR
 	if(showk) {
 		names <- c(names, "Alleles")
 		columns$k <- k
+	}
+	if(showAsymptoticX2){
+		x2 <- unlist(sapply(hwlist, function(x) x$observed[["Chisq"]]))
+		df <- k * (k-1)/2;
+		asyX2 <- pchisq(x2, df, lower.tail=F)
+		columns$asyX2 <- asyX2
+		names <- c(names, "AsymP(X2)")
+	}
+	if(showAsymptoticG2){
+		g2 <- unlist(sapply(hwlist, function(x) (-2) * x$observed[["LLR"]]))
+		df <- k * (k-1)/2;
+		asyG2 <- pchisq(g2, df, lower.tail=F)
+		columns$asyG2 <- asyG2
+		names <- c(names, "AsymP(G2)")
 	}
 	df <- as.data.frame(columns)
 	names(df) <- names
