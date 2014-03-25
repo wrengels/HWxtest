@@ -1,0 +1,35 @@
+\name{listify}
+\alias{listify}
+\title{Convert results of \code{\link{hw.test}} to a single list of \code{hwtest} objects.}
+\usage{
+listify(hwlist, detail = NA, statName = NA)
+}
+\arguments{
+  \item{hwlist}{the results of a call to
+  \code{\link{hw.test}}. It can be an \code{hwtest} object,
+  a list of them or a list of lists of them.}
+
+  \item{detail}{Used only if you wish to reset the
+  \code{detail} of each object.}
+
+  \item{statName}{Used only if you want to rest the
+  \code{statName} of each object}
+}
+\value{
+a list of \code{hwtest} objects, possibly with their
+\code{detail} and \code{statName} parameters reset
+}
+\description{
+There are two main uses of \code{listify}. You can simplify
+a complex result from \code{\link{hw.test}} containing
+multiple populations and multiple loci into a simple list
+of \code{hwtest} objects. At the same time, you have a
+chance to change the parameters \code{detail} and
+\code{statName}. Useful to get output from a test.
+}
+\examples{
+data(HWcases)
+outcome <- hw.test(HWcases, detail=4, statName="LLR")
+listify(outcome, detail=1, statName="U")
+}
+

@@ -25,11 +25,11 @@
 
 #' 
 #' @export
-p.value <- function(x, statName="auto") UseMethod("p.value")
+p.value <- function(x, statName=NA) UseMethod("p.value")
 
 #' @export
 p.value.hwtest <- function(x, statName="auto"){
-	if(statName=="auto") statName <- x$statName;
+	if(is.na(statName)) statName <- x$statName;
 	statNames <- c("LLR", "Prob", "U", "Chisq");
 	statID <- which(statNames==statName);
 	x[["Pvalues"]][statID]}

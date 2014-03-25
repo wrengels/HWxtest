@@ -35,12 +35,13 @@ function(m){
 	UseMethod("acount")
 }
 
-#' @method acount integer
-#' @S3method acount integer
+
+#' @export
 acount.integer <- 
 function(m) {
-	if(length(m) < 2) stop("\nThere must be at least two alleles\n");
-	if(any(m < 1)) stop("\nThere must be at least one copy of each allele\n");
+	m <- m[m != 0]
+	if(length(m) < 2) return(1);
+	if(any(m < 0)) stop("\nAllele counts must be nonnegative\n");
 	n <- sum(m)/2;
 	k <- length(m);
 	summ2 <- sum(m^2);
@@ -53,27 +54,32 @@ function(m) {
 	exp(lns + lnPm)
 }
 
-#' @method acount matrix
-#' @S3method acount matrix
+
+#' @export
 acount.matrix <- 
-function(c) {
-	m <- alleleCounts(c);
+function(m) {
+	m <- alleleCounts(m);
 	acount.integer(m)
 }
 
-#' @method acount numeric
-#' @S3method acount numeric
+#' @export
+acount.table <- 
+function(m) {
+	acount(unclass(m))
+}
+
+#' @export
 acount.numeric <- 
-function(c) {
-	m <- as.integer(c);
+function(m) {
+	m <- as.integer(m);
 	acount.integer(m)
 }
 
-#' @method acount genotype
-#' @S3method acount genotype
+
+#' @export
 acount.genotype <- 
-function(x) {
-	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
+function(m) {
+	tab <- table(factor(allele(m, 1), levels = allele.names(m)), factor(allele(m, 2), levels = allele.names(m)));
 	m <- alleleCounts(unclass(t(tab)));
 	acount.integer(m)
 }
@@ -81,4 +87,4 @@ function(x) {
 
 #' @export
 acount.logical <- 
-function(x) {return(NA)}
+function(m) {return(NA)}

@@ -7,16 +7,39 @@
 #' 
 #' Prints test results (\code{hwtest}) objects depending on how much detail is provided.
 #' 
-#' @param h the results from a call to \code{\link{hw.test}}
-#' @param detail If unspecified, the level of detail used in the \code{hw.test} call will be applied.
-#' @param ... other parameters passed to \code{print}
+#' @param x the results from a call to \code{\link{hw.test}}
+#' @param ... other parameters passed to \code{print}. You can specify \code{detail} or \code{statName}
 
 
 #' @method print hwtest
 #' @S3method print hwtest
 print.hwtest <- 
-function(h, detail=h$detail, ...) {
-	if(length(h) < 8) return();
+function(x,...) show.hwtest(x,...)
+
+
+#' Display results from \code{\link{hw.test}}
+#' 
+#' \code{show.hwtest} is called by \code{print}, but it can also be called directly by the user if the object is a list of \code{hwtest} objects, or even a list of such lists.
+#' 
+#' 
+#' @param h the results of a call to \code{\link{hw.test}}
+#' @param detail may be used to change the detail of the output
+#' @param statName may be used to specify which statistic to use if \code{detail} is 1.
+#' 
+#' @return none
+
+#' @export
+show.hwtest <- 
+function(h, detail=NA, statName=NA) {
+	UseMethod("show.hwtest")
+}
+
+#' @export
+show.hwtest.hwtest <- 
+function(h, detail=NA, statName=NA) {
+	if(is.na(h$p.value)) return()
+	if(!is.na(detail)) h$detail=detail
+	if(!is.na(statName))h$statName=statName
 	if(h$method=="exact" && h$tableCount < 0) stop("Calculation timed out. You can change the time limit by setting parameter 'safeSecs'");
 	statNames <- c("LLR", "Prob", "U", "Chisq");
 	statID <- which(statNames==h$statName);
@@ -26,8 +49,9 @@ function(h, detail=h$detail, ...) {
 	comments <- character(4);
 	if(ob[3]>=0) {comments[[3]] <- " (test for homozygote excess)"}
 	if(ob[3]<0) {comments[[3]] <- " (test for heterozygote excess)"};
+	detail <- h$detail
 	if(detail==1) {
-		cat("\nP value (", h$statName,") = ", formatC(p[statID]), sep="");
+		cat("P value (", h$statName,") = ", formatC(p[statID]), sep="");
 		if(h$method=="monte") cat( " \u00b1 ",formatC(se[statID], digits=5), sep="");
 		cat(comments[statID],"\n");
 	}
@@ -58,4 +82,10 @@ function(h, detail=h$detail, ...) {
 		print(clearUpper(ecounts), digits=3, na.print="");
 	}
 	cat("\n", sep="");
+}
+
+#' @export
+show.hwtest.list <- 
+function(h, detail=NA, statName=NA) {
+	listify(h, detail=detail, statName=statName) 
 }

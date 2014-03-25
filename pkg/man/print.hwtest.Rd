@@ -2,16 +2,14 @@
 \alias{print.hwtest}
 \title{S3 Method for printing \code{hwtest} objects}
 \usage{
-\method{print}{hwtest}(h, detail = h$detail, ...)
+\method{print}{hwtest}(x, ...)
 }
 \arguments{
-  \item{h}{the results from a call to
+  \item{x}{the results from a call to
   \code{\link{hw.test}}}
 
-  \item{detail}{If unspecified, the level of detail used in
-  the \code{hw.test} call will be applied.}
-
-  \item{...}{other parameters passed to \code{print}}
+  \item{...}{other parameters passed to \code{print}. You
+  can specify \code{detail} or \code{statName}}
 }
 \description{
 Prints test results (\code{hwtest}) objects depending on

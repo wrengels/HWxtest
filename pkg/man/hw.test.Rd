@@ -9,7 +9,7 @@ hw.test(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR",
   detail = 2)
 }
 \arguments{
-  \item{x}{The genotype counts. You must provide the number
+  \item{c}{The genotype counts. You must provide the number
   of each genotype. So if there are \eqn{k} alleles, you
   need to include the number of each of the \eqn{k(k+1)/2}
   genotypes. The format of \code{x} is somewhat flexible:
@@ -19,9 +19,6 @@ hw.test(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR",
   compatability with the packages \code{genetics} and
   \code{adegenet}, it can also be an object of class
   \code{genind}, \code{genotype}, or a \code{data.frame}.}
-
-  \item{...}{parameters passed to test functions, including
-  the following:}
 
   \item{method}{Can be \dQuote{auto}, \dQuote{exact} or
   \dQuote{monte} to indicate the method to use. If

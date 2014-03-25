@@ -18,6 +18,10 @@
 #' 
 #' * \code{alleleCounts} returns a vector of length \eqn{k} containing the numbers of each allele. The sum of this vector will be twice the number of diploids in the sample.
 #' 
+#' * \code{remove.missing.alleles} returns a matrix with no \code{0}'s for allele counts
+#' 
+#' * \code{df.to.matrices} converts a data frame to a list of genotype count matrices. The data frame should be of the kind produced in the package \code{adegenet} with \code{genind2df}
+#' 
 #' @param gmat a matrix of non-negative integers representing genotype counts. In a matrix of genotype counts, \code{a[i,j]} and \code{a[j,i]} both represent the same heterozygote. Only the lower-left half of \code{gmat} is used. Numbers along the diagonal represent counts of the homozygotes.
 #' 
 #' @param gvec vector containing \code{k(k+1)/2} genotype counts. All non-negative integers.  Genotype counts should be in the order: \code{a11, a21, a22, a31, a32, ..., akk}
@@ -49,6 +53,7 @@ function(gmat){
 #' @export
 alleleCounts <- 
 function(gmat) {
+	if(class(gmat)!="matrix") gmat <- vec.to.matrix(gmat)
 	t <- fillUpper(gmat);
 	k <- dim(t)[1];
 	m <- integer(k);
@@ -63,6 +68,7 @@ function(gmat) {
 #' @export
 vec.to.matrix <- 
 function(gvec, alleleNames=""){
+	if(!(is.vector(gvec) && is.numeric(gvec))) stop("\nMust be a vector")
 	nGenotypes <- length(gvec)
 	nAlleles <- as.integer((sqrt(8*nGenotypes + 1) - 1)/2)
 	if(nGenotypes != nAlleles*(nAlleles + 1)/2) stop("\nWrong number of genotype counts")
@@ -73,6 +79,17 @@ function(gvec, alleleNames=""){
 		colnames(t) <- alleleNames;
 	}
 	t	
+}
+#' 
+#' @rdname mungeData
+#' @export
+remove.missing.alleles <- 
+function(gmat) {
+	if(class(gmat)!="matrix") gmat <- vec.to.matrix(gmat)
+	m <- alleleCounts(gmat)
+	zm <- which(m==0)
+	if(length(zm)) gmat <- gmat[-zm,-zm]
+	gmat
 }
 
 #' 

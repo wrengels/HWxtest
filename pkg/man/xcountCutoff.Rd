@@ -2,15 +2,12 @@
 \alias{xcountCutoff}
 \title{Determine immediately whether number of tables is over a limit}
 \usage{
-\method{generic}{xcountCutoff}(x, ...)
+xcountCutoff(m, cutoff = 1e+07)
 }
 \arguments{
   \item{m}{vector containing the numbers of alleles of each
-  type. Length must be at least 2 and all must be positive
-  integers. It can also be a matrix of genotype counts, but
-  not a vector of genotype counts.}
-
-  \item{...}{parameters passed to \code{xcountCutoff}}
+  type. It can also be a matrix of genotype counts, but not
+  a vector of genotype counts.}
 
   \item{cutoff}{Is the number of tables above or below this
   value?}

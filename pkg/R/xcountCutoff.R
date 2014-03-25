@@ -8,11 +8,9 @@
 #' Calling \code{scountCutoff} gives you a quick answer to whether the number of tables is over a given cutoff. It is useful in deciding whether to analyze a data set with \code{\link{xtest}} or \code{\link{mtest}}. This function is used by \code{\link{hw.test}} and not normally called directly by the user.
 #' 
 #' 
-#' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be positive integers. It can also be a matrix of genotype counts, but not a vector of genotype counts.
-#' @param ... parameters passed to \code{xcountCutoff}
+#' @param m vector containing the numbers of alleles of each type. It can also be a matrix of genotype counts, but not a vector of genotype counts.
 #' @param cutoff Is the number of tables above or below this value?
 #' 
-#' @method generic xcountCutoff
 #' 
 #' @return TRUE or FALSE depending on whether the table count is above or below \code{cutoff}
 #' 
@@ -24,18 +22,18 @@
 
 #' @useDynLib HWxtest
 
-#' @export xcountCutoff
+#' @export
 xcountCutoff <- 
-function(x, ...){
+function(m, cutoff=1e7) {
 	UseMethod("xcountCutoff")
 }
-
 
 #' @export
 xcountCutoff.integer <- 
 function(m, cutoff=1e7) {
-	if(length(m) < 2) stop("\nThere must be at least two alleles\n");
-	if(any(m < 1)) stop("\nThere must be at least one copy of each allele\n");
+	m <- m[m!=0]
+	if(length(m) < 2) return(TRUE);
+	if(any(m < 0)) stop("\nAllele counts must be nonnegative\n");
 	if(acount(m) > 1e10) return(TRUE);
 		value <- .C("xcount",
 		counts=as.integer(sort(m, decreasing=T)),
@@ -49,19 +47,16 @@ function(m, cutoff=1e7) {
 		return(FALSE)
 }
 
-
 #' @export
 xcountCutoff.matrix <- 
-function(c, ...) {
-	m <- alleleCounts(c);
-	xcountCutoff.integer(m,...)
+function(m, cutoff=1e7) {
+	m <- alleleCounts(m);
+	xcountCutoff(m, cutoff=cutoff)
 }
-
-
 
 #' @export
 xcountCutoff.numeric <-
-function(c, ...) {
-	m <- as.integer(c);
-	xcountCutoff.integer(c,...)
+function(m, cutoff=1e7) {
+	m <- as.integer(m);
+	xcountCutoff(m, cutoff=cutoff)
 }

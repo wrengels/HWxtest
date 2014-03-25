@@ -7,7 +7,7 @@
 #' 
 #' Use \code{xcount} to determine the exact number of tables (i.e., genotype numbers) for a given set of allele counts. This method enumerates all tables, and is best when the total number is less than 10^10 or so. This function is mostly called by \code{\link{hw.test}} rather than directly by the user. If the number of tables is too large to enumerate with this method, use \code{\link{acount}} for an approximation.
 #' 
-#' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be positive integers.
+#' @param m vector containing the numbers of alleles of each type. Length must be at least 2 and all must be non-negative integers. It can also be a \code{matrix} of genotype counts.
 #' @param safety Stop execution if the approximate table number obtained from \code{\link{acount}} is more than this cutoff.
 #' @param safeSecs Time limit in seconds. Another safety feature to prevent getting stuck in a too-long computation
 #' 
@@ -28,23 +28,21 @@
 
 
 #' @useDynLib HWxtest
-#' @export xcount
+#' @export
 xcount <- 
-function(x, ...) {
+function(m, safety = 1e10, safeSecs = 10) {
 	UseMethod("xcount")
 }
 
 
-#' @method xcount integer
-#' @S3method xcount integer
+#' @export
 xcount.integer <- 
 function(m, safety = 1e10, safeSecs = 10) {
-	if(class(m)=="table") m <- unclass(m);
-	if(class(m)=="matrix") m <- alleleCounts(m);
-	if(length(m) < 2) stop("\nThere must be at least two alleles\n");
-	if(any(m < 1)) stop("\nThere must be at least one copy of each allele\n");
+	m <- m[m>0]
+	if(length(m) < 2) return(1);
+	if(any(m < 0)) stop("\nAllele counts must be nonnegative\n");
 	ac <- acount(m);
-	if(ac > safety) stop("\nToo many to count. Try increasing safety paramater\n");
+	if(ac > safety) stop("\nToo many to count. Try increasing safety paramater or call acount\n");
 	xc <- -1;
 	value <- .C("xcount",
 		counts=as.integer(sort(m, decreasing=T)),
@@ -61,32 +59,37 @@ function(m, safety = 1e10, safeSecs = 10) {
 	value$tableCount;
 }
 
-#' @method xcount matrix
-#' @S3method xcount matrix
+#' @export
 xcount.matrix <- 
-function(c, ...) {
-	m <- alleleCounts(c);
-	xcount.integer(m,...)
+function(m, safety = 1e10, safeSecs = 10) {
+	m <- alleleCounts(m);
+	xcount(m, safety=safety, safeSecs=safeSecs)
 }
 
-#' @method xcount numeric
-#' @S3method xcount numeric
+
+#' @export
+xcount.table <- 
+function(m, safety = 1e10, safeSecs = 10) {
+	m <- unclass(m);
+	xcount(m, safety=safety, safeSecs=safeSecs)
+}
+
+#' @export
 xcount.numeric <- 
-function(c, ...) {
-	m <- as.integer(c);
-	xcount.integer(m,...)
+function(m, safety = 1e10, safeSecs = 10) {
+	m <- as.integer(m);
+	xcount(m, safety=safety, safeSecs=safeSecs)
 }
 
-#' @method xcount genotype
-#' @S3method xcount genotype
+#' @export
 xcount.genotype <- 
-function(x, ...) {
-	tab <- table(factor(allele(x, 1), levels = allele.names(x)), factor(allele(x, 2), levels = allele.names(x)));
+function(m, safety = 1e10, safeSecs = 10) {
+	tab <- table(factor(allele(m, 1), levels = allele.names(m)), factor(allele(m, 2), levels = allele.names(m)));
 	m <- alleleCounts(unclass(t(tab)));
-	xcount.integer(m,...)
+	xcount(m, safety=safety, safeSecs=safeSecs)
 }
 
 
-#' export
+#' @export
 xcount.logical <- 
-function(x,...) {return(NA)}
+function(m, safety = 1e10, safeSecs = 10) {return(NA)}

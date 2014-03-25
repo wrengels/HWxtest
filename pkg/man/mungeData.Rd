@@ -1,0 +1,87 @@
+\name{fillUpper}
+\alias{alleleCounts}
+\alias{clearUpper}
+\alias{df.to.matrices}
+\alias{fillUpper}
+\alias{matrix.to.vec}
+\alias{remove.missing.alleles}
+\alias{vec.to.matrix}
+\title{Utility functions for handling genotype counts}
+\usage{
+fillUpper(gmat)
+
+alleleCounts(gmat)
+
+vec.to.matrix(gvec, alleleNames = "")
+
+remove.missing.alleles(gmat)
+
+matrix.to.vec(gmat)
+
+clearUpper(gmat)
+
+df.to.matrices(df, sep = "/")
+}
+\arguments{
+  \item{gmat}{a matrix of non-negative integers
+  representing genotype counts. In a matrix of genotype
+  counts, \code{a[i,j]} and \code{a[j,i]} both represent
+  the same heterozygote. Only the lower-left half of
+  \code{gmat} is used. Numbers along the diagonal represent
+  counts of the homozygotes.}
+
+  \item{gvec}{vector containing \code{k(k+1)/2} genotype
+  counts. All non-negative integers.  Genotype counts
+  should be in the order: \code{a11, a21, a22, a31, a32,
+  ..., akk}}
+
+  \item{alleleNames}{an optional list of names for the
+  alleles. The length should be \eqn{k}}
+
+  \item{df}{a dataframe containing individual genotypes.
+  Each row represents an individual. The first column,
+  named \dQuote{pop} names the population. Each other
+  column is named for a particular locus. The genotypes are
+  as \dQuote{123/124}}
+
+  \item{sep}{For a dataframe, this is the separator
+  character. typically \dQuote{/}}
+}
+\description{
+Interconvert between different formats for genotype counts.
+}
+\details{
+Let \code{k} be the number of alleles:
+
+* \code{clearUpper} fills the upper-right half of the
+\eqn{k x k} matrix with \code{NA}
+
+* \code{fillUpper} makes the \eqn{k x k} matrix symmetrical
+by filling the upper-right half with numbers from the lower
+half.
+
+* \code{vec.to.matrix} converts genotype counts in vector
+form and returns a matrix. The vector must have
+\eqn{k(k+1)/2} non-negative integers.
+
+* \code{matrix.to.vec} converts a \eqn{k x k} matrix of
+genotype counts to a vector of length \eqn{k(k+1)/2}
+
+* \code{alleleCounts} returns a vector of length \eqn{k}
+containing the numbers of each allele. The sum of this
+vector will be twice the number of diploids in the sample.
+
+* \code{remove.missing.alleles} returns a matrix with no
+\code{0}'s for allele counts
+
+* \code{df.to.matrices} converts a data frame to a list of
+genotype count matrices. The data frame should be of the
+kind produced in the package \code{adegenet} with
+\code{genind2df}
+}
+\examples{
+gvec <- c(0,3,1,5,18,1,3,7,5,2)
+gmat <- vec.to.matrix(gvec, alleleNames=letters[1:4])
+alleleCounts(gmat)
+}
+

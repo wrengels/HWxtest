@@ -2,12 +2,13 @@
 \alias{xcount}
 \title{Find Exact Number of Genotype Tables}
 \usage{
-xcount(x, ...)
+xcount(m, safety = 1e+10, safeSecs = 10)
 }
 \arguments{
   \item{m}{vector containing the numbers of alleles of each
-  type. Length must be at least 2 and all must be positive
-  integers.}
+  type. Length must be at least 2 and all must be
+  non-negative integers. It can also be a \code{matrix} of
+  genotype counts.}
 
   \item{safety}{Stop execution if the approximate table
   number obtained from \code{\link{acount}} is more than
