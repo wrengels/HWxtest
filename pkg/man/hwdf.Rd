@@ -1,0 +1,42 @@
+\name{hwdf}
+\alias{hwdf}
+\title{Construct a data frame from \code{\link{hw.test}} output}
+\usage{
+hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
+  showMethod = TRUE, showSE = TRUE, showTables = TRUE,
+  showTrials = TRUE, showStat = TRUE, showAsymptoticX2 = FALSE,
+  showAsymptoticG2 = FALSE)
+}
+\arguments{
+  \item{hwlist}{The output from a call to
+  \code{\link{hw.test}}}
+
+  \item{statName}{gives you the option of changing which
+  statistic's P value is reported}
+
+  \item{showN}{whether to show a column of sample size
+  (number of diploids in the sample)}
+
+  \item{showk}{whether to show the number of alleles}
+
+  \item{showMethod}{whether to show whether the exact or
+  Monte Carlo method was used}
+
+  \item{showSE}{whether to include the standard error for
+  those tests which used the Monte Carlo method}
+
+  \item{showTables}{whether to show the total number of
+  tables examined when full enumeration (exact) method is
+  used}
+
+  \item{showTrials}{whether to show the number of random
+  trials when Monte Carlo method is used}
+
+  \item{showStat}{whether to show the observed statistic}
+}
+\description{
+If the \code{\link{hw.test}} output has multiple
+populations and/or multiple loci, use this function to make
+a data frame to display the results in tabular form.
+}
+
