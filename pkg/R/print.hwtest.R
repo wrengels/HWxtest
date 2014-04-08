@@ -8,35 +8,14 @@
 #' Prints test results (\code{hwtest}) objects depending on how much detail is provided.
 #' 
 #' @param x the results from a call to \code{\link{hw.test}}
-#' @param ... other parameters passed to \code{print}. You can specify \code{detail} or \code{statName}
+#' @param detail 0 for no print; 1 for P value only; 2 for all four P values; 3 to add data; 4 to add expected values
+#' @param statName which statistic to use
+#' @param \dots other parameters passed to \code{print}.
 
-
-#' @method print hwtest
-#' @S3method print hwtest
+#' @export
 print.hwtest <- 
-function(x,...) show.hwtest(x,...)
-
-
-#' Display results from \code{\link{hw.test}}
-#' 
-#' \code{show.hwtest} is called by \code{print}, but it can also be called directly by the user if the object is a list of \code{hwtest} objects, or even a list of such lists.
-#' 
-#' 
-#' @param h the results of a call to \code{\link{hw.test}}
-#' @param detail may be used to change the detail of the output
-#' @param statName may be used to specify which statistic to use if \code{detail} is 1.
-#' 
-#' @return none
-
-#' @export
-show.hwtest <- 
-function(h, detail=NA, statName=NA) {
-	UseMethod("show.hwtest")
-}
-
-#' @export
-show.hwtest.hwtest <- 
-function(h, detail=NA, statName=NA) {
+function(x, detail=NA, statName=NA, ...) {
+	h <- x
 	if(is.na(h$method)) return()
 	if(!is.na(detail)) h$detail=detail
 	if(!is.na(statName))h$statName=statName
@@ -83,8 +62,3 @@ function(h, detail=NA, statName=NA) {
 	cat("\n", sep="");
 }
 
-#' @export
-show.hwtest.list <- 
-function(h, detail=NA, statName=NA) {
-	listify(h, detail=detail, statName=statName) 
-}

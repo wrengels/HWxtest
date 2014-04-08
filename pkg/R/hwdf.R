@@ -45,6 +45,7 @@ listify <- function(hwlist, detail = NA, statName = NA) {
 	}
 	isnum <- sapply(hwlist, function(x) is.character(x$method))
 	hwlist <- hwlist[isnum]
+	class(hwlist) <- "hwlist"
 	hwlist
 }
 
@@ -63,6 +64,8 @@ listify <- function(hwlist, detail = NA, statName = NA) {
 #' @param showTables whether to show the total number of tables examined when full enumeration (exact) method is used
 #' @param showTrials whether to show the number of random trials when Monte Carlo method is used
 #' @param showStat whether to show the observed statistic
+#' @param showAsymptoticX2 whether to include the asymptotic P value corresponding to the Pearson \eqn{X^2} statistic
+#' @param showAsymptoticG2 whether to include the asymptotic P value for the \code{LLR} statistic
 
 #' @export
 hwdf <- 
@@ -86,14 +89,14 @@ function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TR
 	SE <- ifelse(monte, se.all, NA)
 	pm <- ifelse(monte, "\u00b1","")
 	columns <- list(P.Value)
-	names <- paste("P value (", statNames[[statID]],")", sep="")
+	names <- paste("P-val(", statNames[[statID]],")", sep="")
 	if(showSE && any(monte)){
 		names <- c(names," ", "\u00b1 SE")
 		columns$pm <- pm
 		columns$SE <- SE
 	}
 	if(showStat) {
-		names <- c(names, paste("observed ", statNames[[statID]], sep=""))
+		names <- c(names, paste("obs-", statNames[[statID]], sep=""))
 		columns$observedStat <- observedStat
 	}
 	if(showMethod){
@@ -101,19 +104,19 @@ function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TR
 		columns$method <- unlist(method)
 	}
 	if(showTables && any(method=="exact")){
-		names <- c(names, "All Tables")
+		names <- c(names, "Tables")
 		columns$Tables <- unlist(ifelse(exact, tableCount, NA))
 	}
 	if(showTrials && any(method=="monte")){
-		names <- c(names, "Random Trials")
+		names <- c(names, "Trials")
 		columns$Trials <- ntrials
 	}
 	if(showN){
-		names <- c(names, "N Diploids")
+		names <- c(names, "N")
 		columns$N <- N
 	}
 	if(showk) {
-		names <- c(names, "Alleles")
+		names <- c(names, "k")
 		columns$k <- k
 	}
 	if(showAsymptoticX2){

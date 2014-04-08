@@ -51,33 +51,24 @@ df.to.matrices(df, sep = "/")
 Interconvert between different formats for genotype counts.
 }
 \details{
-Let \code{k} be the number of alleles:
-
-* \code{clearUpper} fills the upper-right half of the
-\eqn{k x k} matrix with \code{NA}
-
-* \code{fillUpper} makes the \eqn{k x k} matrix symmetrical
-by filling the upper-right half with numbers from the lower
-half.
-
-* \code{vec.to.matrix} converts genotype counts in vector
+Let \code{k} be the number of alleles: \itemize{ \item
+\code{clearUpper} fills the upper-right half of the \eqn{k
+x k} matrix with \code{NA} \item \code{fillUpper} makes the
+\eqn{k x k} matrix symmetrical by filling the upper-right
+half with numbers from the lower half. \item
+\code{vec.to.matrix} converts genotype counts in vector
 form and returns a matrix. The vector must have
-\eqn{k(k+1)/2} non-negative integers.
-
-* \code{matrix.to.vec} converts a \eqn{k x k} matrix of
-genotype counts to a vector of length \eqn{k(k+1)/2}
-
-* \code{alleleCounts} returns a vector of length \eqn{k}
+\eqn{k(k+1)/2} non-negative integers. \item
+\code{matrix.to.vec} converts a \eqn{k x k} matrix of
+genotype counts to a vector of length \eqn{k(k+1)/2} \item
+\code{alleleCounts} returns a vector of length \eqn{k}
 containing the numbers of each allele. The sum of this
 vector will be twice the number of diploids in the sample.
-
-* \code{remove.missing.alleles} returns a matrix with no
-\code{0}'s for allele counts
-
-* \code{df.to.matrices} converts a data frame to a list of
-genotype count matrices. The data frame should be of the
-kind produced in the package \code{adegenet} with
-\code{genind2df}
+\item \code{remove.missing.alleles} returns a matrix with
+no \code{0}'s for allele counts \item \code{df.to.matrices}
+converts a data frame to a list of genotype count matrices.
+The data frame should be of the kind produced in the
+package \code{adegenet} with \code{genind2df} }
 }
 \examples{
 gvec <- c(0,3,1,5,18,1,3,7,5,2)

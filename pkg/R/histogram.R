@@ -71,12 +71,15 @@ function(ostats, statID, m, histobins, histobounds, histoData, showCurve=TRUE, c
 		labels[3] <- "U Score (test for heterozygote excess)"
 	}
 	colrs <- c(rep(color1, nleft), rep(color2, nright));
+	lwd <- 500/histobins
 	plot(seq(histobounds[1], histobounds[2], length.out=histobins+1), 
 		histoData, 
 		type="h",
 		xlab=labels[statID],
 		ylab="Frequency",
-		col=colrs);
+		col=colrs,
+		lend=1,
+		lwd=lwd);
 	if(showCurve && (statID==1 || statID==4)){
 		if(ntrials==0) ntrials <- 1;
 		dx <- seq(from=histobounds[[1]], to=histobounds[[2]], length.out=histobins);

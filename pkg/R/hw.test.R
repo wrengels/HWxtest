@@ -12,7 +12,7 @@
 #' 
 #' @references The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
 #' 
-#' @param c The genotype counts. You must provide the number of each genotype. So if there are \eqn{k} alleles, you need to include the number of each of the \eqn{k(k+1)/2} genotypes. The format of \code{x} is somewhat flexible: It can be a square matrix, but only the lower-left half is used. It can be a vector of the observations in the order \eqn{a_11, a_21, a_22, a_31, ..., a_kk}. For compatability with the packages \code{genetics} and \code{adegenet}, it can also be an object of class \code{genind}, \code{genotype}, or a \code{data.frame}.
+#' @param c The genotype counts. You must provide the number of each genotype. So if there are \eqn{k} alleles, you need to include the number of each of the \eqn{k(k+1)/2} genotypes. The format of \code{x} is somewhat flexible: It can be a square matrix, but only the lower-left half is used. It can be a vector of the observations in the order \eqn{a_11, a_21, a_22, a_31, ..., a_kk}. For compatability with the packages \code{genetics} and \code{adegenet}, it can also be an object of class \code{genind}, \code{genotype}, or a \code{data.frame}. If \code{c} contains multiple samples, the \code{parallel} package will be used in an attempt to employ multi-cores.
 #' @param method Can be \dQuote{auto}, \dQuote{exact} or \dQuote{monte} to indicate the method to use. If \dQuote{auto}, the \code{hw.test} will first check to see whether the total number of tables exceeds a cutoff specified by the parameter \code{cutoff}.
 #' @param cutoff If \code{method} is set to \dQuote{auto}, then \code{cutoff} is used to decide whether to perform the test via the full enumeration or Monte Carlo method. If the number of tables is less than \code{cutoff}, then a full enumeration is performed. Otherwise the method will be Monte Carlo with \code{B} random trials.
 #' @param B The number of trials to perform if Monte Carlow method is used
@@ -22,7 +22,6 @@
 #' @param showCurve whether to show a blue curve indicating the asymptotic (chi squared) distribution. This only works for \code{LLR} and \code{Chisq}
 #' @param safeSecs After this many seconds the calculation will be aborted. This is a safety valve to prevent attempts to compute impossibly large sets of tables.
 #' @param detail Determines how much detail is printed. If it is set to 0, nothing is printed (useful if you use \code{hw.test} programmatically.)
-#' @param \dots any other parameters
 #' 
 
 #' 
@@ -49,9 +48,8 @@
 #' hw.test(c, statName="U", histobins=TRUE, detail=3)
 #' 
 
-#' @export hw.test
 #' @aliases hw.test.matrix
-
+#' @export
 hw.test <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	UseMethod("hw.test")
@@ -102,7 +100,7 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 #' @export
 hw.test.genotype <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
-	tab <- table(factor(allele(c, 1), levels = allele.names(c)), factor(allele(c, 2), levels = allele.names(c)));
+	tab <- table(factor(allele(c, 1), levels=allele.names(c)), factor(allele(c, 2), levels=allele.names(c)));
 	hw.test(unclass(t(tab)), method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
@@ -129,8 +127,17 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 
 #' @export
 hw.test.list <- 
-function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2){
-	lapply(c, hw.test, method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+function(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR", histobins = 0, histobounds = c(0, 0), showCurve = T, safeSecs = 100, detail = 2) {
+	cores <- getOption("mc.cores", 1L)
+	if (cores == 1) {
+		lapply(c, hw.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail)
+	} else {
+		if (cores >=1 && require(parallel) && Sys.info()[1] != "Windows") {
+			RNGkind("L'Ecuyer-CMRG")
+			mclapply(c, hw.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail, 
+				mc.allow.recursive = T, mc.cores = cores)
+		}
+	}
 }
 
 #' @export

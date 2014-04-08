@@ -33,6 +33,12 @@ hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
   trials when Monte Carlo method is used}
 
   \item{showStat}{whether to show the observed statistic}
+
+  \item{showAsymptoticX2}{whether to include the asymptotic
+  P value corresponding to the Pearson \eqn{X^2} statistic}
+
+  \item{showAsymptoticG2}{whether to include the asymptotic
+  P value for the \code{LLR} statistic}
 }
 \description{
 If the \code{\link{hw.test}} output has multiple

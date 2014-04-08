@@ -2,14 +2,19 @@
 \alias{print.hwtest}
 \title{S3 Method for printing \code{hwtest} objects}
 \usage{
-\method{print}{hwtest}(x, ...)
+\method{print}{hwtest}(x, detail = NA, statName = NA, ...)
 }
 \arguments{
   \item{x}{the results from a call to
   \code{\link{hw.test}}}
 
-  \item{...}{other parameters passed to \code{print}. You
-  can specify \code{detail} or \code{statName}}
+  \item{detail}{0 for no print; 1 for P value only; 2 for
+  all four P values; 3 to add data; 4 to add expected
+  values}
+
+  \item{statName}{which statistic to use}
+
+  \item{\dots}{other parameters passed to \code{print}.}
 }
 \description{
 Prints test results (\code{hwtest}) objects depending on

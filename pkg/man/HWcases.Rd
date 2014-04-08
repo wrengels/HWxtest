@@ -1,13 +1,18 @@
 \docType{data}
 \name{HWcases}
 \alias{HWcases}
-\title{This is a data file with some HW examples}
+\title{This is a data file with some HW examples in matrix form}
 \description{
-This is a data file with some HW examples
+This is a data file with some HW examples in matrix form
 }
 \references{
+\href{http://dx.doi.org/10.2307/2531534}{Louis and
+Dempster, 1987}
+
 \href{http://dx.doi.org/10.2307/2532296}{Guo and Thompson,
 1992}
+
+Rousset 2007 -- from the documentation of GenePop
 }
 \keyword{data}
 

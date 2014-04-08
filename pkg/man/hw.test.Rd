@@ -18,7 +18,10 @@ hw.test(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR",
   order \eqn{a_11, a_21, a_22, a_31, ..., a_kk}. For
   compatability with the packages \code{genetics} and
   \code{adegenet}, it can also be an object of class
-  \code{genind}, \code{genotype}, or a \code{data.frame}.}
+  \code{genind}, \code{genotype}, or a \code{data.frame}.
+  If \code{c} contains multiple samples, the
+  \code{parallel} package will be used in an attempt to
+  employ multi-cores.}
 
   \item{method}{Can be \dQuote{auto}, \dQuote{exact} or
   \dQuote{monte} to indicate the method to use. If
@@ -64,8 +67,6 @@ hw.test(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR",
   \item{detail}{Determines how much detail is printed. If
   it is set to 0, nothing is printed (useful if you use
   \code{hw.test} programmatically.)}
-
-  \item{\dots}{any other parameters}
 }
 \value{
 Returns a list of class \code{hwtest} which includes the

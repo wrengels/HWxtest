@@ -4,15 +4,14 @@
 
 #' Compute observed statistics for a genotype count matrix
 #' 
-#' Four measures of fit to Hardy-Weinberg for a given set of genotype counts may be computed.
+#' #' Four measures of fit to Hardy-Weinberg for a given set of genotype counts may be computed.
+#' \itemize{
+	#' \item \code{observedProb} The probability of the observed set under the HW null and with the allele counts fixed.
+	#' \item \code{observedLLR} The log-likelihood ratio of the observed set
+	#' \item \code{observedU} The observed U-score. Positive values indicate an excess of homozygotes and negative ones imply too many heterozygotes
+	#' \item \code{observedX2} The classical \dQuote{chi-squared} statistic
+#' }
 #' 
-#' * \code{observedProb} The probability of the observed set under the HW null and with the allele counts fixed.
-#' 
-#' * \code{observedLLR} The log-likelihood ratio of the observed set
-#' 
-#' * \code{observedU} The observed U-score. Positive values indicate an excess of homozygotes and negative ones imply too many heterozygotes
-#' 
-#' * \code{observedX2} The classical \dQuote{chi-squared} statistic
 #' 
 #' @param c Matrix of observed genotype counts. Each number should be a non-negative integer, and matrix is \eqn{k x k}.
 #' @param returnExpected Used in \code{observedX2} to indicate whether a matrix of expected numbers should be returned instead.
