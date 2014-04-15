@@ -4,7 +4,7 @@
 
 #' Performs an \dQuote{exact} test using Monte Carlo trials for Hardy-Weinberg proportions
 #' 
-#' Given a set of genotype counts, \code{mtest} examines a large number of possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette. This function will not usually be called directly by the user. Instead, call \code{\link{hw.test}} with \code{method} set to either \dQuote{auto} or \dQuote{monte}.
+#' Given a set of genotype counts, \code{mtest} examines a large number of possible outcomes with the same set of allele counts. For each table, it computes four test statistics and compares them with the observed values. It returns the total probability of all tables with test statistics as \dQuote{extreme} or more so than the observed. It can also plot a histogram of one of the statitistics if \code{histobins} is greater than zero. More about these four test statistics and other information can be found in the vignette. This function will not usually be called directly by the user. Instead, call \code{\link{hwx.test}} with \code{method} set to either \dQuote{auto} or \dQuote{monte}.
 #' 
 #' @param c A matrix containing the genotype counts. It should be a square matrix, but only the lower-left half is used.
 #' @param ntrials the number of random trials to perform
@@ -26,7 +26,7 @@
 #' 
 #' @references The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
 #' 
-#' @seealso \code{\link{hw.test}}
+#' @seealso \code{\link{hwx.test}}
 #' 
 
 

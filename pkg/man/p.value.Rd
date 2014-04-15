@@ -13,10 +13,10 @@
 p.value(x, statName = NA)
 }
 \arguments{
-  \item{x}{The result of a call to \code{\link{hw.test}} or
-  a list of such results. It can also be the genotype
+  \item{x}{The result of a call to \code{\link{hwx.test}}
+  or a list of such results. It can also be the genotype
   counts in any of the same formats as accepted by
-  \code{\link{hw.test}}}
+  \code{\link{hwx.test}}}
 
   \item{statName}{can be \dQuote{LLR}, \dQuote{Prob},
   \dQuote{U}, or \dQuote{Chisq}}
@@ -26,18 +26,18 @@ The P value
 }
 \description{
 Use the \code{p.value} function to return just the P value
-from the results of a call to \code{\link{hw.test}}. If
+from the results of a call to \code{\link{hwx.test}}. If
 applied to a list of results, it will return a vector or
 matrix of P values. You can specify the \code{statName} as
 \dQuote{LLR}, \dQuote{Prob}, \dQuote{U} or \dQuote{Chisq}.
 You can also apply \code{p.value} to a matrix or vector and
-it will attempt to use \code{\link{hw.test}} to return a P
+it will attempt to use \code{\link{hwx.test}} to return a P
 value. However, it's usually preferable to use
-\code{\link{hw.test}} directly.
+\code{\link{hwx.test}} directly.
 }
 \examples{
 data(HWcases)
-testResults <- hw.test(HWcases)
+testResults <- hwx.test(HWcases)
 p.value(testResults)
 p.value(testResults, statName="U")
 }

@@ -5,7 +5,7 @@
 
 #' Determine immediately whether number of tables is over a limit
 #' 
-#' Calling \code{scountCutoff} gives you a quick answer to whether the number of tables is over a given cutoff. It is useful in deciding whether to analyze a data set with \code{\link{xtest}} or \code{\link{mtest}}. This function is used by \code{\link{hw.test}} and not normally called directly by the user.
+#' Calling \code{scountCutoff} gives you a quick answer to whether the number of tables is over a given cutoff. It is useful in deciding whether to analyze a data set with \code{\link{xtest}} or \code{\link{mtest}}. This function is used by \code{\link{hwx.test}} and not normally called directly by the user.
 #' 
 #' 
 #' @param m vector containing the numbers of alleles of each type. It can also be a matrix of genotype counts, but not a vector of genotype counts.
@@ -34,14 +34,14 @@ function(m, cutoff=1e7) {
 	m <- m[m!=0]
 	if(length(m) < 2) return(TRUE);
 	if(any(m < 0)) stop("\nAllele counts must be nonnegative\n");
-	if(acount(m) > 1e10) return(TRUE);
-		value <- .C("xcount",
+	if(acount(m) > 1e11) return(TRUE);
+	value <- .C("xcount",
 		counts=as.integer(sort(m, decreasing=T)),
 		nAlleles = as.integer(length(m)),
 		tableCount=as.double(cutoff),
 		safeSecs=as.integer(5)
 		,PACKAGE="HWxtest"
-		);
+	);
 		n <- value$tableCount;
 		if(n < 0) return(TRUE);
 		return(FALSE)

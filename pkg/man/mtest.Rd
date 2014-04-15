@@ -65,7 +65,7 @@ statitistics if \code{histobins} is greater than zero. More
 about these four test statistics and other information can
 be found in the vignette. This function will not usually be
 called directly by the user. Instead, call
-\code{\link{hw.test}} with \code{method} set to either
+\code{\link{hwx.test}} with \code{method} set to either
 \dQuote{auto} or \dQuote{monte}.
 }
 \references{
@@ -74,6 +74,6 @@ The methods are described by
 2009. \bold{Genetics} 183:1431}.
 }
 \seealso{
-\code{\link{hw.test}}
+\code{\link{hwx.test}}
 }
 

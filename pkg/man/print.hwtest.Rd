@@ -6,7 +6,7 @@
 }
 \arguments{
   \item{x}{the results from a call to
-  \code{\link{hw.test}}}
+  \code{\link{hwx.test}}}
 
   \item{detail}{0 for no print; 1 for P value only; 2 for
   all four P values; 3 to add data; 4 to add expected

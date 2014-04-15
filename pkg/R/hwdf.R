@@ -1,9 +1,9 @@
-# converts results of hw.test into a list of hwtest objects
-#' Convert results of \code{\link{hw.test}} to a single list of \code{hwtest} objects.
+# converts results of hwx.test into a list of hwtest objects
+#' Convert results of \code{\link{hwx.test}} to a single list of \code{hwtest} objects.
 #' 
-#' There are two main uses of \code{listify}. You can simplify a complex result from \code{\link{hw.test}} containing multiple populations and multiple loci into a simple list of \code{hwtest} objects. At the same time, you have a chance to change the parameters \code{detail} and \code{statName}. Useful to get output from a test.
+#' There are two main uses of \code{listify}. You can simplify a complex result from \code{\link{hwx.test}} containing multiple populations and multiple loci into a simple list of \code{hwtest} objects. At the same time, you have a chance to change the parameters \code{detail} and \code{statName}. Useful to get output from a test.
 #' 
-#' @param hwlist the results of a call to \code{\link{hw.test}}. It can be an \code{hwtest} object, a list of them or a list of lists of them.
+#' @param hwlist the results of a call to \code{\link{hwx.test}}. It can be an \code{hwtest} object, a list of them or a list of lists of them.
 #' @param detail Used only if you wish to reset the \code{detail} of each object.
 #' @param statName Used only if you want to rest the \code{statName} of each object
 #' 
@@ -12,7 +12,7 @@
 #' 
 #' @examples
 #' data(HWcases)
-#' outcome <- hw.test(HWcases, detail=4, statName="LLR")
+#' outcome <- hwx.test(HWcases, detail=4, statName="LLR")
 #' listify(outcome, detail=1, statName="U")
 
 #' @export
@@ -50,12 +50,12 @@ listify <- function(hwlist, detail = NA, statName = NA) {
 }
 
 
-#' Construct a data frame from \code{\link{hw.test}} output
+#' Construct a data frame from \code{\link{hwx.test}} output
 #' 
-#' If the \code{\link{hw.test}} output has multiple populations and/or multiple loci, use this function to make a data frame to display the results in tabular form. 
+#' If the \code{\link{hwx.test}} output has multiple populations and/or multiple loci, use this function to make a data frame to display the results in tabular form. 
 
 #' 
-#' @param hwlist The output from a call to \code{\link{hw.test}}
+#' @param hwlist The output from a call to \code{\link{hwx.test}}
 #' @param statName gives you the option of changing which statistic's P value is reported
 #' @param showN whether to show a column of sample size (number of diploids in the sample)
 #' @param showk whether to show the number of alleles

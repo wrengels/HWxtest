@@ -21,7 +21,7 @@ Calling \code{scountCutoff} gives you a quick answer to
 whether the number of tables is over a given cutoff. It is
 useful in deciding whether to analyze a data set with
 \code{\link{xtest}} or \code{\link{mtest}}. This function
-is used by \code{\link{hw.test}} and not normally called
+is used by \code{\link{hwx.test}} and not normally called
 directly by the user.
 }
 \examples{

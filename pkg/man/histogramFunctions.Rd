@@ -48,15 +48,15 @@ left and right boundaries for the x axis.
 histogram.
 }
 \description{
-Running the function \code{\link{hw.test}},
+Running the function \code{\link{hwx.test}},
 \code{\link{xtest}} or \code{\link{mtest}} can create data
 for a frequency distribution plot of one of the four test
 statistics. Then these functions can be used to make the
 plot. The user will not normally call these functions.
-Instead, they will be called by \code{\link{hw.test}}
+Instead, they will be called by \code{\link{hwx.test}}
 provided \code{histobins} is positive.
 }
 \seealso{
-\code{\link{hw.test}}
+\code{\link{hwx.test}}
 }
 

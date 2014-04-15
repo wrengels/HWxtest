@@ -61,7 +61,7 @@ plot a histogram of one of the statitistics if
 \code{histobins} is greater than zero. More about these
 four test statistics and other information can be found in
 the vignette. This function will not normally be called
-directly. Instead, \code{\link{hw.test}} calls either
+directly. Instead, \code{\link{hwx.test}} calls either
 \code{xtest} or \code{\link{mtest}} depending on which
 method is to be used.
 }
@@ -71,6 +71,6 @@ The methods are described by
 2009. \bold{Genetics} 183:1431}.
 }
 \seealso{
-\code{\link{hw.test}}
+\code{\link{hwx.test}}
 }
 

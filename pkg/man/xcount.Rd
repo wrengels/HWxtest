@@ -26,10 +26,10 @@ Use \code{xcount} to determine the exact number of tables
 (i.e., genotype numbers) for a given set of allele counts.
 This method enumerates all tables, and is best when the
 total number is less than 10^10 or so. This function is
-mostly called by \code{\link{hw.test}} rather than directly
-by the user. If the number of tables is too large to
-enumerate with this method, use \code{\link{acount}} for an
-approximation.
+mostly called by \code{\link{hwx.test}} rather than
+directly by the user. If the number of tables is too large
+to enumerate with this method, use \code{\link{acount}} for
+an approximation.
 }
 \examples{
 # Allele counts from human Rh locus. Guo and Thompson, 1992, Figure 1
@@ -43,6 +43,6 @@ The methods are described by
 2009. \bold{Genetics} 183:1431}.
 }
 \seealso{
-\code{\link{hw.test}}, \code{\link{acount}}
+\code{\link{hwx.test}}, \code{\link{acount}}
 }
 

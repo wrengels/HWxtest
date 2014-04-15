@@ -39,6 +39,6 @@ The methods are described by
 2009. \bold{Genetics} 183:1431}.
 }
 \seealso{
-\code{\link{hw.test}}, \code{\link{xcount}}
+\code{\link{hwx.test}}, \code{\link{xcount}}
 }
 

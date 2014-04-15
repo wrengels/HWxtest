@@ -1,4 +1,4 @@
-﻿@article{engels2009,
+@article{engels2009,
    author = {Engels, W. R.},
    title = {Exact tests for Hardy-Weinberg proportions},
    journal = {Genetics},
@@ -23,6 +23,21 @@ Probability},
    DOI = {10.1534/genetics.109.108977},
    url = {http://www.ncbi.nlm.nih.gov/pubmed/19797043},
    year = {2009},
+   type = {Journal Article}
+}
+
+@article{gail1977,
+   author = {Gail, Mitchell and Mantel, Nathan},
+   title = {Counting the Number of r × c Contingency Tables with Fixed Margins},
+   journal = {Journal of the American Statistical Association},
+   volume = {72},
+   number = {360},
+   pages = {859-862},
+   note = {ArticleType: primary_article / Full publication date: Dec., 1977 / Copyright © 1977 American Statistical Association},
+   abstract = {Exact and approximate methods are given for counting the number of r × c contingency tables with fixed margins. The approximate methods are extended to estimate the number of r × c × s contingency tables with given first-order margins.},
+   ISSN = {01621459},
+   url = {http://www.jstor.org/stable/2286475},
+   year = {1977},
    type = {Journal Article}
 }
 
@@ -94,6 +109,23 @@ Sea Urchins/classification/*genetics/physiology},
 }
 
 @article{
+ez1989,
+   author = {Hernandez, J. L. and Weir, B. S.},
+   title = {A Disequilibrium Coefficient Approach to Hardy-Weinberg Testing},
+   journal = {Biometrics},
+   volume = {45},
+   number = {1},
+   pages = {53-70},
+   note = {ArticleType: primary_article / Full publication date: Mar., 1989 / Copyright ¬© 1989 International Biometric Society},
+   abstract = {A comparison was made of various tests for Hardy-Weinberg equilibrium, with emphasis on methods for multiple alleles. For an overall test of deviations from equilibrium, the classical chi-square goodness-of-fit test generally performs well, with continuity corrections needed for extreme gene frequencies or extreme departures from equilibrium. For small samples, probability tests are preferable and for multiple alleles these probability tests may be performed on a sample of all possible sets of genotypic frequencies having a fixed set of sample gene frequencies. Numerical work showed that the continuity-corrected chi-square was the most conservative test procedure, and the uncorrected chi-square the least conservative. With multiple alleles, a better appreciation of the nature of departures from equilibrium is given by the use of disequilibrium coefficients, defined for each heterozygote as the difference between observed and expected frequencies. Likelihood-ratio tests can be used to test each of these coefficients individually but a satisfactory procedure is to divide the squared estimate of each coefficient by its estimated variance and regard the ratio as a single-degree-of-freedom chi-square. Numerical studies confirmed the validity of this approach, which has the great advantage of not requiring solutions of nonlinear equations.},
+   ISSN = {0006341X},
+   url = {http://www.jstor.org/stable/2532034},
+   year = {1989},
+   type = {Journal Article}
+}
+
+@article{
+adegenet,
    author = {Jombart, Thibaut},
    title = {adegenet: a R package for the multivariate analysis of genetic markers},
    journal = {Bioinformatics},
@@ -157,6 +189,7 @@ Biometry
 }
 
 @article{
+olsen2014,
    author = {Olsen, M. T. and Andersen, L. W. and Dietz, R. and Teilmann, J. and Harkonen, T. and Siegismund, H. R.},
    title = {Integrating genetic data and population viability analyses for the identification of harbour seal (Phoca vitulina) populations and management units},
    journal = {Mol Ecol},
@@ -188,6 +221,7 @@ minimum viable population size},
 }
 
 @article{
+pegas,
    author = {Paradis, Emmanuel},
    title = {pegas: an R package for population genetics with an integrated–modular approach},
    journal = {Bioinformatics},

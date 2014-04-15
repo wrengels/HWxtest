@@ -1,6 +1,6 @@
 \name{hwdf}
 \alias{hwdf}
-\title{Construct a data frame from \code{\link{hw.test}} output}
+\title{Construct a data frame from \code{\link{hwx.test}} output}
 \usage{
 hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
   showMethod = TRUE, showSE = TRUE, showTables = TRUE,
@@ -9,7 +9,7 @@ hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
 }
 \arguments{
   \item{hwlist}{The output from a call to
-  \code{\link{hw.test}}}
+  \code{\link{hwx.test}}}
 
   \item{statName}{gives you the option of changing which
   statistic's P value is reported}
@@ -41,7 +41,7 @@ hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
   P value for the \code{LLR} statistic}
 }
 \description{
-If the \code{\link{hw.test}} output has multiple
+If the \code{\link{hwx.test}} output has multiple
 populations and/or multiple loci, use this function to make
 a data frame to display the results in tabular form.
 }
