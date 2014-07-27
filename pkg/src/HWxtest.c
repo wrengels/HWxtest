@@ -120,7 +120,7 @@ static void heterozygote (unsigned r, unsigned c, double probl, double statl, do
     if(tableCount < 0) return;
     COUNTTYPE *res, *resn;
 	int lower, upper, exindex;
-	unsigned i, arc, ar1, ar2, a32, a31, a11, a21, a22;
+	unsigned i, arc, ar1, ar2, a31, a32, a11, a21, a22;
 	unsigned res1, res2, resTemp, dT;
 	int hdex;
 	double probl3, statl3, x23, problT, statlT, uT, x2T, prob, x=0;

@@ -1,4 +1,4 @@
-@article{engels2009,
+﻿@article{engels2009,
    author = {Engels, W. R.},
    title = {Exact tests for Hardy-Weinberg proportions},
    journal = {Genetics},
@@ -36,6 +36,7 @@ Probability},
    note = {ArticleType: primary_article / Full publication date: Dec., 1977 / Copyright © 1977 American Statistical Association},
    abstract = {Exact and approximate methods are given for counting the number of r × c contingency tables with fixed margins. The approximate methods are extended to estimate the number of r × c × s contingency tables with given first-order margins.},
    ISSN = {01621459},
+   DOI = {none},
    url = {http://www.jstor.org/stable/2286475},
    year = {1977},
    type = {Journal Article}
@@ -124,8 +125,7 @@ ez1989,
    type = {Journal Article}
 }
 
-@article{
-adegenet,
+@article{adegenet,
    author = {Jombart, Thibaut},
    title = {adegenet: a R package for the multivariate analysis of genetic markers},
    journal = {Bioinformatics},
@@ -188,8 +188,7 @@ Biometry
    type = {Journal Article}
 }
 
-@article{
-olsen2014,
+@article{olsen2014,
    author = {Olsen, M. T. and Andersen, L. W. and Dietz, R. and Teilmann, J. and Harkonen, T. and Siegismund, H. R.},
    title = {Integrating genetic data and population viability analyses for the identification of harbour seal (Phoca vitulina) populations and management units},
    journal = {Mol Ecol},
@@ -220,8 +219,7 @@ minimum viable population size},
    type = {Journal Article}
 }
 
-@article{
-pegas,
+@article{pegas,
    author = {Paradis, Emmanuel},
    title = {pegas: an R package for population genetics with an integrated–modular approach},
    journal = {Bioinformatics},
@@ -258,6 +256,7 @@ http://bioinformatics.oxfordjournals.org/content/26/3/419.full.pdf},
    pages = {103-106},
    note = {10.1111/j.1471-8286.2007.01931.x},
    ISSN = {1755-0998},
+   DOI = {10.1111/j.1471-8286.2007.01931.x},
    url = {http://dx.doi.org/10.1111/j.1471-8286.2007.01931.x},
    year = {2008},
    type = {Journal Article}
