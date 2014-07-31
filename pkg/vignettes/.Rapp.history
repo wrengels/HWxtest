@@ -1,0 +1,269 @@
+line(0,1)
+line(c(0,1))
+roxygenize("~/DropBox/HWxtest/pkg")
+source('~/DropBox/HWxtest/pkg/R/hw.test.R', chdir = TRUE)
+~/DropBox/HWxtest/HWxtest_0.0.2.tar.gz
+hw.test(s4)
+?hw.test
+hw.test
+bib <- read.bibtex("~/DropBox/HWxtest/bibtexHW.bib")
+bib
+bib[["R1995"]]
+bib <- read.bibtex("~/DropBox/HWxtest/bibtexHW.bib")
+bib[["R1995"]]
+bib <- read.bibtex('~/DropBox/HWxtest/bibtexHW.bib')
+r <- bib[["R1995"]]
+r
+write.bibtex(r,"~/DropBox/HWxtest/rfile.bib")
+citep(r)
+class(r)
+str(r)
+bib <- read.bibtex('~/DropBox/HWxtest/bibHW.txt')
+me2009 <- ref("10.1534/genetics.109.108977")#
+levene1949 <- ref("10.1214/aoms/1177730093")#
+haldane1954 <- ref("10.1007/BF02985085")#
+louis1987 <- ref("10.2307/2531534")#
+guo1992 <- ref("10.2307/2532296")#
+ward2014 <- ref("10.1093/biostatistics/kxt028")#
+rousset1995 <- bib[["R1995"]]#
+robertson1984 <- bib[["robertson1984"]]
+mei2009
+me2009
+class(me2009)
+robertson1984
+class(robertson1984)
+r4 <- ref(robertson1984)
+r4 <- ref("robertson1984")
+r4
+str(me2009)
+str(robertson1984)
+citep(c(me2009, robertson1984))
+citep(c(rousset1995, robertson1984))
+citep(c(rousset1995, robertson1984, me2009))
+citep(list(rousset1995, robertson1984, me2009))
+source("/Users/WRE/DropBox/HWxtest/pkg/R/histogram.R")
+roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+install(""/Users/WRE/DropBox/HWxtest/pkg")
+install("/Users/WRE/DropBox/HWxtest/pkg")
+hw.test
+hw.test(1:10)
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(devtools); install("/Users/WRE/DropBox/HWxtest/pkg")
+hw.test(1:10)
+library(HWxtest)
+hw.test(1:10)
+library(devtools); install("/Users/WRE/DropBox/HWxtest/pkg")
+hw.test(1:10)
+?hw.test
+hw.test(2:11, histobins=100)
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(devtools); install("/Users/WRE/DropBox/HWxtest/pkg")
+?print.hwtest
+library(HWxtest)
+?print.hwtest
+?hw.test
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(devtools); install("/Users/WRE/DropBox/HWxtest/pkg")
+check("/Users/WRE/DropBox/HWxtest/pkg")
+alleles <- c(15, 14, 11, 12, 2, 2, 1, 3)
+acount(alleles)
+library(devtools); install("/Users/WRE/DropBox/HWxtest/pkg")
+check("/Users/WRE/DropBox/HWxtest/pkg")
+acount(alleles)
+xcount(alleles)
+library(devtools); install("/Users/WRE/DropBox/HWxtest/pkg")
+library(devtools); build("/Users/WRE/DropBox/HWxtest/pkg")
+check("/Users/WRE/DropBox/HWxtest/HWxtest_0.0.3.tar.gz")
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(devtools); build("/Users/WRE/DropBox/HWxtest/pkg")
+install("/Users/WRE/DropBox/HWxtest/HWxtest_0.0.3.tar.gz")
+install("/Users/WRE/DropBox/HWxtest/pkg")
+hw.test(41:50)
+hw.test(41:50, B=1e7)
+hw.test(1:10, B=1e7)
+hw.test(1:10, B=1e7, method="monte")
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(HWxtest)
+hw.test(11:20)
+hw.test(11:20, method="exact")
+xcount(1:15)
+acount(1:15)
+vec.to.matrix(1:15)
+alleleCounts(1:15)
+alleleCounts(vec.to.matrix(1:15))
+hw.test(11:20, detail=5)
+require(adegenet)#
+require(genetics)#
+data(nancycats)#
+toto <- HWE.test.genind(nancycats,res="matrix")#
+kGen <- genind2genotype(nancycats,pop=nancycats@pop,res.type="list")
+k <- hw.test(kGen, method="monte")#
+pm.values <- sapply(k, function(a) sapply(a, function(b) b$p.value))
+pm.values
+k <- hw.test(kGen, method="exact")#
+px.values <- sapply(k, function(a) sapply(a, function(b) b$p.value))
+px
+px.values
+plot(px.values,pm.values)
+plot(px.values,pm.values, xlim=c(0,1))
+pm10000 <- sapply(hw.test(kGen, method="monte", B=10000), function(a) sapply(a, function(b) b$p.value))
+pm10000
+plot(px.values,pm10000, xlim=c(0,1))
+pm1000 <- sapply(hw.test(kGen, method="monte", B=1000), function(a) sapply(a, function(b) b$p.value))
+plot(px.values,pm1000, xlim=c(0,1))
+hist(pm1000)
+?hist
+hist(pm1000, breaks=100)
+hist(pm1000, breaks=100, col=gray)
+hist(pm1000, breaks=100, col="gray")
+hist(pm10000, breaks=100, col="gray")
+hist(px.values, breaks=100, col="gray")
+hist(px.values, xlim=c(0,1), breaks=100, col="gray")
+pu <- sapply(hw.test(kGen, method="monte", B=100000), function(a) sapply(a, function(b) b$p.value))
+pu <- sapply(hw.test(kGen, method="auto", B=100000), function(a) sapply(a, function(b) b$p.value))
+which(pu, method=="exact")
+hist(pu, breaks=100, col="gray")
+?which
+k[[1]][[1]]
+which(k, method="monte")
+meth <- sapply(hw.test(kGen, method="auto", B=100000), function(a) sapply(a, function(b) b$method))
+meth
+which(method=="monte")
+which(meth=="monte")
+which(meth=="monte", useNames=T)
+mon <- which(meth=="monte",T)
+mon
+meth <- sapply(hw.test(kGen, method="auto", B=100000, cutoff=1e8), function(a) sapply(a, function(b) b$method))
+mon <- which(meth=="monte",T);mon
+mon <- which(meth != "exact",T);mon
+meth <- sapply(hw.test(kGen, method="auto", B=100000, cutoff=1e9), function(a) sapply(a, function(b) b$method))
+mon <- which(meth != "exact",T);mon
+str(k[[1]][[1]])
+uvals <- sapply(hw.test(kGen, method="auto", B=1000, cutoff=1e5), function(a) sapply(a, function(b) b$observed[[3]]))
+uvals
+hist(uvals, breaks=100)
+class(uvals)
+class(u)
+class(pu)
+hist(uvals)
+uvals^2
+pu
+which(pu==NA)
+which(is.na(pu))
+which(is.na(pu),T)
+uvals[[17,4]]
+uvals[[17,4]] <- NA
+hist(uvals, breaks=100)
+uvals
+which(is.numeric(uvals),T)
+as.numeric(uvals)
+hist(as.numeric(uvals), breaks=100)
+unvals <- as.numeric(uvals)
+sum(uvals>30)
+sum(unvals>30)
+unvals>30
+sum(unvals>30, rm.na=T)
+sum(unvals>30, na.omit=T)
+sum(unvals>30, na.rm=T)
+sum(unvals>0, na.rm=T)
+sum(unvals<0, na.rm=T)
+length(unvals)
+sum(unvals==0, na.rm=T)
+uvals
+pu
+posu <- unvals>0
+pu[[posu]]
+pu[posu]
+pu[!posu]
+negu <- pu<0
+pu[negu]
+negu <- unvals<0
+pu[negu]
+hist(pu[negu], breaks=100)
+hist(pu[posu], breaks=100)
+uvals>0
+hist(pu[uvals>0], breaks=50)
+hist(pu[uvals<0], breaks=50)
+hist(pu[uvals<0], breaks=30)
+hist(pu[uvals<0], breaks=50,col="blue")
+hist(pu[uvals<0], breaks=50,col="gray")
+hist(pu[uvals>0], breaks=50,col="gray")
+(uvals<0) && (pu< .1)
+uvals<0
+pu < .1
+(uvals<0) * (pu< .1)
+(uvals<0) * (pu< .01)
+(uvals<0) & (pu< .01)
+(uvals>0) & (pu< .01)
+which((uvals>0) & (pu<.01),T)
+which((uvals<0) & (pu<.01),T)
+which(pu < .01,T)
+s4
+load("/Users/WRE/DropBox/HWxtest/pkg/data/HWexamples.rda")
+ls()
+data(HWexamples)
+ls()
+s4
+s4a
+s8
+s9
+hw.test(s9)
+system.time(hw.test(s9))
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(devtools); build("/Users/WRE/DropBox/HWxtest/pkg")
+?HWexamples
+data(HWexamples)
+?HWexamples
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(devtools); build("/Users/WRE/DropBox/HWxtest/pkg")
+?HWexamples
+data(HWexamples)
+ls()
+?HWexamples
+library(HWxtest)
+?plotHistogram
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(HWxtest)
+?plotHistogram
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+library(HWxtest)
+?hw.test
+library(roxygen2); roxygenize("/Users/WRE/DropBox/HWxtest/pkg")
+?p.value
+data(HWcases)#
+testResults <- hw.test(HWcases)#
+p.value(testResults)#
+p.value(testResults, statName="U")
+testResults
+p.value(testResults)
+?p.value
+p.value(1:10)
+data(HWcases)#
+testResults <- hw.test(HWcases)#
+p.value(testResults)#
+p.value(testResults, statName="U")
+plot(p.value(testResults), p.value(testResults, statName="U"))
+plot(p.value(testResults), p.value(testResults, statName="Chisq"))
+plot(p.value(testResults), p.value(testResults, statName="Prob"))
+plot(p.value(testResults, statName="Chisq"), p.value(testResults, statName="Prob"))
+HWcases
+getwd()
+?path
+?path.expand
+wd <- getwd()
+wd
+basename(wd)
+wd <- getwd()
+wd
+basename(wd)
+expand.path(wd)
+path.expand(wd)
+wd
+file.path(wd)
+bn <- basename(wd)
+bn
+file.path(bn)
+path.expand(bn)
+normalizePath(wd)
+dirname(wd)
+paste(dirname(wd), "/inst/HWbib.bit")
