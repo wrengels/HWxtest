@@ -1,5 +1,5 @@
 <!--
-%\VignetteEngine{knitr::markdown}
+%\VignetteEngine{knitr::rmarkdown}
 %\VignetteIndexEntry{HWxtest}
 -->
 ```{r setup, include=FALSE}
