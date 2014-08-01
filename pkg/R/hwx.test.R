@@ -126,10 +126,10 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 hwx.test.list <- 
 function(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR", histobins = 0, histobounds = c(0, 0), showCurve = T, safeSecs = 100, detail = 2) {
 	cores <- getOption("mc.cores", 1L)
-	if (cores == 1) {
+	if (cores == 1 || Sys.info()[1] == "Windows") {
 		lapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail)
 	} else {
-		if (cores >=1 && require(parallel) && Sys.info()[1] != "Windows") {
+		if (cores >=1 && require(parallel)) {
 			RNGkind("L'Ecuyer-CMRG")
 			mclapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail, 
 				mc.allow.recursive = T, mc.cores = cores)
