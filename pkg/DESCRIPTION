@@ -1,7 +1,7 @@
 Package: HWxtest
 Type: Package
 Title: Exact Tests for Hardy-Weinberg Proportions
-Version: 1.0.2
+Version: 1.0.3
 Date: 2014-02-22
 Author: Bill Engels <wrengels@wisc.edu>
 Maintainer: Bill Engels <wrengels@wisc.edu>

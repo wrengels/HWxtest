@@ -92,6 +92,7 @@ HWxtest -- Exact Tests for Hardy-Weinberg Proportions With Multiple Alleles
 * [Reading GenePop data](#genepop)
 * [Inaccuracy in asymptotic tests](#asym)
 * [Choice of test statistic](#stat)
+* [Multithreading](#multithreading)
 * [Bibliography](#bib)
 </center>
 
@@ -273,6 +274,15 @@ There are other test statistics that might be added to __HWxtest__ in future ver
 
 **So ... which $P$ value should you use?** My suggestion is to use the $LLR$ if you have no prior reason for suspecting either an excess or lack of homozygotes. If you do, then use the $U$ score. The other two measures are included in __HWxtest__ mainly for comparison. My reasons for preferring the $LLR$ to either the probability or $X^2$ are discussed elsewhere `r citep(engels2009)`
 
+### <a name="multithreading">Multithreading</a>
+
+On Unix-based systems, such as MacOS X, you can greatly speed up processing of multiple samples by using several cores. Do do this, simply set options variable `mc.cores` to something greater than 1. For example, if you have 8 cores you can use:
+
+```{r setcores, eval=FALSE}
+options(mc.cores = 8)
+```
+
+after which any calls to `hwx.test` will attempt to use 8 cores.
 
 
 ### <a name="bib">Bibliography</a>

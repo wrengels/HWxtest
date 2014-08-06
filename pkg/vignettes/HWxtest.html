@@ -114,6 +114,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><a href="#genepop">Reading GenePop data</a></li>
 <li><a href="#asym">Inaccuracy in asymptotic tests</a></li>
 <li><a href="#stat">Choice of test statistic</a></li>
+<li><a href="#multithreading">Multithreading</a></li>
 <li><a href="#bib">Bibliography</a>
 </center>
 </li>
@@ -309,22 +310,28 @@ U = 2n\sum\limits_{i = 1}^k {\frac{{{a_{ii}}}}{{{m_i}}}}  - n
 {X^2} = \sum\limits_{i \ge j} {\frac{{{{({a_{ij}} - expecte{d_{ij}})}^2}}}{{expecte{d_{ij}}}}}
 \]</span> The asymptotic <span class="math">\(\chi^2\)</span> distribution is not used in getting the <span class="math">\(P\)</span> value.</li>
 </ol>
-<p>There are other test statistics that might be added to <strong>HWxtest</strong> in future versions. For example Ward and Carroll (2014) argue that the root-mean-square is a useful measure of departure from Hardy-Weinberg proportions.</p>
+<p>There are other test statistics that might be added to <strong>HWxtest</strong> in future versions. For example Ward and Carroll (2013) argue that the root-mean-square is a useful measure of departure from Hardy-Weinberg proportions.</p>
 <p><strong>So … which <span class="math">\(P\)</span> value should you use?</strong> My suggestion is to use the <span class="math">\(LLR\)</span> if you have no prior reason for suspecting either an excess or lack of homozygotes. If you do, then use the <span class="math">\(U\)</span> score. The other two measures are included in <strong>HWxtest</strong> mainly for comparison. My reasons for preferring the <span class="math">\(LLR\)</span> to either the probability or <span class="math">\(X^2\)</span> are discussed elsewhere (Engels, 2009)</p>
+</div>
+<div id="multithreading" class="section level3">
+<h3><a name="multithreading">Multithreading</a></h3>
+<p>On Unix-based systems, such as MacOS X, you can greatly speed up processing of multiple samples by using several cores. Do do this, simply set options variable <code>mc.cores</code> to something greater than 1. For example, if you have 8 cores you can use:</p>
+<pre class="r"><code>options(mc.cores = 8)</code></pre>
+<p>after which any calls to <code>hwx.test</code> will attempt to use 8 cores.</p>
 </div>
 <div id="bibliography" class="section level3">
 <h3><a name="bib">Bibliography</a></h3>
 <p>Engels, W. R. (2009). “Exact Tests for Hardy-Weinberg Proportions”. In: <em>Genetics</em> 183.4, pp. 1431-1441. DOI: 10.1534/genetics.109.108977. <URL: http: dx.doi.org 10.1534 genetics.109.108977>.</p>
-<p>Haldane, J. B. S. (1954). “An exact test for randomness of mating”. In: <em>J Genet</em> 52.3, pp. 631-635. DOI: 10.1007/bf02985085. <URL: http: dx.doi.org 10.1007 BF02985085>.</p>
+<p>Haldane, J. B. S. (1954). “An exact test for randomness of mating”. In: <em>Journal of Genetics</em> 52.3, pp. 631-635. DOI: 10.1007/BF02985085. <URL: http: dx.doi.org 10.1007 BF02985085>.</p>
 <p>Hart, M. W, I. Popovic and R. B. Emlet (2012). “Low rates of bindin codon evolution in lecithotrophic Heliocidaris sea urchins”. In: <em>Evolution</em> 66.6, pp. 1709-21. DOI: 10.1111/j.1558-5646.2012.01606.x. <URL: http: www.ncbi.nlm.nih.gov pubmed 22671541>.</p>
 <p>Jombart, T. (2008). “adegenet: a R package for the multivariate analysis of genetic markers”. In: <em>Bioinformatics</em> 24.11, pp. 1403-1405. DOI: 10.1093/bioinformatics/btn129. <URL: http: dx.doi.org 10.1093 bioinformatics btn129>.</p>
-<p>Levene, H. (1949). “On a Matching Problem Arising in Genetics”. In: <em>Ann. Math. Statist.</em> 20.1, pp. 91-94. DOI: 10.1214/aoms/1177730093. <URL: http: dx.doi.org 10.1214 aoms 1177730093>.</p>
+<p>Levene, H. (1949). “On a Matching Problem Arising in Genetics”. In: <em>The Annals of Mathematical Statistics</em> 20.1, pp. 91-94. DOI: 10.1214/aoms/1177730093. <URL: http: dx.doi.org 10.1214 aoms 1177730093>.</p>
 <p>Morin, P, F. Archer, V. Pease, et al. (2012). “Empirical comparison of single nucleotide polymorphisms and microsatellites for population and demographic analyses of bowhead whales”. In: <em>Endangered Species Research</em> 19.2, pp. 129-147. DOI: 10.3354/esr00459. <URL: http: www.int-res.com abstracts esr v19 n2 p129-147></URL:>.</p>
 <p>Paradis, E. (2010). “pegas: an R package for population genetics with an integrated-modular approach”. In: <em>Bioinformatics</em> 26.3, pp. 419-420. DOI: 10.1093/bioinformatics/btp696. <URL: http: dx.doi.org 10.1093 bioinformatics btp696>.</p>
 <p>Robertson, A. and W. G. Hill (1984). “Deviations from Hardy-Weinberg proportions: sampling variances and use in estimation of inbreeding coefficients”. In: <em>Genetics</em> 107.4, pp. 703-718. <URL: http: www.genetics.org cgi content abstract 107 4 703>.</p>
 <p>Rousset, F. (2008). “genepop’007: a complete re-implementation of the genepop software for Windows and Linux”. In: <em>Molecular Ecology Resources</em> 8.1, pp. 103-106. DOI: 10.1111/j.1471-8286.2007.01931.x. <URL: http: dx.doi.org 10.1111 j.1471-8286.2007.01931.x>.</p>
 <p>Rousset, F. and M. Raymond (1995). “Testing Heterozygote Excess and Deficiency”. In: <em>Genetics</em> 140.4, pp. 1413-1419. <URL: http: www.genetics.org cgi content abstract 140 4 1413>.</p>
-<p>Ward, R. and R. J. Carroll (2014). “Testing Hardy-Weinberg equilibrium with a simple root-mean-square statistic”. In: <em>Biostatistics</em> 15.1, pp. 74-86. DOI: 10.1093/biostatistics/kxt028. <URL: http: dx.doi.org 10.1093 biostatistics kxt028>.</p>
+<p>Ward, R. and R. J. Carroll (2013). “Testing Hardy-Weinberg equilibrium with a simple root-mean-square statistic”. In: <em>Biostatistics</em> 15.1, pp. 74-86. DOI: 10.1093/biostatistics/kxt028. <URL: http: dx.doi.org 10.1093 biostatistics kxt028>.</p>
 </div>
 </div>
 

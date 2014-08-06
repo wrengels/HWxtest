@@ -81,6 +81,9 @@
 
 #define COUNTTYPE unsigned short
 
+// Check to see if long long are 64-bit
+#define LONG64 LONG_LONG_MAX > 4294967296
+
 #ifdef NOT_READY_FOR_R    // This stuff can be removed in the R-only version
     #include <stdio.h>
     #include <stdlib.h>
@@ -106,7 +109,7 @@
 //This call (MWCranx) generates a random unsigned long named ranx
 #define MWCranx  t=a*Q[++ii]+c; c=(t>>32);  ranx=(unsigned)(t+c); if(ranx<c){ranx++;c++;} Q[ii]= ranx;
 // Turn it into a random integer in the range 0 to k-1 with (unsigned)((unsigned short)ranx * (k)) >> 16;
-#define MWCrank(k) (unsigned)(((unsigned long)ranx * (unsigned long)(k)) >> 32)
+#define MWCrank(k) (unsigned)(((unsigned long long)ranx * (unsigned long long)(k)) >> 32)
 
 
 void mtest (int * m,
@@ -135,12 +138,12 @@ double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup t
     
     // Set up MWC
     unsigned Q[256];
-    unsigned long c;
+    unsigned long long c;
     unsigned char ii;
     c = 362436;
     ii = 255;
     Q[0] = 0;
-    unsigned long t, a = 1540315826LL;
+    unsigned long long t, a = 1540315826LL;
     unsigned ranx;
     // Get "random" Q
     for (int i = 0; i < 256; i++) {
@@ -148,9 +151,11 @@ double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup t
     }
     
     //Run off some random MWCs just to mix things up
-    for (int i=0; i<1000; i++) {
-        MWCranx
-    }
+#if LONG64
+        for (int i=0; i<1000; i++) {
+            MWCranx
+        }
+#endif
     
     // Make lookup tables
     unsigned * aij = Calloc(nAlleles * nAlleles, unsigned); // to hold the allele counts;
@@ -277,8 +282,13 @@ double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup t
         gplex = genes;
         for (int i = nGenes; i > ntotal; i--) {
 //            gt = g + (int)(unif_rand() * i);
+#if LONG64
             MWCranx
             gtplex = gplex + MWCrank(i);
+#else
+            // Use R built-in RNG as suggested by B. Ripley if long long is 32-bit
+            gtplex = gplex+ (int)(unif_rand() * i);
+#endif
             tplex = *gplex;
             *gplex = *gtplex;
             *gtplex = tplex;
