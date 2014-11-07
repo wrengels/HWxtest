@@ -1,4 +1,4 @@
-﻿@article{engels2009,
+@article{engels2009,
    author = {Engels, W. R.},
    title = {Exact tests for Hardy-Weinberg proportions},
    journal = {Genetics},
@@ -22,7 +22,7 @@ Probability},
 0016-6731 (Linking)},
    DOI = {10.1534/genetics.109.108977},
    url = {http://www.ncbi.nlm.nih.gov/pubmed/19797043},
-   year = {2009},
+   date = {2009},
    type = {Journal Article}
 }
 
@@ -299,4 +299,17 @@ Root mean square},
    year = {2014},
    type = {Journal Article}
 }
+
+@ARTICLE{a4,
+       AUTHOR={Oetiker, Tobias and Partl, Hubert and Hyna, Helene and Schlegl, Elisabeth},
+       TITLE="Une courte{~({?})} introduction {\`a~\LaTeXe}",
+       JOURNAL="{Cahiers GUTenberg}",
+       NOTE="{F}rench translation of{~\cite{NSSL2E}} by {\oname{Matthieu}{Herrb}}, adaptation and complements by
+       {\oname{Daniel}{Flipo}}",
+       URL="http://www.dante.de/CTAN/info/lshort/french/flshort-3.20.pdf",
+       MONTH=feb,
+       ISSN="1140-9304",
+       VOLUME="{s}pecial issue number{~2}",
+       YEAR={2003}}
+
 

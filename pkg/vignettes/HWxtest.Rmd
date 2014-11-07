@@ -4,9 +4,9 @@
 -->
 ```{r setup, include=FALSE}
 library(knitr)
-library(knitcitations)
-cleanbib()
-cite_options(max.names = 1,longnamesfirst=F,  bib.style="authoryear", style="markdown", hyperlink = "to.doc", no.print.fields = c("ISSN", "note"))
+library(RefManageR)
+BibOptions(restore.defaults=TRUE)
+BibOptions(check.entries = FALSE, bib.style = "authoryear",cite.style="authortitle", style = "html", max.names=99, hyperlink = "to.bib", no.print.fields = c("ISSN", "note", "url") )
 library(HWxtest)
 library(adegenet)
 figw <- 7
@@ -14,20 +14,19 @@ figh <- 5
 set.seed(60823316) 
 ```
 ```{r refs, include=FALSE}
-bib <- read.bibtex("bibHW.txt")
-engels2009 <- "10.1534/genetics.109.108977"
-levene1949 <- "10.1214/aoms/1177730093"
-haldane1954 <- "10.1007/BF02985085"
-louis1987 <- "10.2307/2531534"
-guo1992 <- "10.2307/2532296"
-ward2014 <- "10.1093/biostatistics/kxt028"
+bib <- ReadBib("bibHW.txt")
+engels2009 <- bib[["engels2009"]]
+levene1949 <- bib[["levene1949"]]
+haldane1954 <- bib[["haldane1954"]]
+louis1987 <- bib[["louis1987"]]
+guo1992 <- bib[["guo1992"]]
+ward2014 <- bib[["ward2014"]]
 rousset1995 <- bib[["rousset1995"]]
 robertson1984 <- bib[["robertson1984"]]
 genepop007 <- bib[["genepop007"]]
-adegenet <- "10.1093/bioinformatics/btn129"
-pegas <- "10.1093/bioinformatics/btp696"
+adegenet <- bib[["adegenet"]]
+pegas <- bib[["pegas"]]
 morin2012 <- bib[["morin2012"]]
-citep(morin2012)
 gail1977 <- bib[["gail1977"]]
 ez1989 <- bib[["ez1989"]]
 olsen2014 <- bib[["olsen2014"]]
@@ -97,11 +96,11 @@ HWxtest -- Exact Tests for Hardy-Weinberg Proportions With Multiple Alleles
 </center>
 
 ### <a name="intro">Main features</a>
-The __HWxtest__ package tests whether a set of genotype counts fits Hardy-Weinberg proportions using the methods described by `r citet(engels2009)`. The package's main features are:
+The __HWxtest__ package tests whether a set of genotype counts fits Hardy-Weinberg proportions using the methods described by `r Citet(engels2009)`. The package's main features are:
 
 * Performs fast exact test with any number of alleles
 * The $P$ value is determined using a choice of test statistics (see [below](#stat)). One option is to test specifically for an excess of homozygotes or heterozygotes.
-* Can handle data sets with multiple loci or populations. It accepts data from other population genetics software: *GenePop* `r citep(genepop007)`, *adegenet* `r citep(adegenet)`, *pegas* `r citep(pegas)`. Multithreading is an option when analyzing a list.
+* Can handle data sets with multiple loci or populations. It accepts data from other population genetics software: *GenePop* `r Citep(genepop007)`, *adegenet* `r Citep(adegenet)`, *pegas* `r Citep(pegas)`. Multithreading is an option when analyzing a list.
 * Can perform either full enumeration test or Monte Carlo, depending on which is optimal for a given data set.
 * Includes functions for determining the number of tables for a given set of allele counts
 
@@ -123,7 +122,7 @@ $$
 ```{r include=FALSE}
 obs <- c(83, 49, 18, 74, 34, 21)
 ```
-That is, we observed `r obs[1]` homozygotes for allele $a_1$, `r obs[2]` heterozygotes of genotype $a_1/a_2$, and so on. The genotype counts are in the lower half of a $3 \times 3$ matrix. (These values come from `r citet(morin2012)`) We'll enter the numbers by rows in an *R* vector:
+That is, we observed `r obs[1]` homozygotes for allele $a_1$, `r obs[2]` heterozygotes of genotype $a_1/a_2$, and so on. The genotype counts are in the lower half of a $3 \times 3$ matrix. (These values come from `r Citet(morin2012, .opts=list(max.names=2))`) We'll enter the numbers by rows in an *R* vector:
 ```{r entera}
 obs <- c(83, 49, 18, 74, 34, 21)
 ```
@@ -152,7 +151,7 @@ hwx.test(obs, histobins=T, detail=0, statName="U")
 Note that setting the parameter `detail` to zero suppresses the re-printing of the numbers.
 
 ### <a name="wex">Example with real data: bowhead whales</a>
-A set of data from P. `r citet(morin2012)` includes genotypes of 280 whales from one population and 49 from another. Each individual was classified at 51 genetic loci. Some of these loci had more than 20 alleles. We can test for Hardy-Weinberg fit for each locus and each population:
+A set of data from P. `r Citet(morin2012)` includes genotypes of 280 whales from one population and 49 from another. Each individual was classified at 51 genetic loci. Some of these loci had more than 20 alleles. We can test for Hardy-Weinberg fit for each locus and each population:
 ```{r testwhales}
 data(whales.genind)
 wtest <- hwx.test(whales.genind)
@@ -190,8 +189,8 @@ When using the *U* test, it is important to pay attention to the sign of *U*. If
 
 ### <a name="genepop">Reading GenePop data</a>
 
-Published data with genotype frequencies are often available in the *GenePop* format `r citep(genepop007)`. These data can be easily converted to *genind* objects and then fed to `hwx.test`. For example, `r citet(hart2012)` provide a supplemental file containing genotype counts at two loci in two populations of sea urchins. We can pull those numbers in directly from the online source and analyze them as follows:
-```{r urchins}
+Published data with genotype frequencies are often available in the *GenePop* format `r Citep(genepop007)`. These data can be easily converted to *genind* objects and then fed to `hwx.test`. For example, `r Citet(hart2012)` provide a supplemental file containing genotype counts at two loci in two populations of sea urchins. We can pull those numbers in directly from the online source and analyze them as follows:
+```{r urchins, eval=FALSE}
 urchin.url <- "http://tinyurl.com/ku4fq7m"
 urchin.data <- genepop.to.genind(urchin.url)
 hwdf(hwx.test(urchin.data))
@@ -245,18 +244,18 @@ Here are the test statistics used by __HWxtest__ to order the potential outcomes
 $$
 LR = \frac{{\Pr (outcome|HW)}}{{\Pr (outcome|{\rm{best fit}})}}
 $$
-The numerator comes from `r citet(levene1949)` and the denominator is a multinomial, so the formula for $LR$ works out to be:
+The numerator comes from `r Citet(levene1949)` and the denominator is a multinomial, so the formula for $LR$ works out to be:
 $$
 LR  = \frac{{\prod\limits_i {{m_i}^{{m_i}}} }}{{{2^{n + d}}{n^n}\prod\limits_{i \ge j} {{a_{ij}}^{{a_{ij}}}} }}
 $$
 where $a_{ij}$ are the genotype counts, $m_i$ are the allele counts, $n$ is the total sample size, and $d$ is the number of homozygotes. Note that the log of the likelihood ratio ($LLR$) orders the outcomes exactly the same as the $LR$ itself and is used interchangeably. 
 
-2. **Probability**. One can also use the conditional probability itself as a measure of deviation from HW. Those outcomes with a lower probability (likelihood) than the observed case can be said to deviate from HW more. This probability is conditional on the observed allele counts `r citep(levene1949)`. Here is the formula:
+2. **Probability**. One can also use the conditional probability itself as a measure of deviation from HW. Those outcomes with a lower probability (likelihood) than the observed case can be said to deviate from HW more. This probability is conditional on the observed allele counts `r Citep(levene1949)`. Here is the formula:
 $$
 {\mathop{\rm P}\nolimits} \left( {\bf{a}} \right) = \frac{{{2^{n - d}}n!\prod {{m_i}!} }}{{\left( {2n} \right)!\prod\limits_{i \ge j} {{a_{ij}}!} }}
 $$
 
-3. **U Score**. A common situation in testing for HW occurs when there is reason to suspect deviation from HW in a particular direction -- either an excess or a dearth of homozygotes. In particular, an excess of homozygotes occurs when there is inbreeding or population admixture. There is also an apparent excess of homozygotes when the presence of null alleles cause heterozygotes to be misclassified as homozygotes. In cases like these, it is better to use a test statistic that reflects the more specific alternative hypothesis. __HWxtest__ uses the $U$ score proposed by `r citet(rousset1995)` which is equivalent in terms of ordering the outcomes to ${\hat f_T}$ of `r citet(haldane1954)` and `r citet(robertson1984)`:
+3. **U Score**. A common situation in testing for HW occurs when there is reason to suspect deviation from HW in a particular direction -- either an excess or a dearth of homozygotes. In particular, an excess of homozygotes occurs when there is inbreeding or population admixture. There is also an apparent excess of homozygotes when the presence of null alleles cause heterozygotes to be misclassified as homozygotes. In cases like these, it is better to use a test statistic that reflects the more specific alternative hypothesis. __HWxtest__ uses the $U$ score proposed by `r Citet(rousset1995)` which is equivalent in terms of ordering the outcomes to ${\hat f_T}$ of `r Citet(haldane1954)` and `r Citet(robertson1984)`:
 $$
 U = 2n\sum\limits_{i = 1}^k {\frac{{{a_{ii}}}}{{{m_i}}}}  - n
 $$
@@ -270,9 +269,9 @@ $$
 $$
 The asymptotic $\chi^2$ distribution is not used in getting the $P$ value.
 
-There are other test statistics that might be added to __HWxtest__ in future versions. For example `r citet(ward2014)` argue that the root-mean-square is a useful measure of departure from Hardy-Weinberg proportions.
+There are other test statistics that might be added to __HWxtest__ in future versions. For example `r Citet(ward2014)` argue that the root-mean-square is a useful measure of departure from Hardy-Weinberg proportions.
 
-**So ... which $P$ value should you use?** My suggestion is to use the $LLR$ if you have no prior reason for suspecting either an excess or lack of homozygotes. If you do, then use the $U$ score. The other two measures are included in __HWxtest__ mainly for comparison. My reasons for preferring the $LLR$ to either the probability or $X^2$ are discussed elsewhere `r citep(engels2009)`
+**So ... which $P$ value should you use?** My suggestion is to use the $LLR$ if you have no prior reason for suspecting either an excess or lack of homozygotes. If you do, then use the $U$ score. The other two measures are included in __HWxtest__ mainly for comparison. My reasons for preferring the $LLR$ to either the probability or $X^2$ are discussed elsewhere `r Citep(engels2009)`
 
 ### <a name="multithreading">Multithreading</a>
 
@@ -287,6 +286,6 @@ after which any calls to `hwx.test` will attempt to use 8 cores.
 
 ### <a name="bib">Bibliography</a>
 ```{r  results="asis", echo=FALSE}
-bibliography(style=NULL)
+PrintBibliography(bib)
 ````
 

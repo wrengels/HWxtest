@@ -19,7 +19,10 @@ function(x, detail=NA, statName=NA, ...) {
 	if(is.na(h$method)) return()
 	if(!is.na(detail)) h$detail=detail
 	if(!is.na(statName))h$statName=statName
-	if(h$method=="exact" && h$tableCount < 0) stop("Calculation timed out. You can change the time limit by setting parameter 'safeSecs'");
+	if(h$method=="exact" && h$tableCount < 0) {
+		cat("\nCalculation timed out. You can change the time limit by increasing parameter 'safeSecs'\n")
+		return();
+		}
 	p <- h$Pvalues;
 	ob <- h$observed;
 	statNames <- names(h$SE)
