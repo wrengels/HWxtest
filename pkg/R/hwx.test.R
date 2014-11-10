@@ -97,7 +97,7 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 #' @export
 hwx.test.genotype <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
-	tab <- table(factor(allele(c, 1), levels=allele.names(c)), factor(allele(c, 2), levels=allele.names(c)));
+	tab <- table(factor(genetics::allele(c, 1), levels=genetics::allele.names(c)), factor(genetics::allele(c, 2), levels=genetics::allele.names(c)));
 	hwx.test(unclass(t(tab)), method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
@@ -106,11 +106,11 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 hwx.test.genind <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2){
 	if (!require(adegenet)) stop("package adegenet is not installed.")
-	if (!is.genind(c)) 
+	if (!adegenet::is.genind(c)) 
         stop("function requires a genind object")
     if (c@ploidy != as.integer(2)) 
         stop("function requires diploid data")
-	df <- genind2df(c, pop=c@pop, sep="/")
+	df <- adegenet::genind2df(c, pop=c@pop, sep="/")
 	hwx.test(df, method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
@@ -131,7 +131,7 @@ function(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR", histob
 	} else {
 		if (cores >=1 && require(parallel)) {
 			RNGkind("L'Ecuyer-CMRG")
-			mclapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail, 
+			parallel::mclapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail, 
 				mc.allow.recursive = T, mc.cores = cores)
 		}
 	}

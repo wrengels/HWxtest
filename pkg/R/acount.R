@@ -79,7 +79,7 @@ function(m) {
 #' @export
 acount.genotype <- 
 function(m) {
-	tab <- table(factor(allele(m, 1), levels = allele.names(m)), factor(allele(m, 2), levels = allele.names(m)));
+	tab <- table(factor(genetics::allele(m, 1), levels = genetics::allele.names(m)), factor(genetics::allele(m, 2), levels = genetics::allele.names(m)));
 	m <- alleleCounts(unclass(t(tab)));
 	acount.integer(m)
 }

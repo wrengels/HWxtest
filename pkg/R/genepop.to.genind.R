@@ -16,7 +16,7 @@ genepop.to.genind <- function(name, quiet=TRUE){
 	tempfile <- file(name)
 	tmp <- readLines(tempfile)
 	writeLines(tmp, "tempgenepop.gen")
-	ind <- import2genind("tempgenepop.gen", quiet=quiet)
+	ind <- adegenet::import2genind("tempgenepop.gen", quiet=quiet)
 	unlink("tempgenepop.gen")
 	ind
 }
