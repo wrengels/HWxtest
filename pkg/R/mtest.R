@@ -17,11 +17,17 @@
 #' 
 #' @return \code{mtest} returns a list components
 #' \item{$ Pvalues}{The four computed P values corresponding to the test statistics: \code{LLR}, \code{Prob}, \code{U} and \code{Chisq} in that order.}
-#' \item{$ se}{Standard errors for the P values. These come from the binomial.}
+#' \item{$ tableCount}{placeholder}
+#' \item{$ SE}{Standard errors for the P values. These come from the binomial.}
 #' \item{$ observed}{The four observed statistics in the same order as above}
 #' \item{$ ntrials}{The number of tables examined during the calculation}
 #' \item{$ genotypes}{The input matrix of genotype counts}
 #' \item{$ alleles}{The allele counts \eqn{m} corresponding to the input genotype counts}
+#' \item{$ statID}{Which test statistic was used if a histogram was plotted}
+#' \item{$ histobins}{If greater than zero, the number of bins to use for the histogram}
+#' \item{$ histobounds}{The lower and upper limits of the test statistic in the histogram}
+#' \item{$ histoData}{Vector of \eqn{histobins} values for the histogram}
+#' \item{$ showCurve}{Whether the asymptotic curve should be plotted with the histogram}
 #' 
 #' 
 #' @references The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
@@ -55,10 +61,24 @@ function(c, ntrials=100000, statName="LLR", histobins=0, histobounds=c(0,0), sho
 			ntrials=as.double(ntrials)
 			,PACKAGE="HWxtest"
 			);
+	if(histobins) { # Convert histo counts to densities
+		binwidth <- (histobounds[[2]] - histobounds[[1]])/histobins
+		x$histoData  <- x$histoData/(ntrials * binwidth)
+	}		
 	names(x$Pvalues) <- statNames;
 	se <- sqrt(abs(x$Pvalues * (1-x$Pvalues)/x$ntrials))
 	names(se) <- statNames
-	if(histobins) plotHistogram(ostats, statID, m, histobins, histobounds, x$histoData, showCurve, ntrials=x$ntrials);
-	return = list(Pvalues=x$Pvalues, observed=ostats, tableCount=NA, ntrials= x$ntrials, genotypes=c, alleles=m, SE=se)
+	return = list(Pvalues=x$Pvalues, 
+		observed=ostats, 
+		tableCount=NA, 
+		ntrials= x$ntrials, 
+		genotypes=c, 
+		alleles=m, 
+		SE=se,
+		statID=statID,
+		histobins=histobins,
+		histobounds=histobounds,
+		histoData=x$histoData,
+		showCurve=showCurve)
 
 }

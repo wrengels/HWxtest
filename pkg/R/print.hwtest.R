@@ -5,16 +5,18 @@
 #' S3 Method for printing \code{hwtest} objects
 
 #' 
-#' Prints test results (\code{hwtest}) objects depending on how much detail is provided.
+#' Prints test results (\code{hwtest}) objects depending on how much detail is provided. If histogram data are present, \code{ggplot2} is used to draw the plot by calling \code{\link{makeHistogram}}
 #' 
 #' @param x the results from a call to \code{\link{hwx.test}}
 #' @param detail 0 for no print; 1 for P value only; 2 for all four P values; 3 to add data; 4 to add expected values
 #' @param statName which statistic to use
 #' @param \dots other parameters passed to \code{print}.
+#' @param plotHisto Indicate whether or not to plot the histogram. Only used if \code{\link{hwx.test}} was called with \code{histobins} set to a positive value.
+#' 
 
 #' @export
 print.hwtest <- 
-function(x, detail=NA, statName=NA, ...) {
+function(x, detail=NA, statName=NA, plotHisto=TRUE, ...) {
 	h <- x
 	if(is.na(h$method)) return()
 	if(!is.na(detail)) h$detail=detail
@@ -38,6 +40,7 @@ function(x, detail=NA, statName=NA, ...) {
 	}
 	if(detail >= 2) {
 		cat("\n*****    Sample of ", sum(h$alleles)/2," diploids with ", length(h$alleles), " alleles", sep="")
+		if(!is.null(x$sampleName)) cat(" :  ", x$sampleName)
 		if(h$method=="monte") cat("\nMonte Carlo test for HW with ", h$ntrials," trials.\n", sep="");
 		if(h$method=="exact") cat("\nFull enumeration of ",h$tableCount, " tables to test for HW\n", sep="");
 		for(i in 1:4){
@@ -63,5 +66,6 @@ function(x, detail=NA, statName=NA, ...) {
 		print(clearUpper(ecounts), digits=3, na.print="");
 	}
 	cat("\n", sep="");
+	if(x$histobins && plotHisto) print(makeHistogram(x))
 }
 

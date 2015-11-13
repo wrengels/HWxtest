@@ -11,9 +11,9 @@ NULL
 
 #' Bowhead whale data from Morin et al. 2012
 #' 
-#' Data from two populations of bowhead whales tested for 51 loci. This partial data set includes 279 individuals sampled from one population (P1) and 49 from another (P2). Each whale was genotyped at 51 loci, including SNP and microsattelite. These data reside in a single \code{genind} object (see package \code{adegenet})
+#' Data from two populations of bowhead whales tested for 51 loci. This partial data set includes 279 individuals sampled from one population (P1) and 49 from another (P2). Each whale was genotyped at 51 loci, including SNP and microsattelite. These data reside in a single \code{data frame} object.
 #' 
-#' @name whales.genind
+#' @name whales.df
 #' @docType data
 #' @references \href{http://www.int-res.com/abstracts/esr/v19/n2/p129-147/}{Morin et al., 2012}
 #' @keywords data

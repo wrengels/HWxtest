@@ -8,8 +8,11 @@ library(RefManageR)
 BibOptions(restore.defaults=TRUE)
 BibOptions(check.entries = FALSE, bib.style = "authoryear",cite.style="authortitle", style = "html", max.names=99, hyperlink = "to.bib", no.print.fields = c("ISSN", "note", "url") )
 library(HWxtest)
+version <- packageDescription("HWxtest", fields = "Version")
+doWhales <- TRUE
 library(adegenet)
 figw <- 7
+dfigw <- 10
 figh <- 5
 set.seed(60823316) 
 ```
@@ -51,7 +54,7 @@ if(coreCount > 1) options(mc.cores=2)
   }
   h1{line-height: 50px}
   body{
-    font-size: 0.9em;
+    font-size: 1.4em;
     line-height: 23px;
   }
   h3{
@@ -59,7 +62,7 @@ if(coreCount > 1) options(mc.cores=2)
   font-size: 1.8em;
   }
   h6{
-        font-size: 0.9em;
+        font-size: 1.4em;
         font-weight: normal;
         line-height: 5px;      
    }
@@ -80,6 +83,7 @@ if(coreCount > 1) options(mc.cores=2)
 HWxtest -- Exact Tests for Hardy-Weinberg Proportions With Multiple Alleles
 ========================================================
 
+###### version `r version`
 ###### William R. Engels  --  <wrengels@wisc.edu>  
 ###### University of Wisconsin, Madison -- Genetics Department
 * * *
@@ -141,6 +145,7 @@ The `hwx.test` function can also show a plot of how the test statistic is actual
 ```{r plot1, fig.width=figw, fig.height=figh}
 hwx.test(obs, histobins=T)
 ```
+
 The red area represents those outcomes found to be more extreme than the observed data by the *LLR* criterion. In other words, the red area represents the $P$ value. The blue curve shows the theoretical $\chi^2$ distribution for comparison. In this case the fit is pretty good.
 
 We can do the same thing for the any of the other test statistics by specifying the `statName`:
@@ -152,12 +157,12 @@ Note that setting the parameter `detail` to zero suppresses the re-printing of t
 
 ### <a name="wex">Example with real data: bowhead whales</a>
 A set of data from P. `r Citet(morin2012)` includes genotypes of 280 whales from one population and 49 from another. Each individual was classified at 51 genetic loci. Some of these loci had more than 20 alleles. We can test for Hardy-Weinberg fit for each locus and each population:
-```{r testwhales}
-data(whales.genind)
-wtest <- hwx.test(whales.genind)
+```{r testwhales, eval=doWhales}
+data(whales.df)
+wtest <- hwx.test(whales.df)
 ```
-Note that the format of the data is of class `genind` from the package `adegenet` which must be installed to perform the test. The result includes `r length(listify(wtest))` individual tests, so let's not print them all out. Instead, we'll use the function `hwdf` to put the results in the form of a data frame, and look at just the first 10 in the list:
-```{r dfwhales}
+Note that the format of the data is of class `genind` from the package `adegenet` which must be installed to perform the test. The result includes `r  length(listify(wtest))` individual tests, so let's not print them all out. Instead, we'll use the function `hwdf` to put the results in the form of a data frame, and look at just the first 10 in the list:
+```{r dfwhales, eval=doWhales}
 dfwhales <- hwdf(wtest)
 dfwhales[1:10,]
 ```
@@ -166,23 +171,23 @@ The first column shows the population, such as "P1," and locus, such as "BmC5R70
 Note that there is a standard error associated with the last two tests, but not the others. This is because those two tests were done by the Monte Carlo method rather than full enumeration. The `hwx.test` function decides which method to use based on how many tables would need to be examined in order to do the full enumeration. In these two samples, the number of tables would be `r acount(wtest$P1$Bmys42aK46_R225_K232$genotypes)` and `r as.integer(xcount(wtest$P1$Bmys43Y237_Y377$genotypes))`  respectively, and that would take too long. Instead, `hwx.test` performed 100,000 random trials to estimate the $P$ value in each case.
 
 If you need a more precise $P$ value than the one provided by 100,000 trials of the Monte Carlo test, there are two ways to do it. One way is to simply increase the Monte Carlo sample size. Suppose we want to do that for the 7-allele case, P1.Bmys42aK46_R225_K232, but not for the whole data set. We can start by pulling out the genotype counts for that specific test. These genotype counts are contained in the `wtest` object and can be picked out as follows:
-```{r getcounts}
+```{r getcounts, eval=doWhales}
 counts1 <- wtest$P1$Bmys42aK46_R225_K232$genotypes
 counts1
 ```
 Now we can call `hwx.test` again, but increase the sample size to one million by changing the parameter `B`:
-```{r biggerB}
+```{r biggerB, eval=doWhales}
 hwx.test(counts1, detail=1, B=1000000)
 ```
 The standard error of the $P$ value is now considerably smaller. For the other sample, P1.Bmys43Y237_Y377, the number of tables is not as huge, and we can obtain an exact $P$ value by increasing the cutoff number. The following tells `hwx.test` to perform the full enumeration test instead of the Monte Carlo unless the number of tables exceeds 2 billion:
-```{r bigger cutoff}
+```{r bigger cutoff, eval=doWhales}
 counts2 <- wtest$P1$Bmys43Y237_Y377$genotypes
 hwx.test(counts2, detail=1, cutoff=2e8)
 ```
 This time, the $P$ value is reported without a standard error, indicating that an exact test with full enumeration was performed.
 
 The results contained in `wtest` includes $P$ values for all [four criteria](#stat). So, for example, if we were interested in the *U* test rather than the *LLR* we could have specified that in the data frame call:
-```{r Udataframe}
+```{r Udataframe, eval=doWhales}
 hwdf(wtest, statName="U")[1:10,]
 ```
 When using the *U* test, it is important to pay attention to the sign of *U*. If it is negative, as in the first two samples, the test is specifically for heterozygote excess. If it is positive, then we are testing for homozygote excess. This point will be discussed further [below](#stat).
@@ -198,42 +203,43 @@ hwdf(hwx.test(urchin.data))
 
 ### <a name="asym">Standard asymptotic tests are often inaccurate</a>
 Most introductory genetics classes teach that the way to test for Hardy-Weinberg proportions is the standard $\chi^2$ test with $k(k-1)/2$ degrees of freedom. (I am guilty of this myself in teaching Genetics 466 at the University of Wisconsin!) The problem is that with real data and multiple alleles, there are often rare alleles which make the asymptotic test unreliable. For example, let's compare the actual $P$ values for the bowhead whale data as computed in the previous example with the corresponding $P$ values from the ordinary $\chi^2$ test. First we make a data frame from `wtest` and extract the true $P$ values from the first column and the approximations from the $10^{th}$ column: 
-```{r LLR-vs-asymp, fig.width=figh, fig.height=figh}
+
+```{r LLR-vs-asymp, fig.height=figh, fig.width=dfigw, eval=doWhales}
 df <- hwdf(wtest, showAsymptoticX2=T)
 pLLR <- df[[1]]
 pAsy <- df[[10]]
+par(mfcol=c(1,2))
 plot(pLLR, pAsy, xlab="True P value", ylab = "Asymototic approximation")
-lines(c(0,1), c(0,1))
+abline(0,1)
+lim <- c(0,.2)
+plot(pLLR, pAsy, xlim=lim, ylim=lim, xlab="True P value", ylab="")
+abline(0,1)
 ```
 
-The error for each point is the vertical distance from the diagonal. We can zoom in to see just the smallest $P$ values to see the extent of the errors in the most critical ranges:
-```{r zoom, fig.width=figh, fig.height=figh}
-lim <- c(0,.2)
-plot(pLLR, pAsy, xlim=lim, ylim=lim, xlab="True P value", ylab = "Asymototic approximation")
-lines(c(0,1), c(0,1))
-```
+The error for each point is the vertical distance from the diagonal. The right-hand plot is zoomed to show just the smallest $P$ values and see the extent of the errors in the most critical ranges:
 
 It's clear that the points are so widely scattered as to make the asymptotic tests essentially useless, even though the sample sizes are not small (especially for whales!). This analysis might be a bit too pessimistic, though, since it compares the true $P$ value based on the likelihood ratio against the approximate one based on the $X^2$ statistic. Therefore, to make the $P$ values more comparable, we will repeat the comparison, but with the true $X^2$ $P$ value versus the approximate one:
-```{r useX2, fig.width=figh, fig.height=figh}
+```{r useX2, fig.height=figh, fig.width=dfigw, eval=doWhales}
 dfx <- hwdf(wtest, statName="Chisq")
 pX2 <- dfx[[1]]
+par(mfcol=c(1,2))
 plot(pX2, pAsy, xlab="True P value", ylab = "Asymototic approximation")
-lines(c(0,1), c(0,1))
-plot(pX2, pAsy, xlim=lim, ylim=lim, xlab="True P value", ylab = "Asymototic approximation")
-lines(c(0,1), c(0,1))
+abline(0,1)
+plot(pX2, pAsy, xlim=lim, ylim=lim, xlab="True P value", ylab = "")
+abline(0,1)
 ```
 
 There is still an unacceptable amount of scatter, but not quite as much as previously. To see the problem more clearly, let's focus on one particular sample. Specifically, look at locus $Bmy26$ from population $P2$:
-```{r Bmy26}
+```{r Bmy26, eval=doWhales}
 wtest$P2$Bmy26
 ```
 The genotype counts are contained within each test result of the `wtest` object, and we can extract them with the `$genotypes` specification. Then we'll re-analyze the data with `hwx.test` and plot the distribution of the $X^2$ statistic. While we're at it, let's increase the Monte Carlo sample size just to make a smoother curve:
-```{r Bmy26counts, fig.width=figw, fig.height=figh}
+```{r Bmy26counts, fig.width=figw, fig.height=figh, eval=doWhales}
 counts <- wtest$P2$Bmy26$genotypes
 hwx.test(counts, detail=0, statName="Chisq", histobins=T, histobounds=c(50, 250), B=1e6)
 ```
 
-Now the problem is clear! The shape of the true distribution is very different from the blue curve. The true curve has a shoulder on the right side. This shoulder is smaller than the main part of the curve, but it accounts for most of the $P$ value, as indicated by the red-shaded area. There are `r length(wtest$P2$Bmy26$alleles)` alleles at the $Bmy26$ locus, and some of them are infrequent. The shoulder of the distribution represents those potential outcomes in which a rare genotype occurred. It is well known that the asymptotic $\chi^2$ distribution is not accurate when there are any small expected numbers.
+Now the problem is clear! The shape of the true distribution is very different from the blue curve. The true curve has a shoulder on the right side. This shoulder is smaller than the main part of the curve, but it accounts for most of the $P$ value, as indicated by the red-shaded area. There are `r  length(wtest$P2$Bmy26$alleles)` alleles at the $Bmy26$ locus, and some of them are infrequent. The shoulder of the distribution represents those potential outcomes in which a rare genotype occurred. It is well known that the asymptotic $\chi^2$ distribution is not accurate when there are any small expected numbers.
 
 ### <a name="stat">Choice of test statistics</a>
 To compute an exact $P$ value, one must have some way to determine which potential outcomes deviate from the expectations by at least as much as the observed. The catch is that there are different ways to define how much a particular outcome deviates from Hardy-Weinberg proportions. The choice of which criterion to use depends on the situation and on one's personal preference. For that reason, __HWxtest__ provides a choice of four test statistics. You can think of the test statistics as providing a way of ordering the potential outcomes from best to worst in terms of how well they fit Hardy-Weinberg. Whenever you run `hwx.test` all four $P$ values are calculated, but it is best to decide ahead of time which one you will use. That is, it's not fair to pick and choose after the fact. 

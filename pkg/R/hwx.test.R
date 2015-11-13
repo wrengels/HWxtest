@@ -91,7 +91,7 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 #' @export
 hwx.test.table <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
-	hwx.test(unclass(c),method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+	hwx.test(unclass(c),method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
 #' @export
@@ -108,7 +108,7 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 	if (!require(adegenet)) stop("package adegenet is not installed.")
 	if (!adegenet::is.genind(c)) 
         stop("function requires a genind object")
-    if (c@ploidy != as.integer(2)) 
+    if (c@ploidy[1] != as.integer(2)) 
         stop("function requires diploid data")
 	df <- adegenet::genind2df(c, pop=c@pop, sep="/")
 	hwx.test(df, method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
@@ -119,23 +119,33 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 hwx.test.data.frame <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
 	mlist <- df.to.matrices(c);
-	hwx.test(mlist,method=method, cutoff=cutoff, B=B, statName=statName, histobins-histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+	hwx.test(mlist,method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }
 
 #' @export
-hwx.test.list <- 
-function(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR", histobins = 0, histobounds = c(0, 0), showCurve = T, safeSecs = 100, detail = 2) {
-	cores <- getOption("mc.cores", 1L)
-	if (cores == 1 || Sys.info()[1] == "Windows") {
-		lapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail)
-	} else {
-		if (cores >=1 && require(parallel)) {
-			RNGkind("L'Ecuyer-CMRG")
-			parallel::mclapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = 0, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail, 
-				mc.allow.recursive = T, mc.cores = cores)
+hwx.test.list <- function(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR", histobins = 0, histobounds = c(0, 0), showCurve = T, safeSecs = 100, 
+	detail = 2) {
+	nameItems <- function(x, nam = "") {
+		if (class(x) == "hwtest") 
+			x$sampleName <- nam
+		if (class(x) == "list") {
+			for (na in names(x)) x[[na]] <- nameItems(x[[na]], paste(na, nam))
 		}
+		return(x)
 	}
+
+	cores <- getOption("mc.cores", 1L)
+	if (cores >= 1 && require(parallel) && Sys.info()[1] != "Windows") {
+		RNGkind("L'Ecuyer-CMRG")
+		resultList <- parallel::mclapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = histobins, histobounds = histobounds, 
+			showCurve = showCurve, safeSecs = safeSecs, detail = detail, mc.allow.recursive = T, mc.cores = cores)
+	} else {
+		resultList <- lapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = histobins, histobounds = histobounds, 
+			showCurve = showCurve, safeSecs = safeSecs, detail = detail)
+	}
+	return(nameItems(resultList))
 }
+
 
 #' @export
 hwx.test.logical <- 
