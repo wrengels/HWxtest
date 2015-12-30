@@ -97,6 +97,7 @@ unsigned long long makeHash (unsigned r, COUNTTYPE * R) {
     return h;
 }
 
+
 void heterozygote (unsigned r, unsigned c, COUNTTYPE * R);
 
 void homozygote (unsigned r, COUNTTYPE * R)
@@ -171,7 +172,7 @@ void heterozygote (unsigned r, unsigned c, COUNTTYPE * R)
 				tableCount += nodez[i].count;
 			} else {
 				// new node
-				countsSoFar = tableCount;
+				countsSoFar =  tableCount;
                 homozygote(r-1, Rnew);
                 if (nextNode < MAXNODE) {
                     // Make a new node

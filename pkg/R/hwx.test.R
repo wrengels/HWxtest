@@ -10,6 +10,9 @@
 #' 
 #' @references The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
 #' 
+#' @importFrom parallel mclapply
+#' 
+#' 
 #' @param c The genotype counts. You must provide the number of each genotype. So if there are \eqn{k} alleles, you need to include the number of each of the \eqn{k(k+1)/2} genotypes. The format of \code{x} is somewhat flexible: It can be a square matrix, but only the lower-left half is used. It can be a vector of the observations in the order \eqn{a_11, a_21, a_22, a_31, ..., a_kk}. For compatability with the packages \code{genetics} and \code{adegenet}, it can also be an object of class \code{genind}, \code{genotype}, or a \code{data.frame}. If \code{c} contains multiple samples, the \code{parallel} package will be used in an attempt to employ multi-cores.
 #' @param method Can be \dQuote{auto}, \dQuote{exact} or \dQuote{monte} to indicate the method to use. If \dQuote{auto}, the \code{hwx.test} will first check to see whether the total number of tables exceeds a cutoff specified by the parameter \code{cutoff}.
 #' @param cutoff If \code{method} is set to \dQuote{auto}, then \code{cutoff} is used to decide whether to perform the test via the full enumeration or Monte Carlo method. If the number of tables is less than \code{cutoff}, then a full enumeration is performed. Otherwise the method will be Monte Carlo with \code{B} random trials.
@@ -103,15 +106,19 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 
 
 #' @export
-hwx.test.genind <- 
-function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2){
-	if (!require(adegenet)) stop("package adegenet is not installed.")
-	if (!adegenet::is.genind(c)) 
-        stop("function requires a genind object")
-    if (c@ploidy[1] != as.integer(2)) 
-        stop("function requires diploid data")
-	df <- adegenet::genind2df(c, pop=c@pop, sep="/")
-	hwx.test(df, method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
+hwx.test.genind <- function(c, method = "auto", cutoff = 1e+07, B = 1e+05, statName = "LLR", histobins = 0, histobounds = c(0, 0), showCurve = T, safeSecs = 100, detail = 2) {
+	if (requireNamespace("adegenet")) {
+		if (!(adegenet::is.genind(c))) 
+			stop("function requires a genind object")
+		if (c@ploidy[1] != as.integer(2)) 
+			stop("function requires diploid data")
+		df <- adegenet::genind2df(c, pop = c@pop, sep = "/")
+		outcome <- hwx.test(df, method = method, cutoff = cutoff, B = B, statName = statName, histobins = histobins, histobounds = histobounds, showCurve = showCurve, safeSecs = safeSecs, detail = detail)
+	} else {
+		cat("\nERROR: package adegenet is not installed.\n")
+		outcome <- hwx.test.logical(c)
+	}
+	return(outcome)
 }
 
 
@@ -135,7 +142,7 @@ hwx.test.list <- function(c, method = "auto", cutoff = 1e+07, B = 1e+05, statNam
 	}
 
 	cores <- getOption("mc.cores", 1L)
-	if (cores >= 1 && require(parallel) && Sys.info()[1] != "Windows") {
+	if (cores >= 1 && requireNamespace("parallel") && Sys.info()[1] != "Windows") {
 		RNGkind("L'Ecuyer-CMRG")
 		resultList <- parallel::mclapply(c, hwx.test, method = method, cutoff = cutoff, B = B, statName = statName, histobins = histobins, histobounds = histobounds, 
 			showCurve = showCurve, safeSecs = safeSecs, detail = detail, mc.allow.recursive = T, mc.cores = cores)

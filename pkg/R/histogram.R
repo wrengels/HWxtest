@@ -51,7 +51,7 @@ function(ostats, statID, m) {
 #' @rdname histogramFunctions
 #' @export
 makeHistogram <- function(x, curveColor="blue", color1 = "gray40", color2 = "lightcoral") {
-	require(ggplot2)
+	requireNamespace("ggplot2")
 	k <- length(x$alleles)
 	labels <- c("-2 ln(LR)", "-2 ln(Probability)", "U Score (test for homozygote excess)", "Pearson's Chi Squared")
 	statID <- x$statID
@@ -88,12 +88,12 @@ makeHistogram <- function(x, curveColor="blue", color1 = "gray40", color2 = "lig
 	lwd <- 200/histobins
 
 	d <- data.frame(statvals = statvals, histoData = x$histoData, colrs = colrs, chi = chi)
-	g <- ggplot(d, aes_string(x = 'statvals', y = 'histoData', color = 'colrs')) + geom_segment(aes(xend = statvals, yend = 0), size = lwd, 
-		show_guide = F) + scale_color_identity() + ylab("Density") + xlab(labels[statID])
+	g <- ggplot2::ggplot(d, ggplot2::aes_string(x = 'statvals', y = 'histoData', color = 'colrs')) + ggplot2::geom_segment(ggplot2::aes(xend = statvals, yend = 0), size = lwd, 
+		show_guide = F) + ggplot2::scale_color_identity() + ggplot2::ylab("Density") + ggplot2::xlab(labels[statID])
 
 	if (showCurve && (statID == 1 || statID == 4)) {
-		g <- g + geom_line(aes(y = chi), color = curveColor, size = 1)
+		g <- g + ggplot2::geom_line(ggplot2::aes(y = chi), color = curveColor, size = 1)
 	}
-	if(!is.null(x$sampleName)) g <- g + ggtitle(x$sampleName)
+	if(!is.null(x$sampleName)) g <- g + ggplot2::ggtitle(x$sampleName)
 	return(g)
 }

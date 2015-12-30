@@ -1,9 +1,14 @@
 # Functions for arranging data used in HW test
 # (c) William R. Engels, 2014
-
-
-#' Utility functions for handling genotype counts
 #' 
+
+#' @title 
+#' mungeData
+#' @description
+#' Utility functions for handling genotype counts and arranging data
+#' 
+
+#' @details
 #' Interconvert between different formats for genotype counts. 
 #' 
 #' Let \code{k} be the number of alleles:
@@ -60,7 +65,7 @@ function(gmat) {
 }
 
 
-#' 
+#' @title vec.to.matrix
 #' @rdname mungeData
 #' @export
 vec.to.matrix <- 
@@ -78,6 +83,9 @@ function(gvec, alleleNames=""){
 	t	
 }
 #' 
+#' @title remove.missing.alleles
+#' @description remove missing alleles
+#' @details none
 #' @rdname mungeData
 #' @export
 remove.missing.alleles <- 
@@ -90,6 +98,9 @@ function(gmat) {
 }
 
 #' 
+#' @title matrix.to.vec
+#' @description converts matrix to vector
+#' @details none
 #' @rdname mungeData
 #' @export
 matrix.to.vec <- 
@@ -102,6 +113,9 @@ function(gmat){
 	v	
 }
 
+
+#' @title clearUpper
+#' @description Clears upper-right of matrix
 #' @rdname mungeData
 #' @export
 clearUpper <- 
@@ -113,6 +127,7 @@ function(gmat){
 }
 
 
+#' @title df.to.matrices
 #' @rdname mungeData
 #' @export
 df.to.matrices <- function(df, sep="/"){

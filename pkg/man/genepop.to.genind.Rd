@@ -4,17 +4,19 @@
 \alias{genepop.to.genind}
 \title{Imports a \code{.txt} file in \code{GenePop} format into an object of type \code{genind}}
 \usage{
-genepop.to.genind(name, quiet = TRUE)
+genepop.to.genind(name, quiet = TRUE, ncode = 3)
 }
 \arguments{
 \item{name}{the name of a file in \code{GenePop} format}
 
 \item{quiet}{whether a conversion message should be printed}
+
+\item{ncode}{Set to the number of characters per allele name}
 }
 \value{
 an object of class \code{genind}
 }
 \description{
-The main work is done by the function \code{adegenet::import2genind}. However, that function requires text files with an extension of \code{.gen}, whereas such files usually have extension \code{.txt}. The sole purpose of this function is to work around the \dQuote{.gen} requirement.
+The main work is done by the function \code{adegenet::read.genepop}. However, that function requires text files with an extension of \code{.gen}, whereas such files usually have extension \code{.txt}. The sole purpose of this function is to work around the \dQuote{.gen} requirement.
 }
 

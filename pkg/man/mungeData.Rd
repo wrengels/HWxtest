@@ -8,7 +8,7 @@
 \alias{matrix.to.vec}
 \alias{remove.missing.alleles}
 \alias{vec.to.matrix}
-\title{Utility functions for handling genotype counts}
+\title{mungeData}
 \usage{
 fillUpper(gmat)
 
@@ -36,9 +36,17 @@ df.to.matrices(df, sep = "/")
 \item{sep}{For a dataframe, this is the separator character. typically \dQuote{/}}
 }
 \description{
-Interconvert between different formats for genotype counts.
+Utility functions for handling genotype counts and arranging data
+
+remove missing alleles
+
+converts matrix to vector
+
+Clears upper-right of matrix
 }
 \details{
+Interconvert between different formats for genotype counts. 
+
 Let \code{k} be the number of alleles:
 \itemize{
 \item \code{clearUpper} fills the upper-right half of the \eqn{k x k} matrix with \code{NA}
@@ -49,6 +57,10 @@ Let \code{k} be the number of alleles:
 \item \code{remove.missing.alleles} returns a matrix with no \code{0}'s for allele counts
 \item \code{df.to.matrices} converts a data frame to a list of genotype count matrices. The data frame should be of the kind produced in the package \code{adegenet} with \code{genind2df}
 }
+
+none
+
+none
 }
 \examples{
 gvec <- c(0,3,1,5,18,1,3,7,5,2)
