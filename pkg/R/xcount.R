@@ -84,6 +84,7 @@ function(m, safety = 1e10, safeSecs = 10) {
 #' @export
 xcount.genotype <- 
 function(m, safety = 1e10, safeSecs = 10) {
+	requireNamespace("genetics")
 	tab <- table(factor(genetics::allele(m, 1), levels = genetics::allele.names(m)), factor(genetics::allele(m, 2), levels = genetics::allele.names(m)));
 	m <- alleleCounts(unclass(t(tab)));
 	xcount(m, safety=safety, safeSecs=safeSecs)

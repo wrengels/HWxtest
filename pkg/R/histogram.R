@@ -89,7 +89,7 @@ makeHistogram <- function(x, curveColor="blue", color1 = "gray40", color2 = "lig
 
 	d <- data.frame(statvals = statvals, histoData = x$histoData, colrs = colrs, chi = chi)
 	g <- ggplot2::ggplot(d, ggplot2::aes_string(x = 'statvals', y = 'histoData', color = 'colrs')) + ggplot2::geom_segment(ggplot2::aes(xend = statvals, yend = 0), size = lwd, 
-		show_guide = F) + ggplot2::scale_color_identity() + ggplot2::ylab("Density") + ggplot2::xlab(labels[statID])
+		show.legend = F) + ggplot2::scale_color_identity() + ggplot2::ylab("Density") + ggplot2::xlab(labels[statID])
 
 	if (showCurve && (statID == 1 || statID == 4)) {
 		g <- g + ggplot2::geom_line(ggplot2::aes(y = chi), color = curveColor, size = 1)

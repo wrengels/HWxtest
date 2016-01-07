@@ -1,15 +1,10 @@
-@article{engels2009,
+﻿@article{engels2009,
    author = {Engels, W. R.},
    title = {Exact tests for Hardy-Weinberg proportions},
    journal = {Genetics},
    volume = {183},
    number = {4},
    pages = {1431-41},
-   note = {Engels, William R
-eng
-GM30948/GM/NIGMS NIH HHS/
-Genetics. 2009 Dec;183(4):1431-41. doi: 10.1534/genetics.109.108977. Epub 2009 Sep 21.},
-   abstract = {Exact conditional tests are often required to evaluate statistically whether a sample of diploids comes from a population with Hardy-Weinberg proportions or to confirm the accuracy of genotype assignments. This requirement is especially common when the sample includes multiple alleles and sparse data, thus rendering asymptotic methods, such as the common chi(2)-test, unreliable. Such an exact test can be performed using the likelihood ratio as its test statistic rather than the more commonly used probability test. Conceptual advantages in using the likelihood ratio are discussed. A substantially improved algorithm is described to permit the performance of a full-enumeration exact test on sample sizes that are too large for previous methods. An improved Monte Carlo algorithm is also proposed for samples that preclude full enumeration. These algorithms are about two orders of magnitude faster than those currently in use. Finally, methods are derived to compute the number of possible samples with a given set of allele counts, a useful quantity for evaluating the feasibility of the full enumeration procedure. Software implementing these methods, ExactoHW, is provided.},
    keywords = {Algorithms
 Alleles
 Diploidy
@@ -21,8 +16,7 @@ Probability},
    ISSN = {1943-2631 (Electronic)
 0016-6731 (Linking)},
    DOI = {10.1534/genetics.109.108977},
-   url = {http://www.ncbi.nlm.nih.gov/pubmed/19797043},
-   date = {2009},
+   year = {2009},
    type = {Journal Article}
 }
 
@@ -33,11 +27,8 @@ Probability},
    volume = {72},
    number = {360},
    pages = {859-862},
-   note = {ArticleType: primary_article / Full publication date: Dec., 1977 / Copyright © 1977 American Statistical Association},
-   abstract = {Exact and approximate methods are given for counting the number of r × c contingency tables with fixed margins. The approximate methods are extended to estimate the number of r × c × s contingency tables with given first-order margins.},
    ISSN = {01621459},
-   DOI = {none},
-   url = {http://www.jstor.org/stable/2286475},
+   DOI = {10.2307/2286475},
    year = {1977},
    type = {Journal Article}
 }
@@ -49,9 +40,6 @@ Probability},
    volume = {48},
    number = {2},
    pages = {361-72},
-   note = {cited by 2393 papers!
-Biometrics. 1992 Jun;48(2):361-72.},
-   abstract = {The Hardy-Weinberg law plays an important role in the field of population genetics and often serves as a basis for genetic inference. Because of its importance, much attention has been devoted to tests of Hardy-Weinberg proportions (HWP) over the decades. It has long been recognized that large-sample goodness-of-fit tests can sometimes lead to spurious results when the sample size and/or some genotypic frequencies are small. Although a complete enumeration algorithm for the exact test has been proposed, it is not of practical use for loci with more than a few alleles due to the amount of computation required. We propose two algorithms to estimate the significance level for a test of HWP. The algorithms are easily applicable to loci with multiple alleles. Both are remarkably simple and computationally fast. Relative efficiency and merits of the two algorithms are compared. Guidelines regarding their usage are given. Numerical examples are given to illustrate the practicality of the algorithms.},
    keywords = {*Alleles
 Gene Frequency
 *Genetics, Population
@@ -60,7 +48,7 @@ Mathematics
 Monte Carlo Method
 Phenotype},
    ISSN = {0006-341X (Print)},
-   url = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=1637966},
+   DOI = {10.2307/2532296},
    year = {1992},
    type = {Journal Article}
 }
@@ -72,9 +60,6 @@ Phenotype},
    volume = {52},
    number = {3},
    pages = {631-635},
-   note = {10.1007/BF02985085},
-   abstract = {Summary&nbsp;&nbsp;An exact test is given for randomness of mating, and it is shown that in a population ofPanaxia dominula there is no evidence that mating was not random in any of 15 years.},
-   url = {http://dx.doi.org/10.1007/BF02985085},
    year = {1954},
    type = {Journal Article}
 }
@@ -86,14 +71,6 @@ Phenotype},
    volume = {66},
    number = {6},
    pages = {1709-21},
-   note = {Hart, Michael W
-Popovic, Iva
-Emlet, Richard B
-eng
-Evolution. 2012 Jun;66(6):1709-21. doi: 10.1111/j.1558-5646.2012.01606.x. Epub 2012 Apr 1.
-
-genepop file:  http://tinyurl.com/ku4fq7m},
-   abstract = {Life-history variables including egg size affect the evolutionary response to sexual selection in broadcast-spawning sea urchins and other marine animals. Such responses include high or low rates of codon evolution at gamete recognition loci that encode sperm- and egg-surface peptides. Strong positive selection on such loci affects intraspecific mating success and interspecific reproductive divergence (and may play a role in speciation). Here, we analyze adaptive codon evolution in the sperm acrosomal protein bindin from a brooding sea urchin (Heliocidaris bajulus, with large eggs and nonfeeding or lecithotrophic larval development) and compare our results to previously published data for two closely related congeners. Purifying selection and low relative rates of bindin nonsynonymous substitution in H. bajulus were significantly different from selectively neutral bindin evolution in H. erythrogramma despite similar large egg size in those two species, but were similar to the background rate of nonsynonymous bindin substitution for other closely related sea urchins (including H. tuberculata, all with small egg size and feeding planktonic larval development). Bindin evolution is not driven by egg size variation among Heliocidaris species, but may be more consistent with an alternative mechanism based on the effects of high or low spatial density of conspecific mates.},
    keywords = {Adaptation, Physiological/genetics
 Animals
 *Codon
@@ -104,7 +81,6 @@ Sea Urchins/classification/*genetics/physiology},
    ISSN = {1558-5646 (Electronic)
 0014-3820 (Linking)},
    DOI = {10.1111/j.1558-5646.2012.01606.x},
-   url = {http://www.ncbi.nlm.nih.gov/pubmed/22671541},
    year = {2012},
    type = {Journal Article}
 }
@@ -117,10 +93,8 @@ ez1989,
    volume = {45},
    number = {1},
    pages = {53-70},
-   note = {ArticleType: primary_article / Full publication date: Mar., 1989 / Copyright ¬© 1989 International Biometric Society},
-   abstract = {A comparison was made of various tests for Hardy-Weinberg equilibrium, with emphasis on methods for multiple alleles. For an overall test of deviations from equilibrium, the classical chi-square goodness-of-fit test generally performs well, with continuity corrections needed for extreme gene frequencies or extreme departures from equilibrium. For small samples, probability tests are preferable and for multiple alleles these probability tests may be performed on a sample of all possible sets of genotypic frequencies having a fixed set of sample gene frequencies. Numerical work showed that the continuity-corrected chi-square was the most conservative test procedure, and the uncorrected chi-square the least conservative. With multiple alleles, a better appreciation of the nature of departures from equilibrium is given by the use of disequilibrium coefficients, defined for each heterozygote as the difference between observed and expected frequencies. Likelihood-ratio tests can be used to test each of these coefficients individually but a satisfactory procedure is to divide the squared estimate of each coefficient by its estimated variance and regard the ratio as a single-degree-of-freedom chi-square. Numerical studies confirmed the validity of this approach, which has the great advantage of not requiring solutions of nonlinear equations.},
    ISSN = {0006341X},
-   url = {http://www.jstor.org/stable/2532034},
+   DOI = {10.2307/2532034},
    year = {1989},
    type = {Journal Article}
 }
@@ -132,10 +106,7 @@ ez1989,
    volume = {24},
    number = {11},
    pages = {1403-1405},
-   abstract = {Summary: The package adegenet for the R software is dedicated to the multivariate analysis of genetic markers. It extends the ade4 package of multivariate methods by implementing formal classes and functions to manipulate and analyse genetic markers. Data can be imported from common population genetics software and exported to other software and R packages. adegenet also implements standard population genetics tools along with more original approaches for spatial genetics and hybridization.Availability: Stable version is available from CRAN: http://cran.r-project.org/mirrors.html. Development version is available from adegenet website: http://adegenet.r-forge.r-project.org/. Both versions can be installed directly from R. adegenet is distributed under the GNU General Public Licence (v.2).Contact: jombart@biomserv.univ-lyon1.frSupplementary information: Supplementary data are available at Bioinformatics online.},
    DOI = {10.1093/bioinformatics/btn129},
-   url = {http://bioinformatics.oxfordjournals.org/content/24/11/1403.abstract
-http://bioinformatics.oxfordjournals.org/content/24/11/1403.full.pdf},
    year = {2008},
    type = {Journal Article}
 }
@@ -147,10 +118,8 @@ http://bioinformatics.oxfordjournals.org/content/24/11/1403.full.pdf},
    volume = {20},
    number = {1},
    pages = {91-94},
-   note = {ArticleType: primary_article / Full publication date: Mar., 1949 / Copyright ¬© 1949 Institute of Mathematical Statistics},
-   abstract = {A statistic useful for detecting deviations from the Hardy-Weinberg equilibrium in population genetics is discussed. Both exact and asymptotic distributions are given and a special case where there is misclassification is discussed. The distribution obtained also arises from a certain card matching problem.},
    ISSN = {00034851},
-   url = {http://www.jstor.org/stable/2236806},
+   DOI = {10.1214/aoms/1177730093},
    year = {1949},
    type = {Journal Article}
 }
@@ -162,14 +131,12 @@ http://bioinformatics.oxfordjournals.org/content/24/11/1403.full.pdf},
    volume = {43},
    number = {4},
    pages = {805-11},
-   note = {Has code},
-   abstract = {Algorithms for generating the exact distribution of a finite sample drawn from a population in Hardy-Weinberg equilibrium are given for multiple alleles. The finite sampling distribution is derived analogously to Fisher's 2 X 2 exact distribution and is equivalent to Levene's conditional finite sampling distribution for Hardy-Weinberg populations. The algorithms presented are fast computationally and allow for quick alternatives to standard methods requiring corrections and approximations. Computation time is on the order of a few seconds for three-allele examples and up to 2 minutes for four-allele examples on an IBM 3081 machine.},
    keywords = {Algorithms
 *Alleles
 Biometry
 *Models, Genetic},
    ISSN = {0006-341X (Print)},
-   url = {http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=3427165},
+   DOI = {10.2307/2531534},
    year = {1987},
    type = {Journal Article}
 }
@@ -181,9 +148,7 @@ Biometry
    volume = {19},
    number = {2},
    pages = {129-147},
-   abstract = {ABSTRACT: Interest in bowhead whale stock structure has been high due to the speciesí extreme historical depletion, differential rates of recovery, the potential effects of climate change, and the need to set appropriate quotas for aboriginal hunts. We present an analysis of 42 linked and unlinked single nucleotide polymorphisms (SNPs) among 3 bowhead whale stocks and within the Bering/Chukchi/Beaufort Seas (BCB) stock, and compare results with previously published results of mtDNA control region sequences and 22 microsatellites. We performed tests of population structure (<i>F</i><sub>ST</sub>, &chi;<sup>2</sup>, STRUCTURE), population assignment, and estimates of effective population size (<i>N</i><sub>e</sub>), and evaluated different numbers of loci and samples to estimate the relative statistical power of SNPs and microsatellites. Results indicate that this number of SNPs provides similar power to microsatellites to detect low levels of differentiation (<i>F</i><sub>ST</sub> = 0.005&#x2212;0.03) between bowhead populations with sample sizes of at least 20 per population. Neither marker performed well for Bayesian analysis of population structure (STRUCTURE) for the strata that had high diversity coupled with low differentiation. This example is valuable in cautioning against use of STRUCTURE to exclude demographic independence of relatively abundant populations. Microsatellites provided greater precision for estimates of <i>N</i><sub>e</sub> and for assignment tests. All 3 genetic marker types are consistent with the BCB stock being a single population. For microsatellites, differences were found between individuals born before 1949 and those born after 1979. SNPs are continuing to prove valuable as tools for understanding structure and demography of populations, and are likely to prove beneficial for long-term monitoring of bowhead whales.},
    DOI = {10.3354/esr00459},
-   url = {http://www.int-res.com/abstracts/esr/v19/n2/p129-147/},
    year = {2012},
    type = {Journal Article}
 }
@@ -195,18 +160,6 @@ Biometry
    volume = {23},
    number = {4},
    pages = {815-31},
-   note = {Olsen, Morten T
-Andersen, Liselotte W
-Dietz, Rune
-Teilmann, Jonas
-Harkonen, Tero
-Siegismund, Hans R
-eng
-England
-Mol Ecol. 2014 Feb;23(4):815-31. doi: 10.1111/mec.12644.
-
-genepop url: http://tinyurl.com/m8f726w},
-   abstract = {Identification of populations and management units is an essential step in the study of natural systems. Still, there is limited consensus regarding how to define populations and management units, and whether genetic methods allow for inference at the relevant spatial and temporal scale. Here, we present a novel approach, integrating genetic, life history and demographic data to identify populations and management units in southern Scandinavian harbour seals. First, 15 microsatellite markers and model- and distance-based genetic clustering methods were used to determine the population genetic structure in harbour seals. Second, we used harbour seal demographic and life history data to conduct population viability analyses (PVAs) in the vortex simulation model in order to determine whether the inferred genetic units could be classified as management units according to Lowe and Allendorf's (Molecular Ecology, 19, 2010, 3038) 'population viability criterion' for demographic independence. The genetic analyses revealed fine-scale population structuring in southern Scandinavian harbour seals and pointed to the existence of several genetic units. The PVAs indicated that the census population size of each of these genetic units was sufficiently large for long-term population viability, and hence that the units could be classified as demographically independent management units. Our study suggests that population genetic inference can offer the same degree of temporal and spatial resolution as 'nongenetic' methods and that the combined use of genetic data and PVAs constitutes a promising approach for delineating populations and management units.},
    keywords = {demographic independence
 management units
 microsatellites
@@ -214,7 +167,6 @@ minimum viable population size},
    ISSN = {1365-294X (Electronic)
 0962-1083 (Linking)},
    DOI = {10.1111/mec.12644},
-   url = {http://www.ncbi.nlm.nih.gov/pubmed/24382213},
    year = {2014},
    type = {Journal Article}
 }
@@ -226,10 +178,7 @@ minimum viable population size},
    volume = {26},
    number = {3},
    pages = {419-420},
-   abstract = {Summary: pegas (Population and Evolutionary Genetics Analysis System) is a new package for the analysis of population genetic data. It is written in R and is integrated with two other existing R packages (ape and adegenet). pegas provides functions for standard population genetic methods, as well as low-level functions for developing new methods. The flexible and efficient graphical capabilities of R are used for plotting haplotype networks as well as for other functionalities. pegas emphasizes the need to further develop an integrated–modular approach for software dedicated to the analysis of population genetic data.Availability: pegas is distributed through the Comprehensive R Archive Network (CRAN): http://cran.r-project.org/web/packages/pegas/index.html Further information may be found at: http://ape.mpl.ird.fr/pegas/Contact: emmanuel.paradis@ird.fr},
    DOI = {10.1093/bioinformatics/btp696},
-   url = {http://bioinformatics.oxfordjournals.org/content/26/3/419.abstract
-http://bioinformatics.oxfordjournals.org/content/26/3/419.full.pdf},
    year = {2010},
    type = {Journal Article}
 }
@@ -241,8 +190,6 @@ http://bioinformatics.oxfordjournals.org/content/26/3/419.full.pdf},
    volume = {107},
    number = {4},
    pages = {703-718},
-   abstract = {An analysis is made of the distribution of deviations from Hardy-Weinberg proportions with k alleles and of estimates of inbreeding coefficients (f) obtained from these deviations.--If f is small, the best estimate of f in large samples is shown to be 2[Sigma] i(Tii/Ni)/(k - 1), where Tii is an unbiased measure of the excess of the ith homozygote and Ni the number of the ith allele in the sample [frequency = Ni/(2N)]. No extra information is obtained from the Tij, where these are departures of numbers of heterozygotes from expectation. Alternatively, the best estimator can be computed from the Tij, ignoring the Tii. Also (1) the variance of the estimate of f equals 1/(N(k - 1)) when all individuals in the sample are unrelated, and the test for f = 0 with 1 d.f. is given by the ratio of the estimate to its standard error; (2) the variance is reduced if some alleles are rare; and (3) if the sample consists of full-sib families of size n, the variance is increased by a proportion (n - 1)/4 but is not increased by a half-sib relationship.--If f is not small, the structure of the population is of critical importance. (1) If the inbreeding is due to a proportion of inbred matings in an otherwise random-breeding population, f as determined from homozygote excess is the same for all genes and expressions are given for its sampling variance. (2) If the homozygote excess is due to population admixture, f is not the same for all genes. The above estimator is probably close to the best for all f values.},
-   url = {http://www.genetics.org/cgi/content/abstract/107/4/703},
    year = {1984},
    type = {Journal Article}
 }
@@ -254,10 +201,8 @@ http://bioinformatics.oxfordjournals.org/content/26/3/419.full.pdf},
    volume = {8},
    number = {1},
    pages = {103-106},
-   note = {10.1111/j.1471-8286.2007.01931.x},
    ISSN = {1755-0998},
    DOI = {10.1111/j.1471-8286.2007.01931.x},
-   url = {http://dx.doi.org/10.1111/j.1471-8286.2007.01931.x},
    year = {2008},
    type = {Journal Article}
 }
@@ -269,7 +214,6 @@ http://bioinformatics.oxfordjournals.org/content/26/3/419.full.pdf},
    volume = {140},
    number = {4},
    pages = {1413-1419},
-   url = {http://www.genetics.org/cgi/content/abstract/140/4/1413},
    year = {1995},
    type = {Journal Article}
 }
@@ -281,13 +225,6 @@ http://bioinformatics.oxfordjournals.org/content/26/3/419.full.pdf},
    volume = {15},
    number = {1},
    pages = {74-86},
-   note = {Ward, Rachel
-Carroll, Raymond J
-eng
-England
-Oxford, England
-Biostatistics. 2014 Jan;15(1):74-86. doi: 10.1093/biostatistics/kxt028. Epub 2013 Aug 22.},
-   abstract = {We provide evidence that, in certain circumstances, a root-mean-square test of goodness of fit can be significantly more powerful than state-of-the-art tests in detecting deviations from Hardy-Weinberg equilibrium. Unlike Pearson's $\chi ^2$ test, the log-likelihood-ratio test, and Fisher's exact test, which are sensitive to relative discrepancies between genotypic frequencies, the root-mean-square test is sensitive to absolute discrepancies. This can increase statistical power, as we demonstrate using benchmark data sets and simulations, and through asymptotic analysis.},
    keywords = {Absolute discrepancies
 Hardy–Weinberg equilibrium
 Relative discrepancies
@@ -295,21 +232,7 @@ Root mean square},
    ISSN = {1468-4357 (Electronic)
 1465-4644 (Linking)},
    DOI = {10.1093/biostatistics/kxt028},
-   url = {http://www.ncbi.nlm.nih.gov/pubmed/23975799},
    year = {2014},
    type = {Journal Article}
 }
-
-@ARTICLE{a4,
-       AUTHOR={Oetiker, Tobias and Partl, Hubert and Hyna, Helene and Schlegl, Elisabeth},
-       TITLE="Une courte{~({?})} introduction {\`a~\LaTeXe}",
-       JOURNAL="{Cahiers GUTenberg}",
-       NOTE="{F}rench translation of{~\cite{NSSL2E}} by {\oname{Matthieu}{Herrb}}, adaptation and complements by
-       {\oname{Daniel}{Flipo}}",
-       URL="http://www.dante.de/CTAN/info/lshort/french/flshort-3.20.pdf",
-       MONTH=feb,
-       ISSN="1140-9304",
-       VOLUME="{s}pecial issue number{~2}",
-       YEAR={2003}}
-
 

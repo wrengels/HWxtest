@@ -1,7 +1,7 @@
 Package: HWxtest
 Type: Package
 Title: Exact Tests for Hardy-Weinberg Proportions
-Version: 1.1.1
+Version: 1.1.5
 Date: 2015-12-22
 Author: Bill Engels <wrengels@wisc.edu>
 Maintainer: Bill Engels <wrengels@wisc.edu>
@@ -13,6 +13,7 @@ Depends:
     R (>= 2.14)
 Suggests:
     ggplot2,
+    rmarkdown,
     knitr,
     RefManageR,
     adegenet,

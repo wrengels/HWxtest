@@ -1,7 +1,7 @@
 # (c) William R. Engels, 2015
 
 #' @importFrom utils packageDescription
-#' @importFrom stats dchisq pchisq qchisq
+#' @importFrom stats dchisq pchisq qchisq runif
 
 .onAttach <- function(libname, pkgname){
 	version <- packageDescription("HWxtest", fields = "Version")

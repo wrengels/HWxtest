@@ -100,6 +100,7 @@ function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, hi
 #' @export
 hwx.test.genotype <- 
 function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
+	requireNamespace("genetics")
 	tab <- table(factor(genetics::allele(c, 1), levels=genetics::allele.names(c)), factor(genetics::allele(c, 2), levels=genetics::allele.names(c)));
 	hwx.test(unclass(t(tab)), method=method, cutoff=cutoff, B=B, statName=statName, histobins=histobins, histobounds=histobounds, showCurve=showCurve, safeSecs=safeSecs, detail=detail)
 }

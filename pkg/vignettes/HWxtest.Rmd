@@ -161,7 +161,7 @@ A set of data from P. `r Citet(morin2012)` includes genotypes of 280 whales from
 data(whales.df)
 wtest <- hwx.test(whales.df)
 ```
-Note that the format of the data is of class `genind` from the package `adegenet` which must be installed to perform the test. The result includes `r  length(listify(wtest))` individual tests, so let's not print them all out. Instead, we'll use the function `hwdf` to put the results in the form of a data frame, and look at just the first 10 in the list:
+Note that the format of the data is that of a data frame where each row has the ID of an individual whale followed by its population ID and the the genotype at each of the 51 loci. The result includes `r  length(listify(wtest))` individual tests, so let's not print them all out. Instead, we'll use the function `hwdf` to put the results in the form of a data frame, and look at just the first 10 in the list:
 ```{r dfwhales, eval=doWhales}
 dfwhales <- hwdf(wtest)
 dfwhales[1:10,]
