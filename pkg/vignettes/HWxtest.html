@@ -101,8 +101,8 @@ img {
 <hr></hr>
 <div id="hwxtest-exact-tests-for-hardy-weinberg-proportions-with-multiple-alleles" class="section level1">
 <h1>HWxtest – Exact Tests for Hardy-Weinberg Proportions With Multiple Alleles</h1>
-<div id="version-1.1.4" class="section level6">
-<h6>version 1.1.4</h6>
+<div id="version-1.1.7" class="section level6">
+<h6>version 1.1.7</h6>
 </div>
 <div id="william-r.-engels-wrengelswisc.edu" class="section level6">
 <h6>William R. Engels – <a href="mailto:wrengels@wisc.edu">wrengels@wisc.edu</a></h6>
@@ -164,7 +164,7 @@ result</code></pre>
 ## P value (U)     = 0.030499 (test for homozygote excess)
 ## P value (Chisq) = 0.109703</code></pre>
 <p>The output tells us that there are 204350 possible samples of 279 diploids with the same allele counts as the observed data. The <span class="math">\(P\)</span> values were computed by looking at each of those possibilities and adding up the total probability of all tables which deviate from HW by at least as much as the observed.</p>
-<p>But why does it report <em>four</em> different <span class="math">\(P\)</span> values? The reason is that there are several ways one can measure just how deviant a particular outcome is compared to the HW expectation. These measures are <a href="#stat">explained in more detail below</a>. Briefly, if you had no prior expectation that there might be too many homozygotes, then the first (<em>LLR</em>) <span class="math">\(P\)</span> value is recommended. However, if you had a prior suspicion that homozygotes would be in excess, such as from inbreeding, population admixture, null alleles, <em>etc.</em>, then the third choice (<em>U</em>) would be preferable.</p>
+<p>But why does it report <em>four</em> different <span class="math">\(P\)</span> values? The reason is that there are several ways one can measure just how deviant a particular outcome is compared to the HW expectation. These measures are <a href="#stat">explained in more detail below</a>. Briefly, if you had no prior expectation that there might be too many homozygotes, then the first (<em>LLR</em>) <span class="math">\(P\)</span> value is recommended. However, if you had a prior suspicion that homozygotes would be in excess, such as from inbreeding, population admixture, null alleles, <em>etc.</em>, then the third choice (<em>U</em>) would be preferable. The other two are included for comparison and for users who prefer them.</p>
 </div>
 <div id="plot-a-histogram-of-the-test-statistic" class="section level3">
 <h3><a name="plot1">Plot a histogram of the test statistic</a></h3>
@@ -321,37 +321,37 @@ U = 2n\sum\limits_{i = 1}^k {\frac{{{a_{ii}}}}{{{m_i}}}}  - n
 <div id="bibliography" class="section level3">
 <h3><a name="bib">Bibliography</a></h3>
 <p>
-<cite><a id="bib-engels2009"></a><a href="#cite-engels2009">Engels, W. R.</a> (2009). “Exact tests for Hardy-Weinberg proportions”. In: <em>Genetics</em> 183.4, pp. 1431-41. DOI: <a href="http://dx.doi.org/10.1534/genetics.109.108977">10.1534/genetics.109.108977</a>.</cite>
+<cite><a id="bib-engels2009"></a><a href="#cite-engels2009">Engels, W. R.</a> “Exact tests for Hardy-Weinberg proportions”. In: <em>Genetics</em> 183.4 (2009), pp. 1431-41. DOI: <a href="http://dx.doi.org/10.1534/genetics.109.108977">10.1534/genetics.109.108977</a>.</cite>
 </p>
 <p>
-<cite><a id="bib-haldane1954"></a><a href="#cite-haldane1954">Haldane, J.</a> (1954). “An exact test for randomness of mating”. In: <em>Journal of Genetics</em> 52.3, pp. 631-635.</cite>
+<cite><a id="bib-haldane1954"></a><a href="#cite-haldane1954">Haldane, J.</a> “An exact test for randomness of mating”. In: <em>Journal of Genetics</em> 52.3 (1954), pp. 631-635.</cite>
 </p>
 <p>
-<cite><a id="bib-hart2012"></a><a href="#cite-hart2012">Hart, M. W, I. Popovic and R. B. Emlet</a> (2012). “Low rates of bindin codon evolution in lecithotrophic Heliocidaris sea urchins”. In: <em>Evolution</em> 66.6, pp. 1709-21. DOI: <a href="http://dx.doi.org/10.1111/j.1558-5646.2012.01606.x">10.1111/j.1558-5646.2012.01606.x</a>.</cite>
+<cite><a id="bib-hart2012"></a><a href="#cite-hart2012">Hart, M. W., I. Popovic and R. B. Emlet.</a> “Low rates of bindin codon evolution in lecithotrophic Heliocidaris sea urchins”. In: <em>Evolution</em> 66.6 (2012), pp. 1709-21. DOI: <a href="http://dx.doi.org/10.1111/j.1558-5646.2012.01606.x">10.1111/j.1558-5646.2012.01606.x</a>.</cite>
 </p>
 <p>
-<cite><a id="bib-adegenet"></a><a href="#cite-adegenet">Jombart, T.</a> (2008). “adegenet: a R package for the multivariate analysis of genetic markers”. In: <em>Bioinformatics</em> 24.11, pp. 1403-1405. DOI: <a href="http://dx.doi.org/10.1093/bioinformatics/btn129">10.1093/bioinformatics/btn129</a>.</cite>
+<cite><a id="bib-adegenet"></a><a href="#cite-adegenet">Jombart, T.</a> “adegenet: a R package for the multivariate analysis of genetic markers”. In: <em>Bioinformatics</em> 24.11 (2008), pp. 1403-1405. DOI: <a href="http://dx.doi.org/10.1093/bioinformatics/btn129">10.1093/bioinformatics/btn129</a>.</cite>
 </p>
 <p>
-<cite><a id="bib-levene1949"></a><a href="#cite-levene1949">Levene, H.</a> (1949). “On a Matching Problem Arising in Genetics”. In: <em>The Annals of Mathematical Statistics</em> 20.1, pp. 91-94. DOI: <a href="http://dx.doi.org/10.1214/aoms/1177730093">10.1214/aoms/1177730093</a>.</cite>
+<cite><a id="bib-levene1949"></a><a href="#cite-levene1949">Levene, H.</a> “On a Matching Problem Arising in Genetics”. In: <em>The Annals of Mathematical Statistics</em> 20.1 (1949), pp. 91-94. DOI: <a href="http://dx.doi.org/10.1214/aoms/1177730093">10.1214/aoms/1177730093</a>.</cite>
 </p>
 <p>
-<cite><a id="bib-morin2012"></a><a href="#cite-morin2012">Morin, P, F. Archer, V. Pease, B. Hancock-Hanser, K. Robertson, R. Huebinger, K. Martien, J. Bickham, J. George, L. Postma and B. Taylor</a> (2012). “Empirical comparison of single nucleotide polymorphisms and microsatellites for population and demographic analyses of bowhead whales”. In: <em>Endangered Species Research</em> 19.2, pp. 129-147. DOI: <a href="http://dx.doi.org/10.3354/esr00459">10.3354/esr00459</a>.</cite>
+<cite><a id="bib-morin2012"></a><a href="#cite-morin2012">Morin, P., F. Archer, V. Pease, B. Hancock-Hanser, K. Robertson, R. Huebinger, K. Martien, J. Bickham, J. George, L. Postma and B. Taylor.</a> “Empirical comparison of single nucleotide polymorphisms and microsatellites for population and demographic analyses of bowhead whales”. In: <em>Endangered Species Research</em> 19.2 (2012), pp. 129-147. DOI: <a href="http://dx.doi.org/10.3354/esr00459">10.3354/esr00459</a>.</cite>
 </p>
 <p>
-<cite><a id="bib-pegas"></a><a href="#cite-pegas">Paradis, E.</a> (2010). “pegas: an R package for population genetics with an integrated–modular approach”. In: <em>Bioinformatics</em> 26.3, pp. 419-420. DOI: <a href="http://dx.doi.org/10.1093/bioinformatics/btp696">10.1093/bioinformatics/btp696</a>.</cite>
+<cite><a id="bib-pegas"></a><a href="#cite-pegas">Paradis, E.</a> “pegas: an R package for population genetics with an integrated–modular approach”. In: <em>Bioinformatics</em> 26.3 (2010), pp. 419-420. DOI: <a href="http://dx.doi.org/10.1093/bioinformatics/btp696">10.1093/bioinformatics/btp696</a>.</cite>
 </p>
 <p>
-<cite><a id="bib-robertson1984"></a><a href="#cite-robertson1984">Robertson, A. and W. G. Hill</a> (1984). “Deviations from Hardy-Weinberg proportions: sampling variances and use in estimation of inbreeding coefficients”. In: <em>Genetics</em> 107.4, pp. 703-718.</cite>
+<cite><a id="bib-robertson1984"></a><a href="#cite-robertson1984">Robertson, A. and W. G. Hill.</a> “Deviations from Hardy-Weinberg proportions: sampling variances and use in estimation of inbreeding coefficients”. In: <em>Genetics</em> 107.4 (1984), pp. 703-718.</cite>
 </p>
 <p>
-<cite><a id="bib-genepop007"></a><a href="#cite-genepop007">Rousset, F.</a> (2008). “genepop’007: a complete re-implementation of the genepop software for Windows and Linux”. In: <em>Molecular Ecology Resources</em> 8.1, pp. 103-106. DOI: <a href="http://dx.doi.org/10.1111/j.1471-8286.2007.01931.x">10.1111/j.1471-8286.2007.01931.x</a>.</cite>
+<cite><a id="bib-genepop007"></a><a href="#cite-genepop007">Rousset, F.</a> “genepop’007: a complete re-implementation of the genepop software for Windows and Linux”. In: <em>Molecular Ecology Resources</em> 8.1 (2008), pp. 103-106. DOI: <a href="http://dx.doi.org/10.1111/j.1471-8286.2007.01931.x">10.1111/j.1471-8286.2007.01931.x</a>.</cite>
 </p>
 <p>
-<cite><a id="bib-rousset1995"></a><a href="#cite-rousset1995">Rousset, F. and M. Raymond</a> (1995). “Testing Heterozygote Excess and Deficiency”. In: <em>Genetics</em> 140.4, pp. 1413-1419.</cite>
+<cite><a id="bib-rousset1995"></a><a href="#cite-rousset1995">Rousset, F. and M. Raymond.</a> “Testing Heterozygote Excess and Deficiency”. In: <em>Genetics</em> 140.4 (1995), pp. 1413-1419.</cite>
 </p>
 <p>
-<cite><a id="bib-ward2014"></a><a href="#cite-ward2014">Ward, R. and R. J. Carroll</a> (2014). “Testing Hardy-Weinberg equilibrium with a simple root-mean-square statistic”. In: <em>Biostatistics</em> 15.1, pp. 74-86. DOI: <a href="http://dx.doi.org/10.1093/biostatistics/kxt028">10.1093/biostatistics/kxt028</a>.</cite>
+<cite><a id="bib-ward2014"></a><a href="#cite-ward2014">Ward, R. and R. J. Carroll.</a> “Testing Hardy-Weinberg equilibrium with a simple root-mean-square statistic”. In: <em>Biostatistics</em> 15.1 (2014), pp. 74-86. DOI: <a href="http://dx.doi.org/10.1093/biostatistics/kxt028">10.1093/biostatistics/kxt028</a>.</cite>
 </p>
 </div>
 </div>

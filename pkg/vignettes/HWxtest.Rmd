@@ -6,7 +6,8 @@
 library(knitr)
 library(RefManageR)
 BibOptions(restore.defaults=TRUE)
-BibOptions(check.entries = FALSE, bib.style = "authoryear",cite.style="authortitle", style = "html", max.names=99, hyperlink = "to.bib", no.print.fields = c("ISSN", "note", "url") )
+BibOptions(check.entries = FALSE, bib.style = "authortitle",cite.style="authoryear", style = "html", max.names=99, hyperlink = "to.bib", no.print.fields = c("ISSN", "note", "url") )
+# setting bib.style to 'authoryear' is what caused problems in RefManageR v. 0.10.5
 library(HWxtest)
 version <- packageDescription("HWxtest", fields = "Version")
 doWhales <- TRUE
@@ -137,7 +138,7 @@ result
 ```
 The output tells us that there are `r as.integer(result$tableCount)` possible samples of `r sum(obs)` diploids with the same allele counts as the observed data. The $P$ values were computed by looking at each of those possibilities and adding up the total probability of all tables which deviate from HW by at least as much as the observed. 
 
-But why does it report *four* different $P$ values? The reason is that there are several ways one can measure just how deviant a particular outcome is compared to the HW expectation. These measures are [explained in more detail below](#stat). Briefly, if you had no prior expectation that there might be too many homozygotes, then the first (*LLR*) $P$ value is recommended. However, if you had a prior suspicion that homozygotes would be in excess, such as from inbreeding, population admixture, null alleles, *etc.*, then the third choice (*U*) would be preferable.
+But why does it report *four* different $P$ values? The reason is that there are several ways one can measure just how deviant a particular outcome is compared to the HW expectation. These measures are [explained in more detail below](#stat). Briefly, if you had no prior expectation that there might be too many homozygotes, then the first (*LLR*) $P$ value is recommended. However, if you had a prior suspicion that homozygotes would be in excess, such as from inbreeding, population admixture, null alleles, *etc.*, then the third choice (*U*) would be preferable. The other two are included for comparison and for users who prefer them.
 
 ### <a name="plot1">Plot a histogram of the test statistic</a>
 
@@ -291,7 +292,7 @@ after which any calls to `hwx.test` will attempt to use 8 cores.
 
 
 ### <a name="bib">Bibliography</a>
-```{r  results="asis", echo=FALSE}
-PrintBibliography(bib)
+```{r  results="asis", echo=FALSE, eval=TRUE}
+#NoCite(bib, "*")
+RefManageR::PrintBibliography(bib)
 ````
-
