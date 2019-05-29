@@ -7,7 +7,7 @@
 /*
  Calculate the number of genotype tables for a given set of allele counts
  
- Copyright 2009-2014  William R. Engels
+ Copyright 2009-2019  William R. Engels
  
  This file used in computing an exact test for Hardy-Weinberg
  frequencies. It is part of the 'HWxtest' package for R

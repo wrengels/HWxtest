@@ -1,14 +1,14 @@
 Package: HWxtest
 Type: Package
 Title: Exact Tests for Hardy-Weinberg Proportions
-Version: 1.1.8
-Date: 2016-01-11
+Version: 1.1.9
+Date: 2019-05-29
 Author: Bill Engels <wrengels@wisc.edu>
 Maintainer: Bill Engels <wrengels@wisc.edu>
 Description: Tests whether a set of genotype counts fits the HW expectations.
     Exact tests performed by an efficient algorithm. Included test statistics
     are likelihood ratio, probability, U-score and Pearson's X2.
-VignetteBuilder: knitr, RefManageR
+VignetteBuilder: knitr
 Depends:
     R (>= 2.14)
 Suggests:

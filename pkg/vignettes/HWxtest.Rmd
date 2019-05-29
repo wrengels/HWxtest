@@ -11,7 +11,7 @@ BibOptions(check.entries = FALSE, bib.style = "authortitle",cite.style="authorye
 library(HWxtest)
 version <- packageDescription("HWxtest", fields = "Version")
 doWhales <- TRUE
-library(adegenet)
+adegenet.loaded <- library(adegenet, logical.return=TRUE)
 figw <- 7
 dfigw <- 10
 figh <- 5
