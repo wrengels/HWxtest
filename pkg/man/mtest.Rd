@@ -48,4 +48,3 @@ The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977
 \seealso{
 \code{\link{hwx.test}}
 }
-

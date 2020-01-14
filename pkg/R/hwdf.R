@@ -66,10 +66,11 @@ listify <- function(hwlist, detail = NA, statName = NA) {
 #' @param showStat whether to show the observed statistic
 #' @param showAsymptoticX2 whether to include the asymptotic P value corresponding to the Pearson \eqn{X^2} statistic
 #' @param showAsymptoticG2 whether to include the asymptotic P value for the \code{LLR} statistic
+#' @param showHeterozygosity whether to include the sample heterozygosity
 
 #' @export
 hwdf <- 
-function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TRUE, showTables=TRUE, showTrials=TRUE, showStat=TRUE, showAsymptoticX2=FALSE, showAsymptoticG2=FALSE) {
+function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TRUE, showTables=TRUE, showTrials=TRUE, showStat=TRUE, showAsymptoticX2=FALSE, showAsymptoticG2=FALSE, showHeterozygosity=TRUE) {
 	hwlist <- listify(hwlist, statName=statName)
 	statNames <- c("LLR", "Prob", "U", "Chisq")
 	statID <- which(statNames==hwlist[[1]]$statName)
@@ -133,10 +134,16 @@ function(hwlist, statName=NA, showN=TRUE, showk=TRUE, showMethod=TRUE, showSE=TR
 		columns$asyG2 <- asyG2
 		names <- c(names, "AsymP(G2)")
 	}
+	if(showHeterozygosity) {
+		hetx <- unlist(sapply(hwlist, function(x) {a <- x$alleles/sum(x$alleles); 1 - sum(a^2)}))
+		columns$hetx <- hetx
+		names <- c(names, "het (exp)")
+		hety <- unlist(sapply(hwlist, function(x) {g <- x$genotypes; 1 - sum(diag(g)/sum(g, na.rm=T))}))
+		columns$hety <- hety
+		names <- c(names, "het (obs)")
+	}
 	df <- as.data.frame(columns)
 	names(df) <- names
 	names(columns) <- names
 	df
-	
-	
 }

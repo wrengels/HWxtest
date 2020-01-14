@@ -19,4 +19,3 @@ an object of class \code{genind}
 \description{
 The main work is done by the function \code{adegenet::read.genepop}. However, that function requires text files with an extension of \code{.gen}, whereas such files usually have extension \code{.txt}. The sole purpose of this function is to work around the \dQuote{.gen} requirement.
 }
-

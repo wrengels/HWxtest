@@ -22,4 +22,3 @@ Calling \code{scountCutoff} gives you a quick answer to whether the number of ta
 alleles <- c(15, 14, 11, 12, 2, 2, 1, 3)
 if(xcountCutoff(alleles)) cat("There are too many tables")
 }
-

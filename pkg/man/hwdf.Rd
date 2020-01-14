@@ -7,7 +7,7 @@
 hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
   showMethod = TRUE, showSE = TRUE, showTables = TRUE,
   showTrials = TRUE, showStat = TRUE, showAsymptoticX2 = FALSE,
-  showAsymptoticG2 = FALSE)
+  showAsymptoticG2 = FALSE, showHeterozygosity = TRUE)
 }
 \arguments{
 \item{hwlist}{The output from a call to \code{\link{hwx.test}}}
@@ -31,8 +31,9 @@ hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
 \item{showAsymptoticX2}{whether to include the asymptotic P value corresponding to the Pearson \eqn{X^2} statistic}
 
 \item{showAsymptoticG2}{whether to include the asymptotic P value for the \code{LLR} statistic}
+
+\item{showHeterozygosity}{whether to include the sample heterozygosity}
 }
 \description{
 If the \code{\link{hwx.test}} output has multiple populations and/or multiple loci, use this function to make a data frame to display the results in tabular form.
 }
-

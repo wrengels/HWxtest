@@ -27,4 +27,3 @@ p.value(testResults, statName="U")
 \references{
 The methods are described by \href{http://dx.doi.org/10.1534/genetics.109.108977}{Engels, 2009. \bold{Genetics} 183:1431}.
 }
-

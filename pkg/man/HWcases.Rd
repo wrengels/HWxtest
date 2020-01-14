@@ -15,4 +15,3 @@ This is a data file with some HW examples in matrix form
 Rousset 2007 -- from the documentation of GenePop
 }
 \keyword{data}
-

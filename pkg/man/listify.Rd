@@ -24,4 +24,3 @@ data(HWcases)
 outcome <- hwx.test(HWcases, detail=4, statName="LLR")
 listify(outcome, detail=1, statName="U")
 }
-

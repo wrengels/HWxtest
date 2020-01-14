@@ -51,7 +51,8 @@
 
 #' @export
 hwx.test <- 
-function(c, method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
+function(c, method="auto", cutoff=1e7, B=100000, statName=c("LLR", "Prob", "U", "Chisq"), histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
+	statName <- match.arg(statName)
 	UseMethod("hwx.test")
 }
 

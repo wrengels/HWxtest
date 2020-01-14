@@ -63,15 +63,16 @@
 #include <time.h>
 
 // Globals
-COUNTTYPE * Rarray;
-unsigned nAlleles, Rbytes, ntotal;
-time_t start;
-int timeLimit;
+extern COUNTTYPE * Rarray;
+extern unsigned nAlleles, Rbytes;
+unsigned ntotal;
+extern time_t start;
+extern int timeLimit;
 int histobins, HN;
 int statID;
 int * mi;
 double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup tables
-double tableCount;
+extern double tableCount;
 double pLLR, pU, pPr, pX2;  // P values
 double maxLLR, maxlPr, minmaxU, minX2; // cutoff values
 double statSpan, constProbTerm, constLLRterm, probSum, leftStat;

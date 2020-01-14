@@ -4,8 +4,8 @@
 \alias{print.hwtest}
 \title{S3 Method for printing \code{hwtest} objects}
 \usage{
-\method{print}{hwtest}(x, detail = NA, statName = NA, plotHisto = TRUE,
-  ...)
+\method{print}{hwtest}(x, detail = NA, statName = NA,
+  plotHisto = TRUE, ...)
 }
 \arguments{
 \item{x}{the results from a call to \code{\link{hwx.test}}}
@@ -21,4 +21,3 @@
 \description{
 Prints test results (\code{hwtest}) objects depending on how much detail is provided. If histogram data are present, \code{ggplot2} is used to draw the plot by calling \code{\link{makeHistogram}}
 }
-

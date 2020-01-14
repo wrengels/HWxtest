@@ -36,4 +36,3 @@ Running the function \code{\link{hwx.test}} can create data for a frequency dist
 \seealso{
 \code{\link{hwx.test}}
 }
-
