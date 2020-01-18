@@ -42,7 +42,7 @@
  *           Engels, 2009, Genetics 183, pp1431-1441
  *
  *The function `xcount` is designed to be called from R using
- *the .C method. Functions `homozygote` and `heterozygote`
+ *the .C method. Functions `homozygote_count` and `heterozygote_count`
  *perform the recursive traversion of the tree of tables.
  *If there are only two alleles, then the number can be
  *found without recursion by calling `twoAlleleSpecialCase`
@@ -75,15 +75,16 @@
 #define MAXNODE 2000
 
 // Globals
-COUNTTYPE * Rarray;
-unsigned nAlleles, Rbytes;
-double tableCount, countLimit;
+extern COUNTTYPE * Rarray;
+extern unsigned nAlleles, Rbytes;
+extern double tableCount;
+extern time_t start;
+double countLimit;
 struct node {
     double count;
     unsigned long long hash;
 } nodez[MAXNODE];
 int nextNode;
-time_t start;
 int timeLimit;
 unsigned long long * hashCoefs;
 
@@ -98,9 +99,9 @@ unsigned long long makeHash (unsigned r, COUNTTYPE * R) {
 }
 
 
-void heterozygote (unsigned r, unsigned c, COUNTTYPE * R);
+void heterozygote_count (unsigned r, unsigned c, COUNTTYPE * R);
 
-void homozygote (unsigned r, COUNTTYPE * R)
+void homozygote_count (unsigned r, COUNTTYPE * R)
 {
     // If the process takes longer than `timeLimit` seconds, set
     // `tableCount` negative to signify that the job is aborted
@@ -122,11 +123,11 @@ void homozygote (unsigned r, COUNTTYPE * R)
         //For each possible value of arr, examine the heterozygote at r, r-1
         for(arr = lower; arr <= upper; arr++) {
             resn[r] = res[r] - 2*arr;
-            heterozygote(r, r-1, Rnew);
+            heterozygote_count(r, r-1, Rnew);
         }
 }
 
-void heterozygote (unsigned r, unsigned c, COUNTTYPE * R)
+void heterozygote_count (unsigned r, unsigned c, COUNTTYPE * R)
 {
     if(tableCount < 0) return;  // aborted because of time limit
 	COUNTTYPE *res, *resn;
@@ -150,7 +151,7 @@ void heterozygote (unsigned r, unsigned c, COUNTTYPE * R)
         // decrement residuals for the current value of arc.
         resn[r] -= arc;
         resn[c] -= arc;
-        heterozygote(r, c-1, Rnew);
+        heterozygote_count(r, c-1, Rnew);
     }
 	if(c==2){
 		if(r > 3) for (ar2= lower; ar2 <= upper; ar2++) {
@@ -158,11 +159,11 @@ void heterozygote (unsigned r, unsigned c, COUNTTYPE * R)
     // decrement residuals for the current value of arc.
 			resn[r] -= ar2;
 			resn[c] -= ar2;
-			// The value of ar1 is now fixed, so no need for any more calls to heterozygote in this row
+			// The value of ar1 is now fixed, so no need for any more calls to heterozygote_count in this row
 			ar1 = fmin(resn[r], resn[1]);
 			resn[1] -= ar1;
 			resn[r] -= ar1;
-            // Before calling homozygote, see if we have visited this node before by comparing its hash tag.
+            // Before calling homozygote_count, see if we have visited this node before by comparing its hash tag.
             hash = makeHash(r-1, Rnew);
             i = 0;
             // Search list of old nodes
@@ -173,7 +174,7 @@ void heterozygote (unsigned r, unsigned c, COUNTTYPE * R)
 			} else {
 				// new node
 				countsSoFar =  tableCount;
-                homozygote(r-1, Rnew);
+                homozygote_count(r-1, Rnew);
                 if (nextNode < MAXNODE) {
                     // Make a new node
                     nodez[i].hash = hash;
@@ -191,7 +192,7 @@ void heterozygote (unsigned r, unsigned c, COUNTTYPE * R)
 			}
 		} // if r == 3
 	} // if c == 2
-} // heterozygote
+} // heterozygote_count
 
 double twoAlleleSpecialCase(int * m)  {
 	unsigned ntables = fmin(m[0], m[1])/2 + 1;
@@ -228,7 +229,7 @@ void xcount (int * m, int * k, double * count, int * safeSecs) {
     start = time(NULL);
     
 //    *****************      This is the call to do all the work!
-    homozygote(nAlleles, Rarray);
+    homozygote_count(nAlleles, Rarray);
 //
     *count = tableCount;
     Free(hashCoefs);
