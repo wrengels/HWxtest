@@ -79,13 +79,14 @@ extern COUNTTYPE * Rarray;
 extern unsigned nAlleles, Rbytes;
 extern double tableCount;
 extern time_t start;
+extern int timeLimit;
+
 double countLimit;
 struct node {
     double count;
     unsigned long long hash;
 } nodez[MAXNODE];
 int nextNode;
-int timeLimit;
 unsigned long long * hashCoefs;
 
 // Compute a unique "hash" to identify a node, defined by it's level (r) and the residuals (R)
@@ -127,7 +128,7 @@ void homozygote_count (unsigned r, COUNTTYPE * R)
         }
 }
 
-void heterozygote_count (unsigned r, unsigned c, COUNTTYPE * R)
+extern void heterozygote_count (unsigned r, unsigned c, COUNTTYPE * R)
 {
     if(tableCount < 0) return;  // aborted because of time limit
 	COUNTTYPE *res, *resn;

@@ -7,8 +7,7 @@
 \usage{
 defaultHistobounds(ostats, statID, m)
 
-makeHistogram(x, curveColor = "blue", color1 = "gray40",
-  color2 = "lightcoral")
+makeHistogram(x, curveColor = "blue", color1 = "gray40", color2 = "lightcoral")
 }
 \arguments{
 \item{ostats}{Observed statistics for the 4 test measures, \code{LLR}, \code{Prob}, \code{U} and \code{Chisq}.}

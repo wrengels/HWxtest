@@ -55,7 +55,7 @@ function(gmat){
 #' @export
 alleleCounts <- 
 function(gmat) {
-	if(class(gmat)!="matrix") gmat <- vec.to.matrix(gmat)
+	if(!is.matrix(gmat)) gmat <- vec.to.matrix(as.integer(gmat))
 	t <- fillUpper(gmat);
 	k <- dim(t)[1];
 	m <- integer(k);
@@ -90,7 +90,7 @@ function(gvec, alleleNames=""){
 #' @export
 remove.missing.alleles <- 
 function(gmat) {
-	if(class(gmat)!="matrix") gmat <- vec.to.matrix(gmat)
+	if(!is.matrix(gmat)) gmat <- vec.to.matrix(as.integer(gmat))
 	m <- alleleCounts(gmat)
 	zm <- which(m==0)
 	if(length(zm)) gmat <- gmat[-zm,-zm]

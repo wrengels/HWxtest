@@ -130,9 +130,9 @@ double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup t
     double pLLR, pU, pPr, pX2;  // P values
     double maxLLR, maxlPr, minmaxU, minX2; // cutoff values
     double problT, statlT, uT, x2T; // temp values for each trial
-    double statSpan, constProbTerm, constLLRterm, leftStat;
+    double statSpan = 0.0, constProbTerm, constLLRterm, leftStat = 0.0;
     unsigned as, d, aij0, aij1, aij2; // for figuring stats
-    double x;
+    double x = 0.0;
     pU = pLLR = pPr = pX2 =0;
     GetRNGstate();
     

@@ -65,14 +65,15 @@
 // Globals
 COUNTTYPE * Rarray;
 unsigned nAlleles, Rbytes;
-unsigned ntotal;
+double tableCount;
 time_t start;
-extern int timeLimit;
+int timeLimit;
+
+unsigned ntotal;
 int histobins, HN;
 int statID;
 int * mi;
 double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup tables
-double tableCount;
 double pLLR, pU, pPr, pX2;  // P values
 double maxLLR, maxlPr, minmaxU, minX2; // cutoff values
 double statSpan, constProbTerm, constLLRterm, probSum, leftStat;
@@ -116,7 +117,7 @@ static void homozygote (unsigned r, double probl, double statl, double u, double
     }
 }
 
-static void heterozygote (unsigned r, unsigned c, double probl, double statl, double u, double x2, COUNTTYPE * R)
+extern void heterozygote (unsigned r, unsigned c, double probl, double statl, double u, double x2, COUNTTYPE * R)
 {
     if(tableCount < 0) return;
     COUNTTYPE *res, *resn;

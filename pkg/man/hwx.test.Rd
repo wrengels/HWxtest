@@ -4,9 +4,18 @@
 \alias{hwx.test}
 \title{Test for HW by either full enumeration or Monte Carlo.}
 \usage{
-hwx.test(c, method = "auto", cutoff = 1e+07, B = 1e+05,
-  statName = c("LLR", "Prob", "U", "Chisq"), histobins = 0,
-  histobounds = c(0, 0), showCurve = T, safeSecs = 100, detail = 2)
+hwx.test(
+  c,
+  method = "auto",
+  cutoff = 1e+07,
+  B = 1e+05,
+  statName = c("LLR", "Prob", "U", "Chisq"),
+  histobins = 0,
+  histobounds = c(0, 0),
+  showCurve = T,
+  safeSecs = 100,
+  detail = 2
+)
 }
 \arguments{
 \item{c}{The genotype counts. You must provide the number of each genotype. So if there are \eqn{k} alleles, you need to include the number of each of the \eqn{k(k+1)/2} genotypes. The format of \code{x} is somewhat flexible: It can be a square matrix, but only the lower-left half is used. It can be a vector of the observations in the order \eqn{a_11, a_21, a_22, a_31, ..., a_kk}. For compatability with the packages \code{genetics} and \code{adegenet}, it can also be an object of class \code{genind}, \code{genotype}, or a \code{data.frame}. If \code{c} contains multiple samples, the \code{parallel} package will be used in an attempt to employ multi-cores.}
@@ -47,6 +56,10 @@ The \code{hwx.test()} function is the main function of the \code{HWxtest} packag
 }
 \examples{
 # Data from Louis and Dempster 1987 Table 2 and Guo and Thompson 1992 Figure 2:
+ma <- matrix(c(0, 3, 5, 3, NA, 1, 18, 7, NA, NA, 1, 5, NA, NA, NA, 2), nrow=4)
+hwx.test(ma, method="monte")
+table.count <- xcount(ma)
+hwx.test(ma)
 c <- c(0,3,1,5,18,1,3,7,5,2)
 hwx.test(c)
 # To see a histogram of the LLR statistic:

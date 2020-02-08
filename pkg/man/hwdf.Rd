@@ -4,10 +4,20 @@
 \alias{hwdf}
 \title{Construct a data frame from \code{\link{hwx.test}} output}
 \usage{
-hwdf(hwlist, statName = NA, showN = TRUE, showk = TRUE,
-  showMethod = TRUE, showSE = TRUE, showTables = TRUE,
-  showTrials = TRUE, showStat = TRUE, showAsymptoticX2 = FALSE,
-  showAsymptoticG2 = FALSE, showHeterozygosity = TRUE)
+hwdf(
+  hwlist,
+  statName = NA,
+  showN = TRUE,
+  showk = TRUE,
+  showMethod = TRUE,
+  showSE = TRUE,
+  showTables = TRUE,
+  showTrials = TRUE,
+  showStat = TRUE,
+  showAsymptoticX2 = FALSE,
+  showAsymptoticG2 = FALSE,
+  showHeterozygosity = TRUE
+)
 }
 \arguments{
 \item{hwlist}{The output from a call to \code{\link{hwx.test}}}

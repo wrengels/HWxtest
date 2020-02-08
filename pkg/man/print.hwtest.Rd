@@ -4,8 +4,7 @@
 \alias{print.hwtest}
 \title{S3 Method for printing \code{hwtest} objects}
 \usage{
-\method{print}{hwtest}(x, detail = NA, statName = NA,
-  plotHisto = TRUE, ...)
+\method{print}{hwtest}(x, detail = NA, statName = NA, plotHisto = TRUE, ...)
 }
 \arguments{
 \item{x}{the results from a call to \code{\link{hwx.test}}}

@@ -4,8 +4,15 @@
 \alias{xtest}
 \title{Performs an exact test with full enumeration for Hardy-Weinberg proportions.}
 \usage{
-xtest(c, statName = "LLR", histobins = 0, histobounds = c(0, 0),
-  showCurve = T, safeSecs = 100, detail = 2)
+xtest(
+  c,
+  statName = "LLR",
+  histobins = 0,
+  histobounds = c(0, 0),
+  showCurve = T,
+  safeSecs = 100,
+  detail = 2
+)
 }
 \arguments{
 \item{c}{A matrix containing the genotype counts. It should be a square matrix, but only the lower-left half is used.}

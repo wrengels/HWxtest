@@ -1,8 +1,8 @@
 Package: HWxtest
 Type: Package
 Title: Exact Tests for Hardy-Weinberg Proportions
-Version: 1.1.12
-Date: 2020-01-10
+Version: 1.1.20
+Date: 2020-02-07
 Author: Bill Engels <wrengels@wisc.edu>
 Maintainer: Bill Engels <wrengels@wisc.edu>
 Description: Tests whether a set of genotype counts fits the Hardy-Weinberg expectations.
@@ -21,4 +21,4 @@ Suggests:
     parallel
 NeedsCompilation: yes
 License: GPL
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

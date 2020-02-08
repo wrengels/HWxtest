@@ -41,6 +41,10 @@
 #' 
 #' @examples
 #' # Data from Louis and Dempster 1987 Table 2 and Guo and Thompson 1992 Figure 2:
+#' ma <- matrix(c(0, 3, 5, 3, NA, 1, 18, 7, NA, NA, 1, 5, NA, NA, NA, 2), nrow=4)
+#' hwx.test(ma, method="monte")
+#' table.count <- xcount(ma)
+#' hwx.test(ma)
 #' c <- c(0,3,1,5,18,1,3,7,5,2)
 #' hwx.test(c)
 #' # To see a histogram of the LLR statistic:
@@ -61,11 +65,11 @@ function(c, method="auto", cutoff=1e7, B=100000, statName=c("LLR", "Prob", "U", 
 #' @export
 hwx.test.matrix <- 
 function(c,  method="auto", cutoff=1e7, B=100000, statName="LLR", histobins=0, histobounds=c(0,0), showCurve=T, safeSecs=100, detail=2) {
-	nAlleles <- length(alleleCounts(c));
+	c <- remove.missing.alleles(c)
+	nAlleles <- dim(c)[1]
 	if(nAlleles < 2) return(hwx.test.logical(FALSE))
 	statNames <- c("LLR", "Prob", "U", "Chisq");
 	statID <- which(statNames==statName);
-	c <- remove.missing.alleles(c)
 	if(method=="auto") method <- if(xcountCutoff(c, cutoff))method <- "monte" else method <- "exact"
 	if(method=="monte") 
 		value <- mtest(c, ntrials=B, statName, histobins, histobounds, showCurve, safeSecs, detail)
