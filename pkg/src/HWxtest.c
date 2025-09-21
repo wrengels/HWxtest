@@ -57,23 +57,33 @@
     #define lgammafn lgamma
 #else
     #include <R.h>
+    #include <R_ext/Memory.h>
+    #include <Rversion.h>
     #include <Rmath.h>
+    #include "rmem_compat.h"
+
+    /* Back-compat for R >= 4.5.0 where Calloc/Free/Realloc were removed */
+    #ifndef Calloc
+        # if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
+        #  define Calloc(n, t)       R_Calloc((n), t)
+        #  define Realloc(p, n, t)   R_Realloc((p), (n), t)
+        #  define Free(p)            R_Free(p)
+    # endif
+    #endif
 #endif
 
 #include <time.h>
 
 // Globals
 COUNTTYPE * Rarray;
-unsigned nAlleles, Rbytes;
-double tableCount;
+unsigned nAlleles, Rbytes, ntotal;
 time_t start;
 int timeLimit;
-
-unsigned ntotal;
 int histobins, HN;
 int statID;
 int * mi;
 double * xlnx, *lnFact, *exa, *uTerm1, *uTerm2, *x211, *x221, *x222; // Lookup tables
+double tableCount;
 double pLLR, pU, pPr, pX2;  // P values
 double maxLLR, maxlPr, minmaxU, minX2; // cutoff values
 double statSpan, constProbTerm, constLLRterm, probSum, leftStat;
@@ -117,7 +127,7 @@ static void homozygote (unsigned r, double probl, double statl, double u, double
     }
 }
 
-extern void heterozygote (unsigned r, unsigned c, double probl, double statl, double u, double x2, COUNTTYPE * R)
+static void heterozygote (unsigned r, unsigned c, double probl, double statl, double u, double x2, COUNTTYPE * R)
 {
     if(tableCount < 0) return;
     COUNTTYPE *res, *resn;

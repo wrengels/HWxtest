@@ -68,7 +68,17 @@
     #define lgammafn lgamma
 #else
     #include <R.h>
-    #include <Rmath.h>
+    #include <R_ext/Memory.h>
+    #include <Rversion.h>
+
+    /* Back-compat for R >= 4.5.0 where Calloc/Free/Realloc were removed */
+    #ifndef Calloc
+        # if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
+        #  define Calloc(n, t)       R_Calloc((n), t)
+        #  define Realloc(p, n, t)   R_Realloc((p), (n), t)
+        #  define Free(p)            R_Free(p)
+    # endif
+    #endif
 #endif
 
 #include <time.h>
